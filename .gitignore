@@ -1,3 +1,5 @@
 
 mariadb/
 .idea/
+
+www/\.env
