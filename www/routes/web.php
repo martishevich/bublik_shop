@@ -1,5 +1,5 @@
 <?php
-use \App\Http\Controllers\TaskController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,21 +11,4 @@ use \App\Http\Controllers\TaskController;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-
-Route::get('/tasks', 'TaskController@index');
-
-Route::get('/tasks/{task}', 'TaskController@show');
-
-/*Route::get('tasks', function () {
-    //$tasks = DB::table('tasks')->get();
-    $tasks = App\Task::incomplete();
-    return view('tasks.index', compact('tasks'));
-});*/
-
-/*Route::get('tasks/{task}', function ($id) {
-    $task = DB::table('tasks')->find($id);
-    return view('tasks.show', compact('task'));
-});*/
+Route::get('/', 'PostsController@index');
