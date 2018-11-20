@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+ apache_php:
+   build: .
+   container_name: bublik-php
+   ports:
+     - 80:80
+   volumes:
+     - ./www:/var/www/
+   working_dir: /var/www/
+   links:
+     - mariadb
+   depends_on:
+     - mariadb
+   tty: true
+
+ mariadb:
+   image: mariadb:10.3
+   container_name: bublik-db
+   environment:
+     MYSQL_ROOT_PASSWORD: password
+   ports:
+     - 3306:3306
+   volumes:
+     - ./mariadb:/var/lib/mysql
+
+ phpmyadmin:
+   image: phpmyadmin/phpmyadmin
+   container_name: bublic-pma
+   container_name: bublic-pma
+   ports:
+   - 8080:80
+   links:
+   - mariadb:mariadb
+   environment:
+     MYSQL_ROOT_PASSWORD: password
+     PMA_HOST: bublik-db
+
+
+
+
+
+
