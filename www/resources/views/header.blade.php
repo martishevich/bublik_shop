@@ -15,9 +15,9 @@
                 <div class="col-md-8 col-lg-8 col-sm-6 col-xs-6">
                     <nav class="mainmenu__nav hidden-xs hidden-sm">
                         <ul class="main__menu">
-                            <li><a href="/">Home</a></li>
+                            <li><a href="/">Shop</a></li>
                             <li><a href="/about">About us</a></li>
-                            <li><a href="shop.html">Contact</a></li>
+                            <li><a href="/contact">Contact</a></li>
                                     <!-- End Single Mega MEnu -->
 
                                 </ul>
@@ -26,9 +26,9 @@
                     <div class="mobile-menu clearfix visible-xs visible-sm">
                         <nav id="mobile_dropdown">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="blog.html">About us</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="/">Shop</a></li>
+                                <li><a href="/about">About us</a></li>
+                                <li><a href="/contact">Contact</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -37,7 +37,19 @@
                 <div class="col-md-2 col-sm-4 col-xs-3">
                     <ul class="menu-extra">
                         {{--<li class="search search__open hidden-xs"><span class="ti-search"></span></li>--}}
-                        <li><a href="login-register.html"><span class="ti-user"></span></a></li>
+                        <li>@if (Route::has('login'))
+                                <div class="top-right links">
+                                    @auth
+                                        <a href="{{ url('/home') }}">Cabinet</a>
+                                    @else
+                                        <a href="{{ route('login') }}">Login</a>
+
+                                        @if (Route::has('register'))
+                                            <a href="{{ route('register') }}">Register</a>
+                                        @endif
+                                    @endauth
+                                </div>
+                            @endif</li>
                         <li class="cart__menu"><span class="ti-shopping-cart"></span></li>
                         {{--<li class="toggle__menu hidden-xs hidden-sm"><span class="ti-menu"></span></li>--}}
                     </ul>
