@@ -37,7 +37,19 @@
                 <div class="col-md-2 col-sm-4 col-xs-3">
                     <ul class="menu-extra">
                         {{--<li class="search search__open hidden-xs"><span class="ti-search"></span></li>--}}
-                        <li><a href="login-register.html"><span class="ti-user"></span></a></li>
+                        <li>@if (Route::has('login'))
+                                <div class="top-right links">
+                                    @auth
+                                        <a href="{{ url('/home') }}">Home</a>
+                                    @else
+                                        <a href="{{ route('login') }}">Login</a>
+
+                                        @if (Route::has('register'))
+                                            <a href="{{ route('register') }}">Register</a>
+                                        @endif
+                                    @endauth
+                                </div>
+                            @endif</li>
                         <li class="cart__menu"><span class="ti-shopping-cart"></span></li>
                         {{--<li class="toggle__menu hidden-xs hidden-sm"><span class="ti-menu"></span></li>--}}
                     </ul>
