@@ -15,9 +15,9 @@
                 <div class="col-md-8 col-lg-8 col-sm-6 col-xs-6">
                     <nav class="mainmenu__nav hidden-xs hidden-sm">
                         <ul class="main__menu">
-                            <li><a href="/">Home</a></li>
+                            <li><a href="/">Shop</a></li>
                             <li><a href="/about">About us</a></li>
-                            <li><a href="shop.html">Contact</a></li>
+                            <li><a href="/contact">Contact</a></li>
                                     <!-- End Single Mega MEnu -->
 
                                 </ul>
@@ -26,9 +26,9 @@
                     <div class="mobile-menu clearfix visible-xs visible-sm">
                         <nav id="mobile_dropdown">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="blog.html">About us</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="/">Shop</a></li>
+                                <li><a href="/about">About us</a></li>
+                                <li><a href="/contact">Contact</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -40,7 +40,7 @@
                         <li>@if (Route::has('login'))
                                 <div class="top-right links">
                                     @auth
-                                        <a href="{{ url('/home') }}">Home</a>
+                                        <a href="{{ url('/home') }}">Cabinet</a>
                                     @else
                                         <a href="{{ route('login') }}">Login</a>
 
