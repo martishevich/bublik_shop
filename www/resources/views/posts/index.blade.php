@@ -103,11 +103,9 @@
                         </div>
                         <div class = "category-menu-list">
                             <ul>
-                                <li><a href = "#"><img alt = "" src = "images/icons/thum7.png"> Notebooks</a></li>
-                                <li><a href = "#"><img alt = "" src = "images/icons/thum8.png"> Mouses</a></li>
-                                <li><a href = "#"><img alt = "" src = "images/icons/thum9.png"> Processors </a></li>
-                                <li><a href = "#"><img alt = "" src = "images/icons/thum10.png"> Motherboards</a></li>
-                                <li><a href = "#"><img alt = "" src = "images/icons/thum2.png"> Printers</a></li>
+                                <?php foreach ($catTitle as $title): ?>
+                                <li><a href = "#"> <?php echo $title['title']?></a></li>
+                                <?php endforeach;?>
                             </ul>
                         </div>
                     </div>
