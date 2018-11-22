@@ -6,7 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    public function show(){
 
-    }
 }

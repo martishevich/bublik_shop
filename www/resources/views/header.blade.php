@@ -18,10 +18,8 @@
                             <li><a href="/">Shop</a></li>
                             <li><a href="/about">About us</a></li>
                             <li><a href="/contact">Contact</a></li>
-                                    <!-- End Single Mega MEnu -->
-
-                                </ul>
-
+                            <!-- End Single Mega MEnu -->
+                        </ul>
                     </nav>
                     <div class="mobile-menu clearfix visible-xs visible-sm">
                         <nav id="mobile_dropdown">

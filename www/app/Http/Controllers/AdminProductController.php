@@ -13,7 +13,7 @@ class AdminProductController extends Controller
      */
     public function index()
     {
-        echo __METHOD__;
+        return view('admin_prod');
     }
 
     /**
@@ -23,7 +23,7 @@ class AdminProductController extends Controller
      */
     public function create()
     {
-        //
+        echo __METHOD__;
     }
 
     /**
@@ -34,7 +34,7 @@ class AdminProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        echo __METHOD__;
     }
 
     /**
@@ -45,7 +45,8 @@ class AdminProductController extends Controller
      */
     public function show($id)
     {
-        //
+        echo __METHOD__;
+
     }
 
     /**
@@ -56,7 +57,7 @@ class AdminProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        echo __METHOD__;
     }
 
     /**
@@ -68,7 +69,7 @@ class AdminProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        echo __METHOD__;
     }
 
     /**
@@ -79,6 +80,6 @@ class AdminProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        echo __METHOD__;
     }
 }

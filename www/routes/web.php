@@ -19,4 +19,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/about', 'AboutController@about');
 
-Route::resource('/home/products', 'AdminProductController');
+Route::resource('/home/products', 'AdminProductController', ['only' => ['index', 'create', 'store', 'edit']]);
