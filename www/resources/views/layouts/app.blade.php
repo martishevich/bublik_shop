@@ -12,6 +12,8 @@
         <!-- Scripts -->
         <script src = "{{ asset('js/app.js') }}" defer></script>
 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
         <!-- Fonts -->
         <link rel = "dns-prefetch" href = "https://fonts.gstatic.com">
         <link href = "https://fonts.googleapis.com/css?family=Nunito" rel = "stylesheet" type = "text/css">
@@ -23,24 +25,22 @@
         <div id = "app">
             <nav class = "navbar navbar-expand-md navbar-light navbar-laravel">
                 <div class = "container">
-                    <a class = "navbar-brand" href = "{{ url('/') }}">
+                    <a href = "{{ url('/') }}">
                         {{ 'Shop' }}
                     </a>
                     <!-- Authentication Links -->
                     @guest
-                        <a class = "navbar-brand" href = "{{ route('login') }}">{{ __('Login') }}</a>
+                        <a href = "{{ route('login') }}">{{ __('Login') }}</a>
                         @if (Route::has('register'))
-                            <a class = "navbar-brand" href = "{{ route('register') }}">{{ __('Register') }}</a>
+                            <a href = "{{ route('register') }}">{{ __('Register') }}</a>
                         @endif
                     @else
-                        <a class = "navbar-brand" href = "{{ route('logout') }}"
+                        <a class href = "{{ route('logout') }}"
                            onclick = "event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
-                        <a class = "navbar-brand" href = "#">
-                            {{ Auth::user()->name }}
-                        </a>
+                            {{ 'Hello, '. Auth::user()->name }}
                         <form id = "logout-form" action = "{{ route('logout') }}" method = "POST"
                               style = "display: none;">
                             @csrf
