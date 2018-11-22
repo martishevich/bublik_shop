@@ -44,5 +44,11 @@ class CategoriesTableSeeder extends Seeder
             'description' => 'Принтеры',
             'position' => '1',
         ]);
+
+        DB::table('products')->insert([
+            'title' => 'Notebooks',
+            'description' => 'Ноутбуки',
+            'position' => '5',
+        ]);
     }
 }
