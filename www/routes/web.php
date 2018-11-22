@@ -13,10 +13,14 @@
 
 Route::get('/', 'PostsController@index');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/about', 'AboutController@about');
 
-Route::resource('/home/products', 'AdminProductController', ['only' => ['index', 'create', 'store', 'edit']]);
+Auth::routes();
+
+Route::group(['middleware' => 'auth'], function () {
+
+	Route::get('/home', 'HomeController@index')->name('home');
+
+	Route::resource('/home/products', 'AdminProductController',	['only' => ['index', 'create', 'store', 'edit']]);
+
+});
