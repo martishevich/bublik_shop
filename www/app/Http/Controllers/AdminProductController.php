@@ -23,9 +23,9 @@ class AdminProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        echo __METHOD__;
+        return view('admin_prod_create');
     }
 
     /**

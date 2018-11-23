@@ -21,6 +21,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/home', 'HomeController@index')->name('home');
 
-	Route::resource('/home/products', 'AdminProductController',	['only' => ['index', 'create', 'store', 'edit']]);
+	Route::match(['get', 'post'], '/home/products', 'AdminProductController@index');
+
+	Route::match(['get', 'post'], '/home/products/create', 'AdminProductController@create');
+
+	Route::get('/home/products/edit', 'AdminProductController@edit');
+
+	Route::get('/home/products/delete', 'AdminProductController@delete');
 
 });

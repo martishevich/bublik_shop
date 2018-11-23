@@ -4,7 +4,10 @@
         <div class = "row justify-content-center">
             <div class = "col-md-12">
                 <div class = "card">
-                    <div class = "card-header"><h1>Products list</h1></div>
+                    <div class = "card-header">
+                        <h1>Products list</h1>
+                        <a class="btn btn-success" href="/home/products/create" role="button">add new</a>
+                    </div>
 
                     @if (session('status'))
                         <div class = "alert alert-success" role = "alert">
