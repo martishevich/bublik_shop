@@ -24,3 +24,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('/home/products', 'AdminProductController',	['only' => ['index', 'create', 'store', 'edit']]);
 
 });
+
+Route::get('contact','ContactController@index')->name('contact.index');
+
+Route::post('add_contact','ContactController@add_contact')->name('contact.add_contact');
