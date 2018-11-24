@@ -3,7 +3,7 @@
     <div class = "container">
         <div class = "row justify-content-center">
             <div class = "col-md-12">
-                <div class = "card">
+                <div>
                     <div class = "card-header">
                         <h1>Products list</h1>
                         <a class="btn btn-success" href="/home/products/create" role="button">add new</a>

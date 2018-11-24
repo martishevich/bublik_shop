@@ -5,9 +5,10 @@
             <div class = "col-md-12">
                 <div>
                     <div class = "card-header">
-                        <h1>Create new product</h1>
+                        <h1>Edit product</h1>
                         <a class = "btn btn-primary" href = "/home" role = "button">cabinet</a>
                         <a class = "btn btn-info" href = "/home/products" role = "button">view</a>
+                        <a class = "btn btn-success" href = "/home/products/create" role = "button">create</a>
                     </div>
 
                     @if (session('status'))
@@ -16,13 +17,13 @@
                         </div>
                     @endif
                     <br>
-                    <form id = "form-ins" method = "post" action = "/home/products/create">
+                    <form id = "form-ins" method = "post" action = "/home/products">
                         @csrf
                         <p><b>Category:</b></p>
                         <select id = "select-ins" required name="category_id" required>
-                            <?php foreach ($allCat as $cat): ?>
+		                    <?php foreach ($allCat as $cat): ?>
                             <option value="@php($cat['id'])"><?= $cat['title'] ?></option>
-                            <?php endforeach; ?>
+		                    <?php endforeach; ?>
                         </select>
                         <br>
                         <p><b>Price:</b></p>
@@ -40,15 +41,9 @@
                         <p><b>Short description:</b></p>
                         <textarea id = "textarea-ins" rows = "2" cols = "50" name = "short_disc" class = "message" required></textarea>
                         <br>
-                        <input type = "submit" name = "submit" class = "btn btn-success" value = "create">
+                        <input type = "submit" name = "submit" class = "btn btn-warning" value = "edit">
                     </form>
                     <br>
-                    {{--<form method = "post">
-                        <input name="name" placeholder="Укажите ваше имя!" class="name" required />
-                        <input name="emailaddress" placeholder="Укажите ваш Email!" class="email" type="email" required />
-                        <textarea rows="4" cols="50" name="subject" placeholder="Введите ваше сообщение:" class="message" required></textarea>
-                        <input name="submit" class="btn123" type="submit" value="Отправить" />
-                    </form>--}}
                 </div>
             </div>
         </div>
