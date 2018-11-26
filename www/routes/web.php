@@ -30,3 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/home/products/delete/{id}', 'AdminProductController@destroy');
 
 });
+
+Route::get('contact','ContactController@index')->name('contact.index');
+
+Route::post('add_contact','ContactController@add_contact')->name('contact.add_contact');
