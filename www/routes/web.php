@@ -24,3 +24,5 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('/home/products', 'AdminProductController',	['only' => ['index', 'create', 'store', 'edit']]);
 
 });
+
+Route::get('/Cardshop', 'CardshopController@cardshop');
