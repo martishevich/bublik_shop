@@ -2816,7 +2816,8 @@ legend {
 
 label {
     display: inline-block;
-    margin-bottom: 5px
+    margin-bottom: 5px;
+    margin-left: 15px
 }
 
 input[type=search] {
@@ -6758,7 +6759,7 @@ button.close {
     font-family: 'Open Sans', sans-serif;
     font-size:18px;
     font-weight: 300;
-    color:#fff;
+    color:#555;
     padding-left:25px;
     padding-right:20px;
     padding-top:12px;

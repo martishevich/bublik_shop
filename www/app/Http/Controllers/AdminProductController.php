@@ -17,9 +17,15 @@ class AdminProductController extends Controller
 
     public function create(Request $request)
     {
+    	$is_add = false;
+    	if (isset($_POST['category_id']) && isset($_POST['name'])){
+    		Product::insertDB($request);
+		    $is_add = true;
+	    }
+    	$request->flash();
 	    $allCat = Categories::orderBy('position')
 		    ->get();
-        return view('admin_prod_create', compact('allCat'));
+        return view('admin_prod_create', compact('allCat', 'is_add'));
     }
 
     public function edit($id)
