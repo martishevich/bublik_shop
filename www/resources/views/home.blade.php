@@ -15,6 +15,7 @@
                         Вы удачно зашли!
                             <h2>Products</h2>
                             <a class="btn btn-info" href="/home/products" role="button">view</a>
+                            <a class="btn btn-success" href="/home/products/create" role="button">add new</a>
                     </div>
                 </div>
             </div>
