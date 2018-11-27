@@ -48,7 +48,7 @@
                                     @endauth
                                 </div>
                             @endif</li>
-                        <li class="cart__menu"><span class="ti-shopping-cart"></span></li>
+                            <li><a title="Add TO Cart" href="/cardshop"><span class="ti-shopping-cart"></span></a></li>
                         {{--<li class="toggle__menu hidden-xs hidden-sm"><span class="ti-menu"></span></li>--}}
                     </ul>
                 </div>

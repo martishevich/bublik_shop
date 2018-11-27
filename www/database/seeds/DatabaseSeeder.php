@@ -64,6 +64,14 @@ class CategoriesTableSeeder extends Seeder
             'is_active' => '0'
         ]);
 
+        DB::table('orders')->delete();
+        DB::table('orders')->insert([
+            'fullname' => 'Стив Джобс',
+            'telephone' => '+375297090660',
+            'email' => 'smile@gmail.com',
+            'adres' => 'г. Минск, ул. Кульман, 11',
+            'status' => 'waiting payment'
+        ]);
 
     }
 }

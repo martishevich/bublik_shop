@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers;
 use App\Providers;
 use mysql_xdevapi\Session;
+use DB;
 
 class PostsController extends Controller
 {
@@ -18,6 +19,9 @@ class PostsController extends Controller
 
         $catTitle = Categories::orderBy('position')
             ->get();
-        return view('posts.index', compact('catTitle'));
+        $product = DB::table('products')->get();
+        dump($product);
+        dump($_POST);   
+        return view('posts.index', ['catTitle'=>$catTitle, 'product'=>$product]);
     }
 }

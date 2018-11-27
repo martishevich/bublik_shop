@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('/', 'PostsController@index');
-
 Route::get('/about', 'AboutController@about');
 
 Auth::routes();
@@ -25,12 +23,18 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::match(['get', 'post'], '/home/products/create', 'AdminProductController@create');
 
-	Route::get('/home/products/edit/{id}', 'AdminProductController@edit');
+    Route::match(['get', 'post'], '/home/products/edit/{id}', 'AdminProductController@edit');
 
 	Route::get('/home/products/delete/{id}', 'AdminProductController@destroy');
+
+    Route::match(['get', 'post'], '/home/orders', 'AdminOrderController@index');
 
 });
 
 Route::get('contact','ContactController@index')->name('contact.index');
 
 Route::post('add_contact','ContactController@add_contact')->name('contact.add_contact');
+
+Route::match(['get', 'post'], '/', 'PostsController@index');
+
+Route::get('/cardshop', 'CardshopController@cardshop');

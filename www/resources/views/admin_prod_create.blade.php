@@ -34,9 +34,8 @@
                         <input id = "input-ins" type = "number" required name = "price" pattern = "^\d+$" value = "{{ old('price') }}">
                         <br>
                         <p><b>Is active?</b></p>
-                        <select id = "select-ins" required name="is_active" required>
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
+                            <input name="is_active" type="radio" value="1" checked> Yes
+                            <input name="is_active" type="radio" value="0"> No<br>
                         </select>
                         <br>
                         <p><b>Full description:</b></p>

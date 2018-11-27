@@ -1,13 +1,26 @@
 @extends('layouts.app')
 @section('content')
+    <script>
+        $(document).ready(function() {
+            $('.btn btn-danger').click(function() {
+                if (confirm('Are you sure?')) {
+                    var url = $(this).attr('href');
+                    $('#content').load(url);
+                }
+            });
+        });
+    </script>
     <div class = "container">
         <div class = "row justify-content-center">
             <div class = "col-md-12">
                 <div>
                     <div class = "card-header">
                         <h1>Products list</h1>
-                        @if (isset($is_add) && $is_add == true)
-                            <p>Данные удачно добавлены</p>
+                        @if (session('is_edit')=='true')
+                            <p class="text-success">Данные удачно изменены</p>
+                        @endif
+                        @if (session('is_del')=='true')
+                            <p class="text-success">Данные удачно удалены</p>
                         @endif
                         <a class="btn btn-success" href="/home/products/create" role="button">add new</a>
                     </div>
@@ -41,8 +54,8 @@
                             <td><?php echo $v['short_disc'] ?></td>
                             <td><?php echo $v['price'] ?></td>
                             <td><?php echo $v['is_active'] ?></td>
-                            <td><button type="button" class="btn btn-warning">Edit</button></td>
-                            <td><button type="button" class="btn btn-danger">Delete</button></td>
+                            <td><a class="btn btn-warning" href="/home/products/edit/<?php echo $v['id'] ?>" role="button">edit</a></td>
+                            <td><a class="btn btn-danger" onclick="return confirm('Are you sure？')" href="/home/products/delete/<?php echo $v['id'] ?>" role="button">delete</a></td>
                         </tr>
 		                <?php endforeach; ?>
                         </tbody>
