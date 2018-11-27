@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/home/products/delete/{id}', 'AdminProductController@destroy');
 
+    Route::match(['get', 'post'], '/home/orders', 'AdminOrderController@index');
+
 });
 
 Route::get('contact','ContactController@index')->name('contact.index');
