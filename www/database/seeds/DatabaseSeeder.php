@@ -64,6 +64,16 @@ class CategoriesTableSeeder extends Seeder
             'is_active' => '0'
         ]);
 
+        DB::table('orders')->delete();
+        DB::table('orders')->insert([
+            'fullname' => '1',
+            'telephone' => 'Notebook Asus',
+            'email' => 'Very good laptop for work and game. If you want the best computer for yor child this good choice',
+            'short_disc' => 'Very good laptop',
+            'adres' => '50000',
+            'is_active' => '1'
+        ]);
 
+        $table->unsignedInteger('summa');
     }
 }
