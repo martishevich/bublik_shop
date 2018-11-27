@@ -73,5 +73,22 @@ class CategoriesTableSeeder extends Seeder
             'status' => 'waiting payment'
         ]);
 
+        DB::table('order_prods')->delete();
+        DB::table('order_prods')->insert([
+            'order_id' => '1',
+            'product_id' => '1',
+            'title' => 'Notebook Asus',
+            'quantity' => '2',
+            'price' => '50000'
+        ]);
+
+        DB::table('order_prods')->insert([
+            'order_id' => '1',
+            'product_id' => '2',
+            'title' => 'Notebook Apple',
+            'quantity' => '3',
+            'price' => '15000'
+        ]);
+
     }
 }
