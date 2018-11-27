@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('/', 'PostsController@index');
-
 Route::get('/about', 'AboutController@about');
 
 Auth::routes();
@@ -34,3 +32,5 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('contact','ContactController@index')->name('contact.index');
 
 Route::post('add_contact','ContactController@add_contact')->name('contact.add_contact');
+
+Route::match(['get', 'post'], '/', 'PostsController@index');

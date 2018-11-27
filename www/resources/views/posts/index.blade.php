@@ -111,11 +111,12 @@
                     </div>  
                 </div>
                 <!-- End Left Feature -->
+                <!-- Start Single Product -->
                 <div class = "col-md-9 col-lg-9 col-sm-8 col-xs-12 row justify-content">
                     <div class="product__list another-product-style">
 
                        <?php foreach ($product as $k => $v): ?>
-                        
+                       <?php $n = $v->id; ?>
                         <div class="col-md-3 col-lg-3 col-sm-8 col-xs-12 no-gutters row justify-content">
                             <div class="product foo">
                                 <div class="product__inner">
@@ -127,7 +128,8 @@
                                     <div class="product__hover__info">
                                         <ul class="product__action">
                                             <li><a data-toggle="modal" data-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
-                                            <li><a title="Add TO Cart" href=""><span class="ti-shopping-cart"></span></a></li>
+                                            <li><form action="/" method="post" ><input type="submit" class="ti-shopping-cart" value="<?php echo $n ?>" name="prodid">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}"></form></li>
                                         </ul>
                                     </div>
                                 </div>
