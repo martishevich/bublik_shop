@@ -57,14 +57,53 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <div class="wc-proceed-to-checkout">
-                                        <a href="checkout.html">Checkout</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="container"> 
+                            <form action="/" method="post">
+                            <div>
+                                <h1 style="text-align: center;">Delivery</h1>
+                                <br>
+                            </div>
+                            <div>
+                                <h2>First Name</h2>
+                                <input type="text" placeholder="Enter Your First Name" name="FName">
+                                <br>
+                            </div>
+                            <div>
+                                <h2>Second Name</h2>
+                                <input type="text" placeholder="Enter Your Second Name" name="SName">
+                                <br>
+                            </div>
+                            <div>
+                                <h2>Phone Number</h2>
+                                <input type="text" placeholder="Enter Your Phone Number" name="PNumber" >
+                                <br>
+                            </div>
+                            <div>
+                                <h2>Email</h2>
+                                <input type="email" name="email" id="" placeholder="Enter Your Email" name="Email">
+                                <br>
+                            </div>
+                            <div>
+                                <h2>Adress:</h2><h3> please, enter your adress like "street/home/apatment/floor" </h3>
+                                <input type="text" placeholder="Enter Your Adress" name="Adress">
+                                <br>
+                            </div>
+                            <div>
+                                <br>
+                                <input type="submit" class="btn btn-info" value="Send"> 
+                            </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>  
             </div>
         </div>
     </div>
