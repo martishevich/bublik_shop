@@ -1,6 +1,3 @@
-<?php $data = session()->all();
-        var_dump($data);
-?>
 @extends('layout')
 
 @section('content')
