@@ -66,14 +66,12 @@ class CategoriesTableSeeder extends Seeder
 
         DB::table('orders')->delete();
         DB::table('orders')->insert([
-            'fullname' => '1',
-            'telephone' => 'Notebook Asus',
-            'email' => 'Very good laptop for work and game. If you want the best computer for yor child this good choice',
-            'short_disc' => 'Very good laptop',
-            'adres' => '50000',
-            'is_active' => '1'
+            'fullname' => 'Стив Джобс',
+            'telephone' => '+375297090660',
+            'email' => 'smile@gmail.com',
+            'adres' => 'г. Минск, ул. Кульман, 11',
+            'status' => 'waiting payment'
         ]);
 
-        $table->unsignedInteger('summa');
     }
 }
