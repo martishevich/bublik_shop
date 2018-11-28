@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
+    public function orderProd(){
+        return $this->hasMany('App\OrderProd');
+    }
+
 	public static function insertDB($request){
 		DB::table('products')->insert([
 			'category_id' => trim(htmlentities(preg_replace("~  +~"," ",$request->input('category_id')))),

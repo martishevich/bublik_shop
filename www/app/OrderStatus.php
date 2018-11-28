@@ -4,14 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OrderProd extends Model
+class OrderStatus extends Model
 {
     public function order(){
         return $this->belongsTo('App\Order');
     }
 
-    public function product(){
-        return $this->belongsTo('App\Product');
+    public function statusForOrder(){
+        return $this->belongsTo('App\StatusForOrder');
     }
-
 }

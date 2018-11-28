@@ -13,4 +13,8 @@ class Order extends Model
     public function orderData(){
         return $this->hasMany('App\OrderData');
     }
+
+    public function orderStatus(){
+        return $this->hasMany('App\OrderStatus');
+    }
 }
