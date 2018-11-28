@@ -51,7 +51,7 @@ class CategoriesTableSeeder extends Seeder
             'name' => 'Notebook Asus',
             'description' => 'Very good laptop for work and game. If you want the best computer for yor child this good choice',
             'short_disc' => 'Very good laptop',
-            'price' => '50000',
+            'price' => '500.20',
             'is_active' => '1'
         ]);
 
@@ -60,7 +60,7 @@ class CategoriesTableSeeder extends Seeder
             'name' => 'Notebook Apple',
             'description' => 'Good choice if you have mach money and like to stand out',
             'short_disc' => 'Not bad...',
-            'price' => '15000',
+            'price' => '1500.50',
             'is_active' => '0'
         ]);
 
@@ -69,8 +69,53 @@ class CategoriesTableSeeder extends Seeder
             'fullname' => 'Стив Джобс',
             'telephone' => '+375297090660',
             'email' => 'smile@gmail.com',
-            'adres' => 'г. Минск, ул. Кульман, 11',
-            'status' => 'waiting payment'
+            'address' => 'г. Минск, ул. Кульман, 11'
+        ]);
+
+        DB::table('order_prods')->delete();
+        DB::table('order_prods')->insert([
+            'order_id' => '1',
+            'product_id' => '1',
+            'quantity' => '2',
+            'price' => '500.20'
+        ]);
+
+        DB::table('order_prods')->insert([
+            'order_id' => '1',
+            'product_id' => '2',
+            'quantity' => '3',
+            'price' => '1500.50'
+        ]);
+
+        DB::table('order_datas')->delete();
+        DB::table('order_datas')->insert([
+            'order_id' => '1',
+            'key' => 'comment',
+            'value' => 'after 7 oclock',
+            'group' => 'time'
+        ]);
+
+        DB::table('status_for_orders')->delete();
+        DB::table('status_for_orders')->insert([
+            'title' => 'waiting for payment'
+        ]);
+        DB::table('status_for_orders')->insert([
+            'title' => 'paid'
+        ]);
+        DB::table('status_for_orders')->insert([
+            'title' => 'abort'
+        ]);
+        DB::table('status_for_orders')->insert([
+            'title' => 'waiting for deliver'
+        ]);
+        DB::table('status_for_orders')->insert([
+            'title' => 'delivered'
+        ]);
+
+        DB::table('order_statuses')->delete();
+        DB::table('order_statuses')->insert([
+            'order_id' => '1',
+            'status_id' => '1'
         ]);
 
     }

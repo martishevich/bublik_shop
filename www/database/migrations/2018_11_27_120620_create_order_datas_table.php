@@ -17,7 +17,10 @@ class CreateOrderDatasTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('order_id');
             $table->foreign('order_id')->references('id')->on('orders');
-            $table->text('info');
+            $table->string('key',25);
+            $table->text('value');
+            $table->string('group',25);
+            $table->timestamps();
         });
     }
 
