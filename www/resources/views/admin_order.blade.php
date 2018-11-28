@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+    <?php dd($allOrd) ?>
     <script>
         $(document).ready(function() {
             $('.btn btn-danger').click(function() {
