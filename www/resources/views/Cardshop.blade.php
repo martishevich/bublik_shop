@@ -1,7 +1,5 @@
 @extends('layout')
-
 @section('content')
-
 <!-- cart-main-area start -->
 <div class="cart-main-area ptb--120 bg__white">
         <div class="container">
