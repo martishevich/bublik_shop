@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\OrderCreate;
 use App\Product;
 use Illuminate\Http\Request;
 use DB;
