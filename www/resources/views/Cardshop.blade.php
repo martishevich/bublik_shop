@@ -20,20 +20,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php $total = 0 ?>
+                                    <?php foreach ($orderItems as $v): ?>
                                     <tr>
-                                        <td class="product-name"><a href="#">Vestibulum suscipit</a></td>
-                                        <td class="product-price"><span class="amount">£165.00</span></td>
-                                        <td class="product-quantity"><input type="number" value="1" /></td>
-                                        <td class="product-subtotal">£165.00</td>
+                                        <td class="product-name"><a href="#"><?php echo $v['name'] ?></a></td>
+                                        <td class="product-price"><span class="amount"><?php echo $v['price'] ?></span></td>
+                                        <td class="product-quantity"><form action="/" method="post"><input type="number" name="quantity" value="<?php echo $prnumber ?>" /><input type="submit" value="Go" /><input type="hidden" name="_token" value="{{ csrf_token() }}"></form></td>
+                                        
+                                        <td class="product-subtotal"><?php echo $v['price']*$v['count'] ?></td>
                                         <td class="product-remove"><a href="#">X</a></td>
+                                        <?php $total = $total + $v['price']*$prnumber ?>
                                     </tr>
-                                    <tr>
-                                        <td class="product-name"><a href="#">Vestibulum dictum magna</a></td>
-                                        <td class="product-price"><span class="amount">£50.00</span></td>
-                                        <td class="product-quantity"><input type="number" value="1" /></td>
-                                        <td class="product-subtotal">£50.00</td>
-                                        <td class="product-remove"><a href="#">X</a></td>
-                                    </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -41,7 +39,7 @@
                             <div class="col-md-8 col-sm-7 col-xs-12">
                                 <div class="buttons-cart">
                                     <input type="submit" value="Update Cart" />
-                                    <a href="#">Continue Shopping</a>
+                                    <a href="/">Continue Shopping</a>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-5 col-xs-12">
@@ -52,7 +50,7 @@
                                             <tr class="order-total">
                                                 <th></th>
                                                 <td>
-                                                    <strong><span class="amount">£215.00</span></strong>
+                                                    <strong><span class="amount"><?php echo $total  ?></span></strong>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -72,18 +70,13 @@
                                 <br>
                             </div>
                             <div>
-                                <h2>First Name</h2>
-                                <input type="text" placeholder="Enter Your First Name" name="FName">
+                                <h2>Full Name</h2>
+                                <input type="text" placeholder="Enter Your Full Name" name="FName">
                                 <br>
                             </div>
                             <div>
-                                <h2>Second Name</h2>
-                                <input type="text" placeholder="Enter Your Second Name" name="SName">
-                                <br>
-                            </div>
-                            <div>
-                                <h2>Phone Number</h2>
-                                <input type="text" placeholder="Enter Your Phone Number" name="PNumber" >
+                                <h2>Phone Number</h2><h3> please, enter your phone number like "<strong>375</strong>123456789" </h3>
+                                <input type="text" placeholder="Enter Your Phone Number" name="PNumber" pattern = "^\d+$"\>
                                 <br>
                             </div>
                             <div>
@@ -96,6 +89,12 @@
                                 <input type="text" placeholder="Enter Your Adress" name="Adress">
                                 <br>
                             </div>
+                            <div>
+                                <h2>Comment</h2>
+                                <input type="text" name="comment">
+                                <br>
+                            </div>
+                            
                             <div>
                                 <br>
                                 <input type="submit" class="btn btn-info" value="Send"> 
