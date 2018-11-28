@@ -66,6 +66,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="container"> 
                             <form action="/" method="post">
+                            @csrf
                             <div>
                                 <h1 style="text-align: center;">Delivery</h1>
                                 <br>
