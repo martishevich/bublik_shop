@@ -39,6 +39,11 @@ class Product extends Model
 
     public static function getByIds($k)
     {
+        return static::where('id', (int)$k)->get()->first();
+    }
+
+    public static function prod_sess($k)
+    {
         return self::whereIn('id', $k)->get()->toArray();
     }
 }

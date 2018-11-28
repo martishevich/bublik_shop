@@ -13,12 +13,12 @@ class OrderCreateController extends Controller
     {
         $sessionCart = $request->session()->get('cart');
         if (isset($sessionCart)) {
-            $orderItems = OrderCreate::prod_sess(array_keys($sessionCart));
+            $orderItems = Product::prod_sess(array_keys($sessionCart));
             foreach ($orderItems as $key => $v) {
                 $orderItems[$key]['count'] = $sessionCart[$v['id']];
             }
-            return view('cardshop', compact('orderItems'));
+            return view('Cardshop', compact('orderItems'));
         }
-        return view('cardsop');
+        return view('Cardshop');
     }
 }
