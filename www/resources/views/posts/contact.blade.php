@@ -58,7 +58,7 @@
                             {!!Form::text('subject','',['id'=>'','class'=>'']) !!}
                             {!!Form::label('message','Message',['id'=>'','class'=>'']) !!}
                             {!!Form::textarea('message','',['id'=>'','class'=>''])!!}
-                            {{ Form::submit('Send') }}
+                            {!!Form::submit('Send') !!}
                             {{ Form::close() }}
                             @if ($errors->any())
                                 <ul class="alert alert-danger">

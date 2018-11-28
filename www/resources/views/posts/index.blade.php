@@ -145,8 +145,8 @@
                     </div>    
                 </div>
             </div>
-        </div>        
+        </div>
     </section>
     <!-- End Feature Product -->
-    
+
 @endsection
