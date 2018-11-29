@@ -32,7 +32,7 @@
                             <td><?php echo $v->telephone ?></td>
                             <td><?php echo $v->email ?></td>
                             <td><?php echo $v->address ?></td>
-                            <td><?php echo $v->total ?></td>
+                            <td><?php echo number_format($v->total, 2, ',', ' ') ?></td>
                         </tr>
                         <?php endforeach; ?>
                         </tbody>

@@ -33,7 +33,7 @@
                             <td><?php echo $v->telephone ?></td>
                             <td><?php echo $v->email ?></td>
                             <td><?php echo $v->address ?></td>
-                            <td><?php echo $v->total ?></td>
+                            <td><?php echo number_format($v->total, 2, ',', ' '); ?></td>
                             <td><a class="btn btn-info" href="/home/orders/<?php echo $v->id ?>" role="button">details</a></td>
                         </tr>
                         <?php endforeach; ?>
