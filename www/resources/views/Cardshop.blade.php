@@ -76,12 +76,12 @@
                                 </div>
                                 <div>
                                     <h2>Phone Number</h2><h3> please, enter your phone number like "<strong>375</strong>123456789" </h3>
-                                    <input type="text" placeholder="Enter Your Phone Number" name="PNumber" pattern = "^\d+$"\>
+                                    <input type="text" placeholder="Enter Your Phone Number" name="PNumber" pattern = "^\d+$">
                                     <br>
                                 </div>
                                 <div>
                                     <h2>Email</h2>
-                                    <input type="email" name="email" id="" placeholder="Enter Your Email" name="Email">
+                                    <input type="email"  id="" placeholder="Enter Your Email" name="Email">
                                     <br>
                                 </div>
                                 <div>
