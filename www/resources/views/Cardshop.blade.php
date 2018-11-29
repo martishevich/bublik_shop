@@ -25,11 +25,10 @@
                                     <tr>
                                         <td class="product-name"><a href="#"><?php echo $v['name'] ?></a></td>
                                         <td class="product-price"><span class="amount"><?php echo $v['price'] ?></span></td>
-                                        <td class="product-quantity"><form action="/" method="post"><input type="number" name="quantity" value="<?php echo $prnumber ?>" /><input type="submit" value="Go" /><input type="hidden" name="_token" value="{{ csrf_token() }}"></form></td>
-                                        
+                                        <td class="product-quantity"><input type="number" name="quantity" value="<?php echo $v['count'] ?>" /></td>
                                         <td class="product-subtotal"><?php echo $v['price']*$v['count'] ?></td>
                                         <td class="product-remove"><a href="#">X</a></td>
-                                        <?php $total = $total + $v['price']*$prnumber ?>
+                                        <?php $total = $total + $v['price']*$v['count'] ?>
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>
@@ -63,35 +62,36 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="container"> 
-                            <form action="/" method="post">
+                            <form action="/vallidate" method="post">
                             @csrf
                             <div>
                                 <h1 style="text-align: center;">Delivery</h1>
                                 <br>
                             </div>
+                            @include('errors')
                             <div>
                                 <h2>Full Name</h2>
-                                <input type="text" placeholder="Enter Your Full Name" name="FName">
+                                <input type="text" placeholder="Enter Your Full Name" name="FullName" value="{{ old('FullName') }}">
                                 <br>
                             </div>
                             <div>
                                 <h2>Phone Number</h2><h3> please, enter your phone number like "<strong>375</strong>123456789" </h3>
-                                <input type="text" placeholder="Enter Your Phone Number" name="PNumber" pattern = "^\d+$"\>
+                                <input type="text" placeholder="Enter Your Phone Number" name="PhoneNumber" value="{{ old('PhoneNumber') }}" pattern = "^\d+$">
                                 <br>
                             </div>
                             <div>
                                 <h2>Email</h2>
-                                <input type="email" name="email" id="" placeholder="Enter Your Email" name="Email">
+                                <input type="email" id="" placeholder="Enter Your Email" name="Email" value="{{ old('Email') }}">
                                 <br>
                             </div>
                             <div>
                                 <h2>Adress:</h2><h3> please, enter your adress like "street/home/apatment/floor" </h3>
-                                <input type="text" placeholder="Enter Your Adress" name="Adress">
+                                <input type="text" placeholder="Enter Your Adress" name="Adress" value="{{ old('Adress') }}">
                                 <br>
                             </div>
                             <div>
                                 <h2>Comment</h2>
-                                <input type="text" name="comment">
+                                <input type="text" name="comment" value="{{ old('comment') }}">
                                 <br>
                             </div>
                             

@@ -38,3 +38,5 @@ Route::post('add_contact','ContactController@add_contact')->name('contact.add_co
 Route::match(['get', 'post'], '/', 'PostsController@index');
 
 Route::get('/Cardshop', 'OrderCreateController@cardshop');
+
+Route::post('/vallidate', 'VallidateController@vallidate');
