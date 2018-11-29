@@ -13,4 +13,8 @@ class OrderStatus extends Model
     public function statusForOrder(){
         return $this->belongsTo('App\StatusForOrder');
     }
+
+    public function paymentForOrder(){
+        return $this->belongsTo('App\PaymentForOrder');
+    }
 }

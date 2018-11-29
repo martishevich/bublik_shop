@@ -5,7 +5,7 @@
             <div class = "col-md-12">
                 <div>
                     <div class = "card-header">
-                        <h1>Orders list</h1>
+                        <h1>Order <?= $allOrd['0']->id ?></h1>
                     </div>
 
                     @if (session('status'))
@@ -22,7 +22,6 @@
                             <th>email</th>
                             <th>address</th>
                             <th>total</th>
-                            <th>details</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -34,7 +33,6 @@
                             <td><?php echo $v->email ?></td>
                             <td><?php echo $v->address ?></td>
                             <td><?php echo $v->total ?></td>
-                            <td><a class="btn btn-info" href="/home/orders/<?php echo $v->id ?>" role="button">details</a></td>
                         </tr>
                         <?php endforeach; ?>
                         </tbody>

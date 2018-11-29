@@ -18,8 +18,11 @@ class CreateOrderStatusesTable extends Migration
             $table->unsignedInteger('order_id');
             $table->foreign('order_id')->references('id')->on('orders');
             $table->unsignedInteger('status_id');
-            //$table->foreign('status_id')->references('id')->on('status_for_orders');
-            $table->timestamps();
+            $table->foreign('status_id')->references('id')->on('status_for_orders');
+            $table->unsignedInteger('payment_id');
+            $table->foreign('payment_id')->references('id')->on('payment_for_orders');
+            $table->string('comment');
+            $table->dateTime('created')->default(new DateTime('now'));
         });
     }
 
