@@ -14,7 +14,4 @@ class OrderStatus extends Model
         return $this->belongsTo('App\StatusForOrder');
     }
 
-    public function paymentForOrder(){
-        return $this->belongsTo('App\PaymentForOrder');
-    }
 }

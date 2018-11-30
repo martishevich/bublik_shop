@@ -21,6 +21,10 @@ class Order extends Model
         return $this->hasMany('App\OrderStatus');
     }
 
+    public function payments()
+    {
+        return $this->belongsToMany('App\PaymentForOrder');
+    }
     /**
      * @param StatusForOrder|null $statusForOrder
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Query\Builder[]|\Illuminate\Support\Collection

@@ -20,7 +20,7 @@ class CreateOrderDatasTable extends Migration
             $table->string('key',25);
             $table->text('value');
             $table->string('group',25);
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

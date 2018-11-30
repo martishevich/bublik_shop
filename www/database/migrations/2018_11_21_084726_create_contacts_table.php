@@ -20,7 +20,7 @@ class CreateContactsTable extends Migration
             $table->integer('phone');
             $table->char('subject');
             $table->char('message');
-            $table->timestamp('created_at')->nullable();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 
