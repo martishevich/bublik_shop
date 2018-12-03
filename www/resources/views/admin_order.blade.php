@@ -22,6 +22,8 @@
                             <th>email</th>
                             <th>address</th>
                             <th>total</th>
+                            <th>payment</th>
+                            <th>delivering</th>
                             <th>details</th>
                         </tr>
                         </thead>
@@ -33,7 +35,9 @@
                             <td><?php echo $v->telephone ?></td>
                             <td><?php echo $v->email ?></td>
                             <td><?php echo $v->address ?></td>
-                            <td><?php echo number_format($v->total, 2, ',', ' '); ?></td>
+                            <td><?php echo number_format($v->total, 2, ',', ' ') ?></td>
+                            <td><?php echo $v->payment ?></td>
+                            <td><?php echo $v->delivering ?></td>
                             <td><a class="btn btn-info" href="/home/orders/<?php echo $v->id ?>" role="button">details</a></td>
                         </tr>
                         <?php endforeach; ?>

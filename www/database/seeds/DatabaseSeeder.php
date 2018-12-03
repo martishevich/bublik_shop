@@ -99,7 +99,7 @@ class CategoriesTableSeeder extends Seeder
 
         DB::table('status_for_orders')->delete();
         DB::table('status_for_orders')->insert([
-            'title' => 'in processing'
+            'title' => 'processing'
         ]);
         DB::table('status_for_orders')->insert([
             'title' => 'reshape'
@@ -114,7 +114,7 @@ class CategoriesTableSeeder extends Seeder
             'title' => 'waiting for deliver'
         ]);
         DB::table('status_for_orders')->insert([
-            'title' => 'in delivering'
+            'title' => 'delivering'
         ]);
         DB::table('status_for_orders')->insert([
             'title' => 'delivered'
@@ -144,7 +144,8 @@ class CategoriesTableSeeder extends Seeder
         DB::table('order_statuses')->delete();
         DB::table('order_statuses')->insert([
             'order_id'  => '1',
-            'status_id' => '1'
+            'status_id' => '1',
+            'comment'   => 'комментарий'
         ]);
 
     }
