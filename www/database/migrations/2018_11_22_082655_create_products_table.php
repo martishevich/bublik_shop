@@ -21,7 +21,8 @@ class CreateProductsTable extends Migration
             $table->string('short_disc', 150);
             $table->unsignedDecimal('price',8,2);
             $table->boolean('is_active')->default('1');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+
         });
     }
 

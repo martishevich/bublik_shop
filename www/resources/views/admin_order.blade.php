@@ -1,21 +1,11 @@
 @extends('layouts.app')
 @section('content')
-    <script>
-        $(document).ready(function() {
-            $('.btn btn-danger').click(function() {
-                if (confirm('Are you sure?')) {
-                    var url = $(this).attr('href');
-                    $('#content').load(url);
-                }
-            });
-        });
-    </script>
     <div class = "container">
         <div class = "row justify-content-center">
             <div class = "col-md-12">
                 <div>
                     <div class = "card-header">
-                        <h1>Products list</h1>
+                        <h1>Orders list</h1>
                     </div>
 
                     @if (session('status'))
@@ -30,21 +20,25 @@
                             <th>fullname</th>
                             <th>telephone</th>
                             <th>email</th>
-                            <th>adres</th>
-                            <th>status</th>
+                            <th>address</th>
+                            <th>total</th>
+                            <th>payment</th>
+                            <th>delivering</th>
                             <th>details</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php foreach ($allOrd as $k => $v):?>
                         <tr>
-                            <th scope="row"><?php echo $v['id'] ?></th>
-                            <td><?=htmlentities($v['fullname']); ?></td>
-                            <td><?php echo $v['telephone'] ?></td>
-                            <td><?php echo $v['email'] ?></td>
-                            <td><?php echo $v['adres'] ?></td>
-                            <td><?php echo $v['status'] ?></td>
-                            <td><a class="btn btn-info" href="/home/order/<?php echo $v['id'] ?>" role="button">details</a></td>
+                            <th scope="row"><?php echo $v->id ?></th>
+                            <td><?php echo $v->fullname ?></td>
+                            <td><?php echo $v->telephone ?></td>
+                            <td><?php echo $v->email ?></td>
+                            <td><?php echo $v->address ?></td>
+                            <td><?php echo number_format($v->total, 2, ',', ' ') ?></td>
+                            <td><?php echo $v->payment ?></td>
+                            <td><?php echo $v->delivering ?></td>
+                            <td><a class="btn btn-info" href="/home/orders/<?php echo $v->id ?>" role="button">details</a></td>
                         </tr>
                         <?php endforeach; ?>
                         </tbody>
