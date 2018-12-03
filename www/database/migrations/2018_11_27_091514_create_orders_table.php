@@ -19,7 +19,9 @@ class CreateOrdersTable extends Migration
             $table->string('telephone', 13);
             $table->string('email',50);
             $table->string('address', 150);
-            $table->timestamps();
+            $table->unsignedInteger('payment_id');
+            $table->foreign('payment_id')->references('id')->on('payment_for_orders');
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

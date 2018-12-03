@@ -13,4 +13,5 @@ class OrderStatus extends Model
     public function statusForOrder(){
         return $this->belongsTo('App\StatusForOrder');
     }
+
 }
