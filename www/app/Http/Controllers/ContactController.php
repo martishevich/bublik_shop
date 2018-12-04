@@ -37,7 +37,6 @@ class ContactController extends Controller
             return view('posts.contact');
         } else {
             return view('posts.infomes')->with('name',$validatedata['name']);
-
         }
     }
 }

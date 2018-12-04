@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Mail;
 use Illuminate\Http\Request;
 use App\Product;
 use DB;
@@ -28,15 +29,11 @@ class AddToOrderController extends Controller
         $data['created_at'] = Carbon::now();
 
 
-
-
-        $s['order_id'] = DB::table('orders')->insertGetId($data);
-        $s['status_id'] = 1;
+        $s['order_id']   = DB::table('orders')->insertGetId($data);
+        $s['status_id']  = 1;
         $s['created_at'] = Carbon::now();
 
         DB::table('order_statuses')->insert($s);
-
-
 
 
         foreach ($orderItems as $key => $v) {
@@ -50,15 +47,24 @@ class AddToOrderController extends Controller
             DB::table('order_prods')->insert($order_prod);
         }
 
-
-
-        var_dump($orderItems);
+        Mail::send(['text' => 'orderList'], [$validatedata['name'], $validatedata['email']], function ($message) {
+            $message->to('loliabombita@mail.ru', 'To web dev blog')->subject('Test mail');
+            $message->from('loliabombita@mail.ru', 'Web deb blog');
+        });
+        if (count(Mail::failures()) > 0) {
+            return view('posts.contact');
+        } else {
+            return view('posts.infomes')->with('name', $validatedata['name']);
+        }
         return view('add_success');
 
     }
-    public function clearSession(Request $request){
+
+    public function clearSession(Request $request)
+    {
 
         $request->session()->forget('cart');
 
     }
+
 }

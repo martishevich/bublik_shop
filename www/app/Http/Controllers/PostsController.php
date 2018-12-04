@@ -27,7 +27,6 @@ class PostsController extends Controller
             );
         }
         $request->session()->save();
-        var_dump($request->session()->all());
         $catTitle = Categories::orderBy('position')
             ->get();
         $product  = DB::table('products')->get();
