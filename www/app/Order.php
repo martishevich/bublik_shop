@@ -128,4 +128,37 @@ LEFT JOIN(
     }
 
 
+    /**
+     * @param int $id
+     * @return Order|null
+     */
+    public static function getById(int $id): ?Model
+    {
+        return static::query()
+            ->find($id);
+    }
+
+    /**
+     * @return OrderStatus|null
+     */
+    public function getStatus()
+    {
+        return OrderStatus::getLastByOrder($this);
+    }
+
+    public function getStatusId()
+    {
+        $this->getStatus()->getKey();
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getData()
+    {
+        return OrderData::getListByOrder($this);
+    }
+
+
 }

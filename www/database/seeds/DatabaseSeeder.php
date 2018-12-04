@@ -14,8 +14,53 @@ class CategoriesTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('categories')->delete();
 
+
+        DB::table('status_for_orders')->delete();
+        DB::table('status_for_orders')->insert([
+            'title' => 'processing'
+        ]);
+        DB::table('status_for_orders')->insert([
+            'title' => 'reshape'
+        ]);
+        DB::table('status_for_orders')->insert([
+            'title' => 'going'
+        ]);
+        DB::table('status_for_orders')->insert([
+            'title' => 'assembled'
+        ]);
+        DB::table('status_for_orders')->insert([
+            'title' => 'waiting for deliver'
+        ]);
+        DB::table('status_for_orders')->insert([
+            'title' => 'delivering'
+        ]);
+        DB::table('status_for_orders')->insert([
+            'title' => 'delivered'
+        ]);
+        DB::table('status_for_orders')->insert([
+            'title' => 'return in store'
+        ]);
+        DB::table('status_for_orders')->insert([
+            'title' => 'abandonment'
+        ]);
+
+
+        DB::table('payment_for_orders')->delete();
+        DB::table('payment_for_orders')->insert([
+            'title' => 'waiting for payment'
+        ]);
+        DB::table('payment_for_orders')->insert([
+            'title' => 'cash'
+        ]);
+        DB::table('payment_for_orders')->insert([
+            'title' => 'bank roga'
+        ]);
+        DB::table('payment_for_orders')->insert([
+            'title' => 'refund'
+        ]);
+
+        DB::table('categories')->delete();
         DB::table('categories')->insert([
             'title'       => 'Notebooks',
             'description' => 'Ноутбуки',
@@ -97,49 +142,7 @@ class CategoriesTableSeeder extends Seeder
             'group'    => 'time'
         ]);
 
-        DB::table('status_for_orders')->delete();
-        DB::table('status_for_orders')->insert([
-            'title' => 'processing'
-        ]);
-        DB::table('status_for_orders')->insert([
-            'title' => 'reshape'
-        ]);
-        DB::table('status_for_orders')->insert([
-            'title' => 'going'
-        ]);
-        DB::table('status_for_orders')->insert([
-            'title' => 'assembled'
-        ]);
-        DB::table('status_for_orders')->insert([
-            'title' => 'waiting for deliver'
-        ]);
-        DB::table('status_for_orders')->insert([
-            'title' => 'delivering'
-        ]);
-        DB::table('status_for_orders')->insert([
-            'title' => 'delivered'
-        ]);
-        DB::table('status_for_orders')->insert([
-            'title' => 'return in store'
-        ]);
-        DB::table('status_for_orders')->insert([
-            'title' => 'abandonment'
-        ]);
 
-
-        DB::table('payment_for_orders')->delete();
-        DB::table('payment_for_orders')->insert([
-            'title' => 'waiting for payment'
-        ]);
-        DB::table('payment_for_orders')->insert([
-            'title' => 'cash'
-        ]);
-        DB::table('payment_for_orders')->insert([
-            'title' => 'bank roga'
-        ]);
-        DB::table('payment_for_orders')->insert([
-            'title' => 'refund'
-        ]);
 
         DB::table('order_statuses')->delete();
         DB::table('order_statuses')->insert([
