@@ -42,3 +42,5 @@ Route::match(['get', 'post'], '/', 'PostsController@index');
 Route::get('/cardshop', 'OrderCreateController@cardshop');
 
 Route::match(['get','post'],'/show','AddToOrderController@add');
+
+Route::get('orderList','AddToOrderController@viewOrder');

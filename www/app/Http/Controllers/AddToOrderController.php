@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
+use PDF;
 use Mail;
 use Illuminate\Http\Request;
 use App\Product;
@@ -12,29 +14,23 @@ class AddToOrderController extends Controller
 {
     public function add(Request $request)
     {
-
         $sessionCart = $request->session()->get('cart');
         if (isset($sessionCart)) {
             $orderItems = Product::prod_sess(array_keys($sessionCart));
             foreach ($orderItems as $key => $v) {
                 $orderItems[$key]['count'] = $sessionCart[$v['id']];
-
             }
-
         }
         $data['fullname']   = $request['FName'];
         $data['telephone']  = $request['PNumber'];
         $data['email']      = $request['Email'];
         $data['address']    = $request['Adress'];
-        $data['created_at'] = Carbon::now();
+        $data['payment_id'] = 1;
 
-
-        $s['order_id']   = DB::table('orders')->insertGetId($data);
-        $s['status_id']  = 1;
-        $s['created_at'] = Carbon::now();
-
+        $s['order_id']  = DB::table('orders')->insertGetId($data);
+        $s['status_id'] = 1;
+        $s['comment']   = '';
         DB::table('order_statuses')->insert($s);
-
 
         foreach ($orderItems as $key => $v) {
 
@@ -46,25 +42,42 @@ class AddToOrderController extends Controller
 
             DB::table('order_prods')->insert($order_prod);
         }
-
-        Mail::send(['text' => 'orderList'], [$validatedata['name'], $validatedata['email']], function ($message) {
-            $message->to('loliabombita@mail.ru', 'To web dev blog')->subject('Test mail');
-            $message->from('loliabombita@mail.ru', 'Web deb blog');
-        });
-        if (count(Mail::failures()) > 0) {
-            return view('posts.contact');
-        } else {
-            return view('posts.infomes')->with('name', $validatedata['name']);
-        }
+        $dataOrder['order_id'] = $s['order_id'];
+        $dataOrder['key']      = 'comment';
+        $dataOrder['value']    = '';
+        $dataOrder['group']    = 'time';
+        DB::table('order_datas')->insert($dataOrder);
         return view('add_success');
-
     }
 
     public function clearSession(Request $request)
     {
 
         $request->session()->forget('cart');
-
     }
 
+
+
+
+
+
+
+
+
+
+
+
+    public function viewOrder()
+    {
+        $sd         = Order::getListByStatus(1)->toArray();
+        $data       = Order::getProds(1)->toArray();
+        $pdf = PDF::loadView('orderList', compact('data'));
+
+        Mail::send('backEmail', $data, function ($message) use ($pdf) {
+            $message->from('loliabombita@mail.ru', 'Your Name');
+            $message->to('loliabombita@mail.ru')->subject('Invoice');
+            $message->attachData($pdf->output(), "orderList.pdf");
+        });
+    }
 }
+

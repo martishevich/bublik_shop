@@ -14,6 +14,49 @@ class CategoriesTableSeeder extends Seeder
 {
     public function run()
     {
+        DB::table('status_for_orders')->delete();
+        DB::table('status_for_orders')->insert([
+            'title' => 'processing'
+        ]);
+        DB::table('status_for_orders')->insert([
+            'title' => 'reshape'
+        ]);
+        DB::table('status_for_orders')->insert([
+            'title' => 'going'
+        ]);
+        DB::table('status_for_orders')->insert([
+            'title' => 'assembled'
+        ]);
+        DB::table('status_for_orders')->insert([
+            'title' => 'waiting for deliver'
+        ]);
+        DB::table('status_for_orders')->insert([
+            'title' => 'delivering'
+        ]);
+        DB::table('status_for_orders')->insert([
+            'title' => 'delivered'
+        ]);
+        DB::table('status_for_orders')->insert([
+            'title' => 'return in store'
+        ]);
+        DB::table('status_for_orders')->insert([
+            'title' => 'abandonment'
+        ]);
+
+        DB::table('payment_for_orders')->delete();
+        DB::table('payment_for_orders')->insert([
+            'title' => 'waiting for payment'
+        ]);
+        DB::table('payment_for_orders')->insert([
+            'title' => 'cash'
+        ]);
+        DB::table('payment_for_orders')->insert([
+            'title' => 'bank roga'
+        ]);
+        DB::table('payment_for_orders')->insert([
+            'title' => 'refund'
+        ]);
+
         DB::table('categories')->delete();
 
         DB::table('categories')->insert([
@@ -67,11 +110,11 @@ class CategoriesTableSeeder extends Seeder
 
         DB::table('orders')->delete();
         DB::table('orders')->insert([
-            'fullname'  => 'Стив Джобс',
-            'telephone' => '+375297090660',
-            'email'     => 'smile@gmail.com',
-            'address'   => 'г. Минск, ул. Кульман, 11',
-            'payment_id'   => '1'
+            'fullname'   => 'Стив Джобс',
+            'telephone'  => '+375297090660',
+            'email'      => 'smile@gmail.com',
+            'address'    => 'г. Минск, ул. Кульман, 11',
+            'payment_id' => '1'
         ]);
 
         DB::table('order_prods')->delete();
@@ -95,50 +138,6 @@ class CategoriesTableSeeder extends Seeder
             'key'      => 'comment',
             'value'    => 'after 7 oclock',
             'group'    => 'time'
-        ]);
-
-        DB::table('status_for_orders')->delete();
-        DB::table('status_for_orders')->insert([
-            'title' => 'processing'
-        ]);
-        DB::table('status_for_orders')->insert([
-            'title' => 'reshape'
-        ]);
-        DB::table('status_for_orders')->insert([
-            'title' => 'going'
-        ]);
-        DB::table('status_for_orders')->insert([
-            'title' => 'assembled'
-        ]);
-        DB::table('status_for_orders')->insert([
-            'title' => 'waiting for deliver'
-        ]);
-        DB::table('status_for_orders')->insert([
-            'title' => 'delivering'
-        ]);
-        DB::table('status_for_orders')->insert([
-            'title' => 'delivered'
-        ]);
-        DB::table('status_for_orders')->insert([
-            'title' => 'return in store'
-        ]);
-        DB::table('status_for_orders')->insert([
-            'title' => 'abandonment'
-        ]);
-
-
-        DB::table('payment_for_orders')->delete();
-        DB::table('payment_for_orders')->insert([
-            'title' => 'waiting for payment'
-        ]);
-        DB::table('payment_for_orders')->insert([
-            'title' => 'cash'
-        ]);
-        DB::table('payment_for_orders')->insert([
-            'title' => 'bank roga'
-        ]);
-        DB::table('payment_for_orders')->insert([
-            'title' => 'refund'
         ]);
 
         DB::table('order_statuses')->delete();
