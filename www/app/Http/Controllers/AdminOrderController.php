@@ -23,8 +23,13 @@ class AdminOrderController extends Controller
         $order = Order::getById($id);
         $allProds = Order::getProds($id);
         $ordHistory = Order::getOrdHistory($id);
+
         
         return view('admin_order_show', compact('order','allProds', 'ordHistory'));
 
     }
+
+/*$start = microtime(true);
+$finish = number_format(microtime(true) - $start, 2, ',', ' ');
+dd($finish);*/
 }
