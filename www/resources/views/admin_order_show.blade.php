@@ -63,6 +63,10 @@
 							<th>Status</th>
 							<td><?=$order->getStatusName()->title?></td>
 						</tr>
+						<tr>
+							<th>Payment</th>
+							<td><?=$order->getPaymentName()->title?></td>
+						</tr>
 						<?php endforeach; ?>
 						</tbody>
 					</table>

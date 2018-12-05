@@ -16,7 +16,7 @@
 		const STATUS_RET_IN_STORE   = 8;
 		const STATUS_CANCEL         = 9;
 		
-		public static function getName(Order $order): ?self
+		public static function getNameStatus(Order $order): ?self
 		{
 			return static::query()
 				->where(['id' => $order->getStatusId()])

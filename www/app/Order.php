@@ -24,7 +24,7 @@
 		 * @param StatusOrder|null $statusOrder
 		 * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Query\Builder[]|\Illuminate\Support\Collection
 		 */
-		public static function getListByStatus($id, StatusOrder $statusOrder = null)
+		/*public static function getListByStatus($id, StatusOrder $statusOrder = null)
 		{
 			return static::query()
 				->select([
@@ -34,8 +34,8 @@
 					'ss1.title AS delivering'
 				])
 				->fromRaw('orders AS o1
-LEFT JOIN(
-    SELECT order_id, SUM(price * quantity) AS total
+				LEFT JOIN(
+				SELECT order_id, SUM(price * quantity) AS total
     FROM order_prods GROUP BY order_id) AS p1
     ON  p1.order_id = o1.id
 LEFT JOIN(
@@ -54,7 +54,7 @@ LEFT JOIN(
 				->whereRaw('o1.id = ?', [$id])
 				->get();
 			
-		}
+		}*/
 		
 		public static function getList()
 		{
@@ -64,22 +64,19 @@ LEFT JOIN(
 					'p1.total'
 				])
 				->fromRaw('orders AS o1
-LEFT JOIN(
-    SELECT order_id, SUM(price * quantity) AS total
-    FROM order_prods GROUP BY order_id) AS p1
-    ON  p1.order_id = o1.id
-LEFT JOIN(
-    SELECT s1.order_id, s1.status_id, s3.title
-  FROM order_statuses AS s1
-    LEFT JOIN (
-        SELECT MAX(order_statuses.id) AS lastid, order_id
-            FROM order_statuses
-            GROUP BY order_id) s2
-        ON s1.id = s2.lastid
-      LEFT JOIN status_orders s3
-        ON s1.status_id = s3.id
-        WHERE NOT s2.lastid IS null) ss1
-    ON o1.id = ss1.order_id')
+				LEFT JOIN(SELECT order_id, SUM(price * quantity) AS total
+				FROM order_prods GROUP BY order_id) AS p1
+				ON  p1.order_id = o1.id
+				LEFT JOIN(SELECT s1.order_id, s1.status_id, s3.title
+				    FROM order_statuses AS s1
+				    LEFT JOIN (SELECT MAX(order_statuses.id) AS lastid, order_id
+				    FROM order_statuses
+				    GROUP BY order_id) s2
+				    ON s1.id = s2.lastid
+				    LEFT JOIN status_orders s3
+				    ON s1.status_id = s3.id
+				    WHERE NOT s2.lastid IS null) ss1
+				ON o1.id = ss1.order_id')
 				->where('ss1.status_id', '<>', null)
 				->orderBy('o1.id', 'DESC')
 				->get();
@@ -93,7 +90,8 @@ LEFT JOIN(
 					'p.name'
 				])
 				->fromRaw('order_prods AS op
-    INNER JOIN products AS p ON op.product_id = p.id')
+				INNER JOIN products AS p
+				ON op.product_id = p.id')
 				->whereRaw('op.order_id = ?', [$id])
 				->get();
 		}
@@ -106,8 +104,9 @@ LEFT JOIN(
 					'os.comment',
 					'os.created_at'
 				])
-				->fromRaw('order_statuses AS
-        os INNER JOIN status_orders AS sfo ON os.status_id = sfo.id')
+				->fromRaw('order_statuses AS os
+				INNER JOIN status_orders AS sfo
+				ON os.status_id = sfo.id')
 				->whereRaw('os.order_id = ?', [$id])
 				->orderBy('os.id', 'DESC')
 				->get();
@@ -140,10 +139,30 @@ LEFT JOIN(
 		
 		public function getStatusName()
 		{
-			return StatusOrder::getName($this);
+			return StatusOrder::getNameStatus($this);
 		}
 		
-		
+
+
+		public function getPaymentId()
+		{
+			return $this->getPayment()->getKey();
+		}
+
+		/**
+		 * @return OrderStatus|null
+		 */
+		public function getPayment()
+		{
+			return OrderStatus::getLastByOrder($this);
+		}
+
+		public function getPaymentName()
+		{
+			return StatusPayment::getNamePayment($this);
+		}
+
+
 		/**
 		 * @return \Illuminate\Database\Eloquent\Collection
 		 */
