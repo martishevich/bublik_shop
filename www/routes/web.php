@@ -31,6 +31,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::match(['get', 'post'], '/home/orders/{id}', 'AdminOrderController@show');
 
+    Route::get('home/orders/{id}/change', 'AdminOrderController@change');
+
 });
 
 Route::get('contact','ContactController@index')->name('contact.index');

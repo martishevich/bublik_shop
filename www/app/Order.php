@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
@@ -191,8 +192,7 @@ ON o1.id = ss1.order_id')
 
     public function setCancel()
     {
-        /*проверить текущий статус canCancel()*/
-        /*запилить в базу смену статуса.*/
+
     }
 
 
@@ -223,8 +223,15 @@ ON o1.id = ss1.order_id')
 
     public function setBoxing()
     {
-        /*проверить текущий статус canCancel()*/
-        /*запилить в базу смену статуса.*/
+        DB::table('order_statuses')
+            ->insert(
+                ['order_id' => $this->getKey(),
+                 'status_id' => 3,
+                 'payment_id' => $this->getPaymentId()
+                ]
+            )
+            ->save;
+        $this->getPaymentId();
     }
 
     public function canCollected()

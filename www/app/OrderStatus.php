@@ -21,7 +21,7 @@
 				->get()
 				->first();
 		}
-		
+
 		public function order()
 		{
 			return $this->belongsTo('App\Order');
@@ -31,5 +31,7 @@
 		{
 			return $this->belongsTo('App\StatusOrder');
 		}
+
+
 		
 	}

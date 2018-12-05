@@ -4,6 +4,7 @@
     /**
      * @var $order \App\Order
      */
+
     ?>
     <script>
         $(document).ready(function () {
@@ -13,7 +14,6 @@
                     $('#form_change_status>input').val(value);
                     $('#form_change_status').submit();
                 }
-
                 return false;
             });
         });
@@ -70,8 +70,8 @@
                         </tr>
                     </table>
                     <hr>
-                    <form method="post" class="hidden" id="form_change_status"
-                          action="/home/orders/status/change&id=<?=$order->getKey()?>">
+                    <form method="get" class="hidden" id="form_change_status"
+                          action="/home/orders/<?=$order->getKey()?>/change">
                         <input type="text" name="status" value="">
                     </form>
                     Изменить статус заказа:
@@ -80,7 +80,7 @@
                                value="Cancel">
                     @endif
                     @if($order->canRebuild())
-                        <input type="button" data-status="rebuild" class="btn btn-danger status_btn"
+                        <input type="button" data-status="rebuild" class="btn btn-info status_btn"
                                value="Rebuild">
                     @endif
                     @if($order->canBoxing())
@@ -108,7 +108,7 @@
                                value="Return in store">
                     @endif
                     <br><br>
-                    @if($order->getStatusId() == \App\StatusOrder::STATUS_PROCESSING)
+                    @if(!($order->getStatusId() == 9))
                         Отправить счет заново:
                         <br><br>
                     @endif

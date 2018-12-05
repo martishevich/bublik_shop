@@ -20,16 +20,24 @@ class AdminOrderController extends Controller
     public function show($id)
     {
 
-        $order = Order::getById($id);
-        $allProds = Order::getProds($id);
+        $order      = Order::getById($id);
+        $allProds   = Order::getProds($id);
         $ordHistory = Order::getOrdHistory($id);
 
-        
-        return view('admin_order_show', compact('order','allProds', 'ordHistory'));
+        return view('admin_order_show', compact('order', 'allProds', 'ordHistory'));
 
     }
 
-/*$start = microtime(true);
-$finish = number_format(microtime(true) - $start, 2, ',', ' ');
-dd($finish);*/
+    public function change($id)
+    {
+        $order = Order::getById($id);
+        if ($_GET['status'] == 'boxing' && $order->canBoxing()) {
+            $order->setBoxing();
+        }
+        return redirect("home/orders/$id");
+    }
+
+    /*$start = microtime(true);
+    $finish = number_format(microtime(true) - $start, 2, ',', ' ');
+    dd($finish);*/
 }
