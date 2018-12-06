@@ -21,6 +21,7 @@ class AdminOrderController extends Controller
     {
 
         $order      = Order::getById($id);
+        $ddd = $order->
         $allProds   = Order::getProds($id);
         $ordHistory = Order::getOrdHistory($id);
 /*        dd($order->getStatusId());*/
@@ -55,6 +56,9 @@ class AdminOrderController extends Controller
         }
         if ($_GET['status'] == 'cancel' && $order->canCancel()) {
             $order->setCancel();
+        }
+        if ($_GET['status'] == 'paid' && $order->canPaid()) {
+            $order->setPaid();
         }
         return redirect("home/orders/$id");
     }

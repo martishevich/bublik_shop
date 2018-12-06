@@ -345,5 +345,37 @@ ON o1.id = ss1.order_id')
 		    );
     }
 
+    public function canPaid()
+    {
+        switch ($this->getStatusId()) {
+            case StatusOrder::STATUS_PROCESSING:
+            case StatusOrder::STATUS_REBUILD:
+            case StatusOrder::STATUS_BOXING:
+            case StatusOrder::STATUS_COLLECTED:
+            case StatusOrder::STATUS_WAIT_FOR_DELIV:
+            case StatusOrder::STATUS_DELIVERING:
+            case StatusOrder::STATUS_DELIVERED:
+                switch ($this->getPaymentId()){
+                    case StatusPayment::STATUS_WAITING:
+                        return true;
+                }
+                return false;
+        }
+        return false;
+    }
+
+
+
+    public function setPaid()
+    {
+        DB::table('order_statuses')
+            ->insert(
+                ['order_id' => $this->getStatus()->order_id,
+                 'status_id' => $this->getStatus()->status_id,
+                 'payment_id' => StatusPayment::STATUS_CASH
+                ]
+            );
+    }
+
 
 }
