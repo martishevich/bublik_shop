@@ -23,6 +23,7 @@ class AdminOrderController extends Controller
         $order      = Order::getById($id);
         $allProds   = Order::getProds($id);
         $ordHistory = Order::getOrdHistory($id);
+/*        dd($order->getStatusId());*/
 
         return view('admin_order_show', compact('order', 'allProds', 'ordHistory'));
 
@@ -33,6 +34,27 @@ class AdminOrderController extends Controller
         $order = Order::getById($id);
         if ($_GET['status'] == 'boxing' && $order->canBoxing()) {
             $order->setBoxing();
+        }
+        if ($_GET['status'] == 'rebuild' && $order->canRebuild()) {
+            $order->setRebuild();
+        }
+        if ($_GET['status'] == 'collected' && $order->canCollected()) {
+            $order->setCollected();
+        }
+        if ($_GET['status'] == 'waiting' && $order->canWaiting()) {
+            $order->setWaiting();
+        }
+        if ($_GET['status'] == 'delivering' && $order->canDelivering()) {
+            $order->setDelivering();
+        }
+        if ($_GET['status'] == 'delivered' && $order->canDelivered()) {
+            $order->setDelivered();
+        }
+        if ($_GET['status'] == 'store' && $order->canInStore()) {
+            $order->setInStore();
+        }
+        if ($_GET['status'] == 'cancel' && $order->canCancel()) {
+            $order->setCancel();
         }
         return redirect("home/orders/$id");
     }

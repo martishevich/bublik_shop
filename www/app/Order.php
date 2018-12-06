@@ -130,7 +130,7 @@ ON o1.id = ss1.order_id')
 
     public function getStatusId()
     {
-        return $this->getStatus()->getKey();
+        return $this->getStatus()->status_id;
     }
 
     /**
@@ -149,7 +149,7 @@ ON o1.id = ss1.order_id')
 
     public function getPaymentId()
     {
-        return $this->getPayment()->getKey();
+        return $this->getPayment()->payment_id;
     }
 
     /**
@@ -192,7 +192,13 @@ ON o1.id = ss1.order_id')
 
     public function setCancel()
     {
-
+	    DB::table('order_statuses')
+		    ->insert(
+			    ['order_id' => $this->getStatus()->order_id,
+			     'status_id' => StatusOrder::STATUS_CANCEL,
+			     'payment_id' => $this->getPayment()->payment_id
+			    ]
+		    );
     }
 
 
@@ -207,8 +213,13 @@ ON o1.id = ss1.order_id')
 
     public function setRebuild()
     {
-        /*проверить текущий статус canCancel()*/
-        /*запилить в базу смену статуса.*/
+    	DB::table('order_statuses')
+		    ->insert(
+			    ['order_id' => $this->getStatus()->order_id,
+			     'status_id' => StatusOrder::STATUS_REBUILD,
+			     'payment_id' => $this->getPayment()->payment_id
+			    ]
+		    );
     }
 
     public function canBoxing()
@@ -225,13 +236,11 @@ ON o1.id = ss1.order_id')
     {
         DB::table('order_statuses')
             ->insert(
-                ['order_id' => $this->getKey(),
-                 'status_id' => 3,
-                 'payment_id' => $this->getPaymentId()
+                ['order_id' => $this->getStatus()->order_id,
+                 'status_id' => StatusOrder::STATUS_BOXING,
+                 'payment_id' => $this->getPayment()->payment_id
                 ]
-            )
-            ->save;
-        $this->getPaymentId();
+            );
     }
 
     public function canCollected()
@@ -245,8 +254,13 @@ ON o1.id = ss1.order_id')
 
     public function setCollected()
     {
-        /*проверить текущий статус canCancel()*/
-        /*запилить в базу смену статуса.*/
+	    DB::table('order_statuses')
+		    ->insert(
+			    ['order_id' => $this->getStatus()->order_id,
+			     'status_id' => StatusOrder::STATUS_COLLECTED,
+			     'payment_id' => $this->getPayment()->payment_id
+			    ]
+		    );
     }
 
     public function canWaiting()
@@ -260,8 +274,13 @@ ON o1.id = ss1.order_id')
 
     public function setWaiting()
     {
-        /*проверить текущий статус canCancel()*/
-        /*запилить в базу смену статуса.*/
+	    DB::table('order_statuses')
+		    ->insert(
+			    ['order_id' => $this->getStatus()->order_id,
+			     'status_id' => StatusOrder::STATUS_WAIT_FOR_DELIV,
+			     'payment_id' => $this->getPayment()->payment_id
+			    ]
+		    );
     }
 
     public function canDelivering()
@@ -275,8 +294,13 @@ ON o1.id = ss1.order_id')
 
     public function setDelivering()
     {
-        /*проверить текущий статус canCancel()*/
-        /*запилить в базу смену статуса.*/
+	    DB::table('order_statuses')
+		    ->insert(
+			    ['order_id' => $this->getStatus()->order_id,
+			     'status_id' => StatusOrder::STATUS_DELIVERING,
+			     'payment_id' => $this->getPayment()->payment_id
+			    ]
+		    );
     }
 
 
@@ -291,8 +315,13 @@ ON o1.id = ss1.order_id')
 
     public function setDelivered()
     {
-        /*проверить текущий статус canCancel()*/
-        /*запилить в базу смену статуса.*/
+	    DB::table('order_statuses')
+		    ->insert(
+			    ['order_id' => $this->getStatus()->order_id,
+			     'status_id' => StatusOrder::STATUS_DELIVERED,
+			     'payment_id' => $this->getPayment()->payment_id
+			    ]
+		    );
     }
 
     public function canInStore()
@@ -307,8 +336,13 @@ ON o1.id = ss1.order_id')
 
     public function setInStore()
     {
-        /*проверить текущий статус canCancel()*/
-        /*запилить в базу смену статуса.*/
+	    DB::table('order_statuses')
+		    ->insert(
+			    ['order_id' => $this->getStatus()->order_id,
+			     'status_id' => StatusOrder::STATUS_RET_IN_STORE,
+			     'payment_id' => $this->getPayment()->payment_id
+			    ]
+		    );
     }
 
 
