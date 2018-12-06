@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-<?php /*dd($prod->id) */?>
     <div class = "container">
         <div class = "row justify-content-center">
             <div class = "col-md-12">

@@ -18,7 +18,8 @@ class CreateCategoriesTable extends Migration
             $table->string('title', 50);
             $table->string('description', 250);
             $table->mediumInteger('position')->default('0');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
     }
 
