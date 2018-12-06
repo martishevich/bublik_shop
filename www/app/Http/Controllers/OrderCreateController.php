@@ -66,7 +66,7 @@ class OrderCreateController extends Controller
                 }
                
             }
-            return view('Cardshop', ['orderItems' => $orderItems]);
+            return view('Cardshop', compact('orderItems'));
         }
         return view('Cardshop');
     }

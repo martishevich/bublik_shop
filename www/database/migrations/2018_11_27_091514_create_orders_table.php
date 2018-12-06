@@ -18,9 +18,8 @@ class CreateOrdersTable extends Migration
             $table->string('fullname');
             $table->string('telephone', 13);
             $table->string('email',50);
-            $table->string('adres', 150);
-            $table->string('status',25);
-            $table->timestamps();
+            $table->string('address', 150);
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 
