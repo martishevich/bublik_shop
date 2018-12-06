@@ -41,10 +41,6 @@ Route::post('add_contact','ContactController@add_contact')->name('contact.add_co
 
 Route::match(['get', 'post'], '/', 'PostsController@index');
 
-<<<<<<< HEAD
 Route::get('/Cardshop', 'OrderCreateController@cardshop');
 
 Route::post('/vallidate', 'VallidateController@vallidate');
-=======
-Route::get('/cardshop', 'OrderCreateController@cardshop');
->>>>>>> develop

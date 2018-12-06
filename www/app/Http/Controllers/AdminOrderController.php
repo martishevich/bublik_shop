@@ -21,7 +21,6 @@ class AdminOrderController extends Controller
     {
 
         $order      = Order::getById($id);
-        $ddd = $order->
         $allProds   = Order::getProds($id);
         $ordHistory = Order::getOrdHistory($id);
 /*        dd($order->getStatusId());*/
