@@ -14,10 +14,7 @@ class PostsController extends Controller
 {
     public function index(Request $request)
     {
-<<<<<<< HEAD
         //$request->session()->flush();
-=======
->>>>>>> develop
         $product = Product::getByIds(
             $request->post('prodid', 0)
         );
@@ -31,10 +28,6 @@ class PostsController extends Controller
             );
         }
         $request->session()->save();
-<<<<<<< HEAD
-=======
-        var_dump($request->session()->all());
->>>>>>> develop
         $catTitle = Categories::orderBy('position')
             ->get();
         $product  = DB::table('products')->get();
