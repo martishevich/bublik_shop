@@ -46,20 +46,21 @@ LEFT JOIN(
     FROM order_prods GROUP BY order_id) AS p1
     ON  p1.order_id = o1.id
 LEFT JOIN(
-    SELECT s1.order_id, s1.status_id, s3.title
+    SELECT s1.order_id, s1.status_id, s1.payment_id, s3.title
   FROM order_statuses AS s1
     LEFT JOIN (
         SELECT MAX(order_statuses.id) AS lastid, order_id
             FROM order_statuses
             GROUP BY order_id) s2 
         ON s1.id = s2.lastid
-      LEFT JOIN status_for_orders s3
+      LEFT JOIN status_orders s3
         ON s1.status_id = s3.id
         WHERE NOT s2.lastid IS null) ss1
     ON o1.id = ss1.order_id
-    LEFT JOIN payment_for_orders p1
+    LEFT JOIN status_payments p1
     ON o1.payment_id = p1.id')
             ->where('ss1.status_id', '<>', null)
+            ->where('ss1.payment_id', '<>', null)
             ->whereRaw('o1.id = ?', [$id])
             ->get();
 

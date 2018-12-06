@@ -21,13 +21,18 @@ class AddToOrderController extends Controller
                 $orderItems[$key]['count'] = $sessionCart[$v['id']];
             }
         }
+        else {
+            $error = 'Вы не добавили товар!';
+            return view('Cardshop', compact('error'));
+        }
         $data['fullname']   = $request['FName'];
         $data['telephone']  = $request['PNumber'];
         $data['email']      = $request['Email'];
         $data['address']    = $request['Adress'];
-        $data['payment_id'] = 1;
+
 
         $s['order_id']  = DB::table('orders')->insertGetId($data);
+        $s['payment_id'] = 1;
         $s['status_id'] = 1;
         $s['comment']   = '';
         DB::table('order_statuses')->insert($s);
@@ -47,7 +52,7 @@ class AddToOrderController extends Controller
         $dataOrder['value']    = '';
         $dataOrder['group']    = 'time';
         DB::table('order_datas')->insert($dataOrder);
-        return view('add_success');
+        return view('add_success', compact('s'));
     }
 
     public function clearSession(Request $request)
@@ -56,28 +61,31 @@ class AddToOrderController extends Controller
         $request->session()->forget('cart');
     }
 
-
-
-
-
-
-
-
-
-
+    /*public function viewOrder()
+    {
+        $data = Order::getProds(1)->toArray();
+        $sd   = Order::getListByStatus(1)->toArray();
+        foreach ($sd as $value) {
+            $client = $value;
+        }
+        return view('orderList', compact('data', 'client'));
+    }*/
 
 
     public function viewOrder()
     {
-        $sd         = Order::getListByStatus(1)->toArray();
-        $data       = Order::getProds(1)->toArray();
-        $pdf = PDF::loadView('orderList', compact('data'));
-
+        $order   = Order::g;
+        $data = Order::getProds(1)->toArray();
+        foreach ($sd as $value) {
+            $client = $value;
+        }
+        $pdf = PDF::loadView('orderList', compact('data', 'client'));
         Mail::send('backEmail', $data, function ($message) use ($pdf) {
             $message->from('loliabombita@mail.ru', 'Your Name');
             $message->to('loliabombita@mail.ru')->subject('Invoice');
             $message->attachData($pdf->output(), "orderList.pdf");
         });
+        return view('add_success');
     }
 }
 

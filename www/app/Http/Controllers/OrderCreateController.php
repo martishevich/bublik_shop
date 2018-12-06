@@ -8,16 +8,18 @@ use DB;
 
 class OrderCreateController extends Controller
 {
+
     public function cardshop(Request $request)
     {
+        $error = '';
         $sessionCart = $request->session()->get('cart');
         if (isset($sessionCart)) {
             $orderItems = Product::prod_sess(array_keys($sessionCart));
             foreach ($orderItems as $key => $v) {
                 $orderItems[$key]['count'] = $sessionCart[$v['id']];
             }
-            return view('Cardshop', compact('orderItems'));
+            return view('Cardshop', compact('orderItems','error'));
         }
-        return view('Cardshop');
+        return view('Cardshop', compact('error'));
     }
 }

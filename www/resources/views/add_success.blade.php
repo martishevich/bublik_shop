@@ -1,19 +1,16 @@
 @extends('layout')
-
 @section('content')
-
     <div class="container">
         <h1 style="text-align: center">
-            Hello!
+            Your order accept!
             <br><br><br>
         </h1>
-        <h2 style="text-align: justify">We are pleased to introduce our company to you!
+        <h2 style="text-align: justify">Send you email with check?
             <br><br>
-            Bublik company has been selling computers and components for them for more than 15 years.
-            <br><br>
-            Any of our employees will be happy to help you solve any problem related to the purchase of a computer and accessories.
         </h2>
-
+        {!!Form::open(['action'=>'AddToOrderController@viewOrder', 'method'=>'GET', 'accept-charset'=>'UTF-8']) !!}
+        {!!Form::submit('Send') !!}
+        {{ Form::close() }}
     </div>
 
 @endsection
