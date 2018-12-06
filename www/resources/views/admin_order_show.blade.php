@@ -74,7 +74,7 @@
 					      action = "/home/orders/<?=$order->getKey()?>/change">
 						<input type = "text" name = "status" value = "">
 					</form>
-					@if(!$order->getStatusId() == \App\StatusOrder::STATUS_CANCEL)
+					@if($order->getStatusId() != \App\StatusOrder::STATUS_CANCEL ?? $order->getStatusId() != \App\StatusOrder::STATUS_RET_IN_STORE)
 						<p>Изменить статус заказа: </p>
 					@else
 						<p>Заказ завершен!</p>
@@ -110,6 +110,10 @@
 					@if($order->canDelivered())
 						<input type = "button" data-status = "delivered" class = "btn btn-info status_btn"
 						       value = "Delivered">
+					@endif
+					@if($order->canPaid())
+						<input type = "button" data-status = "paid" class = "btn btn-success status_btn"
+						       value = "Paid">
 					@endif
 					<br><br>
 					@if(!($order->getStatusId() == 9))
