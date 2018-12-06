@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
@@ -20,80 +21,63 @@ class Order extends Model
     {
         return $this->hasMany('App\OrderStatus');
     }
-
-    public function payments()
-    {
-        return $this->belongsToMany('App\PaymentForOrder');
-    }
-
     /**
-     * @param StatusForOrder|null $statusForOrder
+     * @param StatusOrder|null $statusOrder
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Query\Builder[]|\Illuminate\Support\Collection
      */
-    public static function getListByStatus($id, StatusForOrder $statusForOrder = null)
+    /*public static function getListByStatus($id, StatusOrder $statusOrder = null)
     {
         return static::query()
             ->select([
                 'o1.*',
-                'p1.title AS payment',
                 'p1.total',
                 'ss1.status_id',
                 'ss1.title AS delivering'
             ])
             ->fromRaw('orders AS o1
+            LEFT JOIN(
+            SELECT order_id, SUM(price * quantity) AS total
+FROM order_prods GROUP BY order_id) AS p1
+ON  p1.order_id = o1.id
 LEFT JOIN(
-    SELECT order_id, SUM(price * quantity) AS total
-    FROM order_prods GROUP BY order_id) AS p1
-    ON  p1.order_id = o1.id
-LEFT JOIN(
-    SELECT s1.order_id, s1.status_id, s3.title
-  FROM order_statuses AS s1
-    LEFT JOIN (
-        SELECT MAX(order_statuses.id) AS lastid, order_id
-            FROM order_statuses
-            GROUP BY order_id) s2 
-        ON s1.id = s2.lastid
-      LEFT JOIN status_for_orders s3
-        ON s1.status_id = s3.id
-        WHERE NOT s2.lastid IS null) ss1
-    ON o1.id = ss1.order_id
-    LEFT JOIN payment_for_orders p1
-    ON o1.payment_id = p1.id')
+SELECT s1.order_id, s1.status_id, s3.title
+FROM order_statuses AS s1
+LEFT JOIN (
+    SELECT MAX(order_statuses.id) AS lastid, order_id
+        FROM order_statuses
+        GROUP BY order_id) s2
+    ON s1.id = s2.lastid
+  LEFT JOIN status_orders s3
+    ON s1.status_id = s3.id
+    WHERE NOT s2.lastid IS null) ss1
+ON o1.id = ss1.order_id')
             ->where('ss1.status_id', '<>', null)
             ->whereRaw('o1.id = ?', [$id])
             ->get();
 
-    }
+    }*/
 
     public static function getList()
     {
         return static::query()
             ->select([
                 'o1.*',
-                'p1.title AS payment',
-                'p1.total',
-                'ss1.status_id',
-                'ss1.title AS delivering'
+                'p1.total'
             ])
             ->fromRaw('orders AS o1
-LEFT JOIN(
-    SELECT order_id, SUM(price * quantity) AS total
-    FROM order_prods GROUP BY order_id) AS p1
-    ON  p1.order_id = o1.id
-LEFT JOIN(
-    SELECT s1.order_id, s1.status_id, s3.title
-  FROM order_statuses AS s1
-    LEFT JOIN (
-        SELECT MAX(order_statuses.id) AS lastid, order_id
-            FROM order_statuses
-            GROUP BY order_id) s2 
-        ON s1.id = s2.lastid
-      LEFT JOIN status_for_orders s3
-        ON s1.status_id = s3.id
-        WHERE NOT s2.lastid IS null) ss1
-    ON o1.id = ss1.order_id
-    LEFT JOIN payment_for_orders p1
-    ON o1.payment_id = p1.id')
+				LEFT JOIN(SELECT order_id, SUM(price * quantity) AS total
+				FROM order_prods GROUP BY order_id) AS p1
+				ON  p1.order_id = o1.id
+				LEFT JOIN(SELECT s1.order_id, s1.status_id, s3.title
+				    FROM order_statuses AS s1
+				    LEFT JOIN (SELECT MAX(order_statuses.id) AS lastid, order_id
+				    FROM order_statuses
+				    GROUP BY order_id) s2
+				    ON s1.id = s2.lastid
+				    LEFT JOIN status_orders s3
+				    ON s1.status_id = s3.id
+				    WHERE NOT s2.lastid IS null) ss1
+				ON o1.id = ss1.order_id')
             ->where('ss1.status_id', '<>', null)
             ->orderBy('o1.id', 'DESC')
             ->get();
@@ -107,7 +91,8 @@ LEFT JOIN(
                 'p.name'
             ])
             ->fromRaw('order_prods AS op
-    INNER JOIN products AS p ON op.product_id = p.id')
+				INNER JOIN products AS p
+				ON op.product_id = p.id')
             ->whereRaw('op.order_id = ?', [$id])
             ->get();
     }
@@ -116,15 +101,248 @@ LEFT JOIN(
     {
         return static::query()
             ->select([
-                'sfo.title AS status',
+                'so.title AS status',
+                'sp.title AS payment',
                 'os.comment',
                 'os.created_at'
             ])
-            ->fromRaw('order_statuses AS
-        os INNER JOIN status_for_orders AS sfo ON os.status_id = sfo.id')
+            ->fromRaw('order_statuses AS os
+				INNER JOIN status_orders AS so
+				ON os.status_id = so.id
+				INNER JOIN status_payments AS sp
+				ON os.payment_id = sp.id')
             ->whereRaw('os.order_id = ?', [$id])
             ->orderBy('os.id', 'DESC')
-            ->get();
+            ->get()
+            ->first();
+    }
+
+    /**
+     * @param int $id
+     * @return Order|null
+     */
+    public static function getById(int $id): ?Model
+    {
+        return static::query()
+            ->find($id);
+    }
+
+
+    public function getStatusId()
+    {
+        return $this->getStatus()->status_id;
+    }
+
+    /**
+     * @return OrderStatus|null
+     */
+    public function getStatus()
+    {
+        return OrderStatus::getLastByOrder($this);
+    }
+
+    public function getStatusName()
+    {
+        return StatusOrder::getNameStatus($this);
+    }
+
+
+    public function getPaymentId()
+    {
+        return $this->getPayment()->payment_id;
+    }
+
+    /**
+     * @return OrderStatus|null
+     */
+    public function getPayment()
+    {
+        return OrderStatus::getLastByOrder($this);
+    }
+
+    public function getPaymentName()
+    {
+        return StatusPayment::getNamePayment($this);
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getData()
+    {
+        return OrderData::getListByOrder($this);
+    }
+
+    //Проверить на возможность установки статуса CANCEL
+
+    public function canCancel()
+    {
+        switch ($this->getStatusId()) {
+            case StatusOrder::STATUS_PROCESSING:
+            case StatusOrder::STATUS_REBUILD:
+            case StatusOrder::STATUS_BOXING:
+            case StatusOrder::STATUS_COLLECTED:
+            case StatusOrder::STATUS_WAIT_FOR_DELIV:
+            case StatusOrder::STATUS_RET_IN_STORE:
+                return true;
+        }
+        return false;
+    }
+
+    public function setCancel()
+    {
+	    DB::table('order_statuses')
+		    ->insert(
+			    ['order_id' => $this->getStatus()->order_id,
+			     'status_id' => StatusOrder::STATUS_CANCEL,
+			     'payment_id' => $this->getPayment()->payment_id
+			    ]
+		    );
+    }
+
+
+    public function canRebuild()
+    {
+        switch ($this->getStatusId()) {
+            case StatusOrder::STATUS_PROCESSING:
+                return true;
+        }
+        return false;
+    }
+
+    public function setRebuild()
+    {
+    	DB::table('order_statuses')
+		    ->insert(
+			    ['order_id' => $this->getStatus()->order_id,
+			     'status_id' => StatusOrder::STATUS_REBUILD,
+			     'payment_id' => $this->getPayment()->payment_id
+			    ]
+		    );
+    }
+
+    public function canBoxing()
+    {
+        switch ($this->getStatusId()) {
+            case StatusOrder::STATUS_PROCESSING:
+            case StatusOrder::STATUS_REBUILD:
+                return true;
+        }
+        return false;
+    }
+
+    public function setBoxing()
+    {
+        DB::table('order_statuses')
+            ->insert(
+                ['order_id' => $this->getStatus()->order_id,
+                 'status_id' => StatusOrder::STATUS_BOXING,
+                 'payment_id' => $this->getPayment()->payment_id
+                ]
+            );
+    }
+
+    public function canCollected()
+    {
+        switch ($this->getStatusId()) {
+            case StatusOrder::STATUS_BOXING:
+                return true;
+        }
+        return false;
+    }
+
+    public function setCollected()
+    {
+	    DB::table('order_statuses')
+		    ->insert(
+			    ['order_id' => $this->getStatus()->order_id,
+			     'status_id' => StatusOrder::STATUS_COLLECTED,
+			     'payment_id' => $this->getPayment()->payment_id
+			    ]
+		    );
+    }
+
+    public function canWaiting()
+    {
+        switch ($this->getStatusId()) {
+            case StatusOrder::STATUS_COLLECTED:
+                return true;
+        }
+        return false;
+    }
+
+    public function setWaiting()
+    {
+	    DB::table('order_statuses')
+		    ->insert(
+			    ['order_id' => $this->getStatus()->order_id,
+			     'status_id' => StatusOrder::STATUS_WAIT_FOR_DELIV,
+			     'payment_id' => $this->getPayment()->payment_id
+			    ]
+		    );
+    }
+
+    public function canDelivering()
+    {
+        switch ($this->getStatusId()) {
+            case StatusOrder::STATUS_WAIT_FOR_DELIV:
+                return true;
+        }
+        return false;
+    }
+
+    public function setDelivering()
+    {
+	    DB::table('order_statuses')
+		    ->insert(
+			    ['order_id' => $this->getStatus()->order_id,
+			     'status_id' => StatusOrder::STATUS_DELIVERING,
+			     'payment_id' => $this->getPayment()->payment_id
+			    ]
+		    );
+    }
+
+
+    public function canDelivered()
+    {
+        switch ($this->getStatusId()) {
+            case StatusOrder::STATUS_DELIVERING:
+                return true;
+        }
+        return false;
+    }
+
+    public function setDelivered()
+    {
+	    DB::table('order_statuses')
+		    ->insert(
+			    ['order_id' => $this->getStatus()->order_id,
+			     'status_id' => StatusOrder::STATUS_DELIVERED,
+			     'payment_id' => $this->getPayment()->payment_id
+			    ]
+		    );
+    }
+
+    public function canInStore()
+    {
+        switch ($this->getStatusId()) {
+            case StatusOrder::STATUS_DELIVERING:
+            case StatusOrder::STATUS_DELIVERED:
+                return true;
+        }
+        return false;
+    }
+
+    public function setInStore()
+    {
+	    DB::table('order_statuses')
+		    ->insert(
+			    ['order_id' => $this->getStatus()->order_id,
+			     'status_id' => StatusOrder::STATUS_RET_IN_STORE,
+			     'payment_id' => $this->getPayment()->payment_id
+			    ]
+		    );
     }
 
 
