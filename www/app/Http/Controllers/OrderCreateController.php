@@ -9,6 +9,7 @@ use DB;
 
 class OrderCreateController extends Controller
 {
+
     public function cardshop(Request $request)
     {
         $sessionCart = $request->session()->get('cart');
@@ -17,7 +18,11 @@ class OrderCreateController extends Controller
             foreach ($orderItems as $key => $v) {
                 $orderItems[$key]['count'] = $sessionCart[$v['id']];
             }
+<<<<<<< HEAD
+            return view('Cardshop', ['orderItems' => $orderItems]);
+=======
             return view('Cardshop', compact('orderItems'));
+>>>>>>> develop
         }
         return view('Cardshop');
     }
