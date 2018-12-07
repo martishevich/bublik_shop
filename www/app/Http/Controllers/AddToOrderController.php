@@ -21,21 +21,20 @@ class AddToOrderController extends Controller
             foreach ($orderItems as $key => $v) {
                 $orderItems[$key]['count'] = $sessionCart[$v['id']];
             }
-        }
-        else {
+        } else {
             $error = 'Вы не добавили товар!';
             return view('Cardshop', compact('error'));
         }
-        $data['fullname']   = $request['fullname'];
-        $data['telephone']  = $request['PNumber'];
-        $data['email']      = $request['Email'];
-        $data['address']    = $request['Adress'];
+        $data['fullname']  = $request['fullname'];
+        $data['telephone'] = $request['PNumber'];
+        $data['email']     = $request['Email'];
+        $data['address']   = $request['Adress'];
 
 
-        $s['order_id']  = DB::table('orders')->insertGetId($data);
+        $s['order_id']   = DB::table('orders')->insertGetId($data);
         $s['payment_id'] = 1;
-        $s['status_id'] = 1;
-        $s['comment']   = '';
+        $s['status_id']  = 1;
+        $s['comment']    = '';
         DB::table('order_statuses')->insert($s);
 
         foreach ($orderItems as $key => $v) {
@@ -61,10 +60,11 @@ class AddToOrderController extends Controller
 
         $request->session()->forget('cart');
     }
+
     public function viewOrder()
     {
-        $order      = Order::getById(1);
-        $data = Order::getProds(1)->toArray();
+        $order = Order::getById(1);
+        $data  = Order::getProds(1)->toArray();
         dd($order);
         foreach ($order as $value) {
             $client = $value;
