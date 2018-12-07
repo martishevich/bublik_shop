@@ -18,7 +18,6 @@ class PostsController extends Controller
         $product = Product::getByIds(
             $request->post('prodid', 0)
         );
-        dump($_POST);
         if ($product instanceof Product) {
 
             $count = $request->session()->get('cart.' . $product->getKey(), 0);

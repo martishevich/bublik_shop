@@ -15,53 +15,64 @@ class OrderCreateController extends Controller
 
     public function cardshop(Request $request)
     {
-        $data = $request->session()->all();
+        //Delete Cart
+
         if (isset($_POST['remove'])){
             $removeId = $_POST['id'];
-            
             $request->session()->forget('cart.'.$removeId);
         }
+
+        //Update Cart
+
+        if (isset($_POST['quantity'])){
+
+            if ($_POST['quantity'] > 0){
+
+            $removeId = $_POST['upid'];
+            $request->session()->put('cart.'.$removeId, $_POST['quantity']);
+
+            }
+        }
+    
+        //Add Product Count to Order Items
+
         $sessionCart = $request->session()->get('cart');
-        
-        $data = $request->session()->all();
-       
         if (isset($sessionCart)) {
-            $orderItems = Product::prod_sess(array_keys($sessionCart));
-            
-            if (isset($_POST['quantity'])){
+            $orderItems = Product::prod_sess(array_keys($sessionCart)); 
 
-            }
-            
-           
             foreach ($orderItems as $key => $v) {
-                    $orderItems[$key]['count'] = $sessionCart[$v['id']];
-            }
+                $orderItems[$key]['count'] = $sessionCart[$v['id']];
+            } 
 
-            if (isset($_POST['quantity'])){
-                $key = $_POST['quantityId'];
-                $orderItems[$key]['count']=$_POST['quantity'];
-            }
-            
-           
+            //Validation 
+
             if (isset($_POST['Send'])){
                 $validatedData = $request->validate([
-                    'fullname' => 'required|max:60|alpha_dash',
-                    'phonenumber' => 'required|digits:12',
+                    'fullname' => 'required|max:60',
+                    'phonenumber' => 'required|max:60',
                     'email' => 'required|email',
-                    'adress' => 'required|alpha_dash',
-                    'comment' => 'required|alpha_dash'
+                    'adress' => 'required|max:60',
+                    'comment' => ''
                ]);
+
                $post=$_POST;
+
                $post = array_except($post, ['_token']);
+
+               foreach ($post as $k => $v){
+                $post[$k] = trim($v); 
+               }
+
+                //Send Validate Data
+
                if ($post = $validatedData) {
                    foreach ($post as $k => $v){
-                    $post[$k] = trim($v);
-                   }
-                   
+                    $post[$k] = e($v);
+                   } 
                 return view('vallidate', ['post' => $post]);
                 }
+
                 else{
-                    $gopost = trim($post);
                     return view('Cardshop', ['post' => $post, 'orderItems' => $orderItems, '']);
                 }
                
