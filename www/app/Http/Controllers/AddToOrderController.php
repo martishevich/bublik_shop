@@ -14,7 +14,7 @@ class AddToOrderController extends Controller
 {
     public function add(Request $request)
     {
-        dd($post);
+
         $sessionCart = $request->session()->get('cart');
         if (isset($sessionCart)) {
             $orderItems = Product::prod_sess(array_keys($sessionCart));
@@ -26,7 +26,7 @@ class AddToOrderController extends Controller
             $error = 'Вы не добавили товар!';
             return view('Cardshop', compact('error'));
         }
-        $data['fullname']   = $request['name'];
+        $data['fullname']   = $request['fullname'];
         $data['telephone']  = $request['PNumber'];
         $data['email']      = $request['Email'];
         $data['address']    = $request['Adress'];
@@ -61,18 +61,6 @@ class AddToOrderController extends Controller
 
         $request->session()->forget('cart');
     }
-
-    /*public function viewOrder()
-    {
-        $data = Order::getProds(1)->toArray();
-        $sd   = Order::getListByStatus(1)->toArray();
-        foreach ($sd as $value) {
-            $client = $value;
-        }
-        return view('orderList', compact('data', 'client'));
-    }*/
-
-
     public function viewOrder()
     {
         $order      = Order::getById(1);

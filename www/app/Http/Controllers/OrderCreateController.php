@@ -42,8 +42,39 @@ class OrderCreateController extends Controller
                     foreach ($post as $k => $v) {
                         $post[$k] = trim($v);
                     }
-                    //return view('/show', ['post' => $post,'orderItems' => $orderItems]);
-                    return redirect()->action('AddToOrderController@add')->with($orderItems, $post);
+                        $dataor['fullname']   = $post['fullname'];
+                        $dataor['telephone']  = $post['phonenumber'];
+                        $dataor['email']      = $post['email'];
+                        $dataor['address']    = $post['adress'];
+
+                        $s['order_id']  = DB::table('orders')->insertGetId($dataor);
+                        $s['payment_id'] = 1;
+                        $s['status_id'] = 1;
+                        $s['comment']   = '';
+                        DB::table('order_statuses')->insert($s);
+
+                        foreach ($orderItems as $key => $m) {
+
+                            $orderItems[$key]['order_id'] = $s['order_id'];
+                            $order_prod['order_id']       = $s['order_id'];
+                            $order_prod['product_id']     = $m['id'];
+                            $order_prod['quantity']       = $m['count'];
+                            $order_prod['price']          = $m['price'];
+
+                            DB::table('order_prods')->insert($order_prod);
+                        }
+                        $dataOrder['order_id'] = $s['order_id'];
+                        $dataOrder['key']      = 'comment';
+                        $dataOrder['value']    = '';
+                        $dataOrder['group']    = 'time';
+                        DB::table('order_datas')->insert($dataOrder);
+                        return view('add_success', compact('s'));
+
+
+
+
+                    //return view('show', ['post' => $post,'orderItems' => $orderItems]);
+                   return redirect()->action('AddToOrderController@add',['orderItems'=>$orderItems,'post'=>$post]);
                 } else {
                     $gopost = trim($post);
                     return view('Cardshop', ['post' => $post, 'orderItems' => $orderItems, '']);
