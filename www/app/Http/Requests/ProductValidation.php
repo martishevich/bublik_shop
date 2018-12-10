@@ -6,29 +6,39 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ProductValidation extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-            'category_id' => 'required',
-            'name'        => 'required',
-            'price'       => 'required',
-            'description' => 'required',
-            'short_disc'  => 'required'
-        ];
-    }
+	/**
+	 * Determine if the user is authorized to make this request.
+	 *
+	 * @return bool
+	 */
+	public function authorize()
+	{
+		return true;
+	}
+	
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array
+	 */
+	public function rules()
+	{
+		return [
+			'category_id' => 'required|exists:categories,id',
+			'name'        => 'required|between:3,64',
+			'price'       => 'required|regex:/^[1-9]{1}\d{0,15}(\.\d{1,2})?$/',
+			'is_active'   => 'required|boolean',
+			'description' => 'required|max:4000',
+			'short_disc'  => 'required|max:255',
+		];
+	}
+	
+	public function messages()
+	{
+		return [
+			'required' => 'Just do it! The :attribute field is required!',
+			'category_id.exists' => 'Hmmm... This category was not found!',
+			'price.regex' => 'I want digit between 0.01 and 99999999999999.99',
+		];
+	}
 }
