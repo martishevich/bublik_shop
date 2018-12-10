@@ -20,6 +20,21 @@ class OrderCreateController extends Controller
 
             $request->session()->forget('cart.' . $removeId);
         }
+
+        //Update Cart
+
+        if (isset($_POST['quantity'])){
+
+            if ($_POST['quantity'] > 0){
+
+            $removeId = $_POST['upid'];
+            $request->session()->put('cart.'.$removeId, $_POST['quantity']);
+
+            }
+        }
+    
+        //Add Product Count to Order Items
+
         $sessionCart = $request->session()->get('cart');
 
         if (isset($sessionCart)) {
