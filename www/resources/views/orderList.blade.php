@@ -95,14 +95,15 @@
 <body>
 <div class="col-md-2 col-lg-2 col-sm-3 col-xs-3">
     <div class="logo">
-        <img src="images/logo/logo.png" alt="logo">
+        <img src="images/logo/logo.png" width="100%" height="100%" alt="logo">
     </div>
 </div>
 <br>
+<br><br><br>
 <div class="container">
-    <h2>Ваш заказ принят!</h2>
+    <h2>Your order was accepted!</h2>
     <br><br>
-    <?php echo 'Client name: ' . $client['fullname'] . '<br> Client phone: ' . $client['telephone'] . '<br> Client email address: ' . $client['email'] . '<br> ' . 'Номер заказа № ' . $client['id'].':';?>
+    <?php echo 'Client name: ' . $order['fullname'] . '<br> Client phone: ' . $order['telephone'] . '<br> Client email address: ' . $order['email'] . '<br> ' . 'Order number № ' . $order['id'].':';?>
 </div>
 <!-- cart-main-area start -->
 <div class="cart-main-area ptb--120 bg__white">
@@ -120,7 +121,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php $total = 0 ?>
+                        <?php $total = 0; $quantityId = 0?>
                         <?php foreach ($data as $v): ?>
                         <tr>
                             <td class="product-name"><a href="#"><?php echo $v['name'] ?></a></td>
@@ -136,6 +137,21 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div align="left">
+    <div class="cart_totals">
+        <h2>Cart Totals</h2>
+        <table>
+            <tbody>
+            <tr class="order-total">
+                <th></th>
+                <td>
+                    <strong><span class="amount"><?php echo $total  ?></span></strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

@@ -8,7 +8,8 @@
         <h2 style="text-align: justify">Send you email with check?
             <br><br>
         </h2>
-        {!!Form::open(['action'=>'AddToOrderController@viewOrder', 'method'=>'GET', 'accept-charset'=>'UTF-8']) !!}
+        {!!Form::open(['action'=>'AddToOrderController@viewOrder', 'method'=>'POST', 'accept-charset'=>'UTF-8']) !!}
+        {!!Form::hidden('id',$s['order_id']) !!}
         {!!Form::submit('Send') !!}
         {{ Form::close() }}
     </div>

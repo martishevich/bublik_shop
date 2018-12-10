@@ -45,4 +45,4 @@ Route::match(['get', 'post'], 'Cardshop', 'OrderCreateController@cardshop');
 
 Route::match(['get','post'],'/show','AddToOrderController@add');
 
-Route::get('orderList','AddToOrderController@viewOrder');
+Route::post('orderList','AddToOrderController@viewOrder');

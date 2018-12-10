@@ -63,19 +63,16 @@ class AddToOrderController extends Controller
 
     public function viewOrder()
     {
-        $order = Order::getById(1);
-        $data  = Order::getProds(1)->toArray();
-        dd($order);
-        foreach ($order as $value) {
-            $client = $value;
-        }
-        $pdf = PDF::loadView('orderList', compact('data', 'client'));
+        $id = $_POST['id'];
+        $order = Order::getById($id);
+        $data  = Order::getProds($id)->toArray();
+        $pdf = PDF::loadView('orderList', compact('data', 'order'));
         Mail::send('backEmail', $data, function ($message) use ($pdf) {
-            $message->from('loliabombita@mail.ru', 'Your Name');
+            $message->from('loliabombita@mail.ru', 'Bublic Shop');
             $message->to('loliabombita@mail.ru')->subject('Invoice');
             $message->attachData($pdf->output(), "orderList.pdf");
         });
-        return view('add_success');
+        return view('Cardshop');
     }
 }
 
