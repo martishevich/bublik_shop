@@ -36,8 +36,7 @@ class ContactController extends Controller
         if (count(Mail::failures()) > 0) {
             return view('posts.contact');
         } else {
-            return view('posts.infomes')->with('name',$validatedata['name']);
-
+            return view('posts.infomes')->with('name', $validatedata['name']);
         }
     }
 }
