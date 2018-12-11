@@ -26,7 +26,7 @@ class AdminProductController extends Controller
         return view('admin_prod_create', compact('allCat', 'is_add'));
     }
 
-    public function save(ProductValidation $request, $id)
+    public function save(ProductValidation $request, $id = false)
     {
         $referer = $request->headers->get('referer');
         switch ($referer) {
