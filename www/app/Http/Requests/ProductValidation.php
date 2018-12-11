@@ -26,7 +26,7 @@ class ProductValidation extends FormRequest
 		return [
 			'category_id' => 'required|exists:categories,id',
 			'name'        => 'required|between:3,64',
-			'price'       => 'required|regex:/^[1-9]{1}\d{0,15}(\.\d{1,2})?$/',
+			'price'       => 'required|regex:/^\s*(?=.*[1-9])\d*(?:\.\d{1,2})?\s*$/',
 			'is_active'   => 'required|boolean',
 			'description' => 'required|max:4000',
 			'short_disc'  => 'required|max:255',

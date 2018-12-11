@@ -144,14 +144,12 @@
                                value="Paid">
                     @endif
                     <br><br>
-                    @if(($order->canSendMail()))
                         <p>Send mail again: </p>
                         <input type="button"
                                data-status="paid"
                                class="btn btn-primary status_btn"
                                value="Send">
                         <br><br>
-                    @endif
                     <div class="card-header">
                         <h1>Order products</h1>
                     </div>
