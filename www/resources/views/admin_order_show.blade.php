@@ -85,9 +85,9 @@
                                value="">
                     </form>
                     @if($order->getStatusId() != \App\StatusOrder::STATUS_CANCEL ?? $order->getStatusId() != \App\StatusOrder::STATUS_RET_IN_STORE)
-                        <p>Изменить статус заказа: </p>
+                        <p>Change status: </p>
                     @else
-                        <p>Заказ завершен!</p>
+                        <p>Order complete!</p>
                     @endif
                     @if($order->canCancel())
                         <input type="button"
@@ -144,8 +144,12 @@
                                value="Paid">
                     @endif
                     <br><br>
-                    @if(!($order->getStatusId() == 9))
-                        Отправить счет заново:
+                    @if(($order->canSendMail()))
+                        <p>Send mail again: </p>
+                        <input type="button"
+                               data-status="paid"
+                               class="btn btn-primary status_btn"
+                               value="Send">
                         <br><br>
                     @endif
                     <div class="card-header">

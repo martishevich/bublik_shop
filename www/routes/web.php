@@ -25,7 +25,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/home/products/create', 'AdminProductController@create');
 
-    Route::match(['get', 'post'], '/home/products/edit/{id}', 'AdminProductController@edit');
+    Route::get('/home/products/edit/{id}', 'AdminProductController@edit');
+
+    Route::post('/home/products/edit/{id}', 'AdminProductController@save');
 
 	Route::get('/home/products/delete/{id}', 'AdminProductController@destroy');
 

@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
+    public $timestamps = false;
+
     public static function insertDB($request)
     {
         DB::table('products')->insert([
