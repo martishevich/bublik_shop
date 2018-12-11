@@ -379,4 +379,21 @@ ON o1.id = ss1.order_id')
     }
 
 
+
+    public function canSendMail()
+    {
+        switch ($this->getStatusId()) {
+            case StatusOrder::STATUS_PROCESSING:
+            case StatusOrder::STATUS_REBUILD:
+            case StatusOrder::STATUS_BOXING:
+            case StatusOrder::STATUS_COLLECTED:
+            case StatusOrder::STATUS_WAIT_FOR_DELIV:
+            case StatusOrder::STATUS_DELIVERING:
+            case StatusOrder::STATUS_DELIVERED:
+                return true;
+        }
+        return false;
+    }
+
+
 }
