@@ -22,23 +22,36 @@
     <!-- Theme shortcodes/elements style -->
     <link rel="stylesheet" href="css/shortcode/shortcodes.css">
     <!-- Theme main style -->
-    <link rel="stylesheet" href="/css/style.css?{<?php gettimeofday() ?>}" />
+    <link rel="stylesheet" href="/css/style.css"/>
     <!-- Responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
     <!-- User style -->
     <link rel="stylesheet" href="css/custom.css">
 
-
-    <!-- Modernizr JS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 
 </head>
-
 <body>
-@include('header')
+<div class="col-md-2 col-lg-2 col-sm-3 col-xs-3">
+    <div class="logo">
+        <img src="images/logo/logo.png" alt="logo">
+    </div>
+</div>
+<br>
 
-@yield('content')
-@include('footer')
+    <div class="container">
+        <h1 style="text-align: center">
+            Hello!
+            <br><br><br>
+        </h1>
+        <h2 style="text-align: justify">We are pleased to introduce our company to you!
+            <br><br>
+            Bublik company has been selling computers and components for them for more than 15 years.
+            <br><br>
+            Any of our employees will be happy to help you solve any problem related to the purchase of a computer and accessories.
+        </h2>
 
+    </div>
 </body>
-</html>

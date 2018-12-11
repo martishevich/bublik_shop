@@ -52,6 +52,7 @@ LEFT JOIN (
     WHERE NOT s2.lastid IS null) ss1
 ON o1.id = ss1.order_id')
             ->where('ss1.status_id', '<>', null)
+            ->where('ss1.payment_id', '<>', null)
             ->whereRaw('o1.id = ?', [$id])
             ->get();
 
@@ -375,6 +376,23 @@ ON o1.id = ss1.order_id')
                  'payment_id' => StatusPayment::STATUS_CASH
                 ]
             );
+    }
+
+
+
+    public function canSendMail()
+    {
+        switch ($this->getStatusId()) {
+            case StatusOrder::STATUS_PROCESSING:
+            case StatusOrder::STATUS_REBUILD:
+            case StatusOrder::STATUS_BOXING:
+            case StatusOrder::STATUS_COLLECTED:
+            case StatusOrder::STATUS_WAIT_FOR_DELIV:
+            case StatusOrder::STATUS_DELIVERING:
+            case StatusOrder::STATUS_DELIVERED:
+                return true;
+        }
+        return false;
     }
 
 

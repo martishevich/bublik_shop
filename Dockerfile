@@ -6,6 +6,9 @@ RUN apt-get install zlib1g-dev
 RUN docker-php-ext-install zip
 RUN apt-get install unzip
 
+RUN apt-get update -y && apt-get install -y sendmail libpng-dev
+RUN docker-php-ext-install gd
+
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
 

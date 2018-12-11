@@ -138,12 +138,12 @@
                            
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
         </div>
-    </div>
-    <!-- cart-main-area end -->
+</div>
+<!-- cart-main-area end -->
 
-    </div>
+</div>
 
 @endsection

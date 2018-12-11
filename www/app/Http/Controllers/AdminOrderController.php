@@ -23,7 +23,7 @@ class AdminOrderController extends Controller
         $order      = Order::getById($id);
         $allProds   = Order::getProds($id);
         $ordHistory = Order::getOrdHistory($id);
-/*        dd($order->getStatusId());*/
+        /*        dd($order->getStatusId());*/
 
         return view('admin_order_show', compact('order', 'allProds', 'ordHistory'));
 

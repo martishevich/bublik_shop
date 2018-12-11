@@ -31,6 +31,7 @@ class PostsController extends Controller
         $catTitle = Categories::orderBy('position')
             ->get();
         $product  = DB::table('products')->get();
+
         return view('posts.index', ['catTitle' => $catTitle, 'product' => $product]);
     }
 }

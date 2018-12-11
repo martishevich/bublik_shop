@@ -21,9 +21,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::match(['get', 'post'], '/home/products', 'AdminProductController@index');
 
-	Route::match(['get', 'post'], '/home/products/create', 'AdminProductController@create');
+	Route::post('/home/products/create', 'AdminProductController@save');
 
-    Route::match(['get', 'post'], '/home/products/edit/{id}', 'AdminProductController@edit');
+	Route::get('/home/products/create', 'AdminProductController@create');
+
+    Route::get('/home/products/edit/{id}', 'AdminProductController@edit');
+
+    Route::post('/home/products/edit/{id}', 'AdminProductController@save');
 
 	Route::get('/home/products/delete/{id}', 'AdminProductController@destroy');
 
@@ -43,5 +47,6 @@ Route::match(['get', 'post'], '/', ['uses' => 'PostsController@index', 'as' => '
 
 Route::match(['get', 'post'], 'Cardshop', 'OrderCreateController@cardshop');
 
-Route::post('/vallidate', 'VallidateController@vallidate');
+Route::match(['get','post'],'/show','AddToOrderController@add');
 
+Route::post('orderList','AddToOrderController@viewOrder');
