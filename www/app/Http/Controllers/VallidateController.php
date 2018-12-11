@@ -8,6 +8,7 @@ use Validator;
 class VallidateController extends Controller
 {
     public function vallidate(Request $request){
+        
         $validatedData = $request->validate([
             'fullname' => 'required|max:60|alpha_dash',
             'phonenumber' => 'required|digits:12',
@@ -29,6 +30,5 @@ class VallidateController extends Controller
         else {
             return view('vallidate', compact('validatedData'));
         }
-        
     }
 }

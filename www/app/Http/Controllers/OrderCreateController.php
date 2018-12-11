@@ -35,7 +35,6 @@ class OrderCreateController extends Controller
         }
     
         //Add Product Count to Order Items
-
         $sessionCart = $request->session()->get('cart');
         if (isset($sessionCart)) {
             $orderItems = Product::prod_sess(array_keys($sessionCart)); 
@@ -43,9 +42,10 @@ class OrderCreateController extends Controller
             foreach ($orderItems as $key => $v) {
                 $orderItems[$key]['count'] = $sessionCart[$v['id']];
             } 
-
+            $data = $request->session()->all();
+            dump($data);
             //Validation 
-
+            $post=$_POST;
             if (isset($_POST['Send'])){
                 $validatedData = $request->validate([
                     'fullname' => 'required|max:60',
@@ -58,10 +58,10 @@ class OrderCreateController extends Controller
                $post=$_POST;
 
                $post = array_except($post, ['_token']);
-
+               dump($_POST);
                foreach ($post as $k => $v){
                 $post[$k] = trim($v); 
-               }
+               };
 
                 //Send Validate Data
 
@@ -69,7 +69,7 @@ class OrderCreateController extends Controller
                    foreach ($post as $k => $v){
                     $post[$k] = e($v);
                    } 
-                return view('vallidate', ['post' => $post]);
+                return view('vallidate', ['post' => $post, 'orderItems' => $orderItems]);
                 }
 
                 else{
