@@ -14,7 +14,6 @@ class OrderCreateController extends Controller
 
     public function cardshop(Request $request)
     {
-        $data = $request->session()->all();
         if (isset($_POST['remove'])) {
             $removeId = $_POST['id'];
 
@@ -23,16 +22,16 @@ class OrderCreateController extends Controller
 
         //Update Cart
 
-        if (isset($_POST['quantity'])){
+        if (isset($_POST['quantity'])) {
 
-            if ($_POST['quantity'] > 0){
+            if ($_POST['quantity'] > 0) {
 
-            $removeId = $_POST['upid'];
-            $request->session()->put('cart.'.$removeId, $_POST['quantity']);
+                $removeId = $_POST['upid'];
+                $request->session()->put('cart.' . $removeId, $_POST['quantity']);
 
             }
         }
-    
+
         //Add Product Count to Order Items
 
         $sessionCart = $request->session()->get('cart');
@@ -88,7 +87,6 @@ class OrderCreateController extends Controller
                     $gopost = trim($post);
                     return view('Cardshop', ['post' => $post, 'orderItems' => $orderItems, '']);
                 }
-
             }
             return view('Cardshop', compact('orderItems'));
         }
