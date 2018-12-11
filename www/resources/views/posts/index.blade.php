@@ -132,7 +132,7 @@
                                                        title="Quick View" class="quick-view modal-view detail-link"
                                                        href="#"><span class="ti-plus"></span></a></li>
                                                 <li>
-                                                    <form action="/" method="post">
+                                                    <form action="/" method="get">
 
                                                         <input type="hidden" name="prodid" value="<?php echo $n ?>">
                                                         <input type="submit" class="btn btn-dark btn-sm" value="Basket">
@@ -156,6 +156,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </section>
     <!-- End Feature Product -->
 
