@@ -52,6 +52,7 @@ LEFT JOIN (
     WHERE NOT s2.lastid IS null) ss1
 ON o1.id = ss1.order_id')
             ->where('ss1.status_id', '<>', null)
+            ->where('ss1.payment_id', '<>', null)
             ->whereRaw('o1.id = ?', [$id])
             ->get();
 

@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                    <form action="/Cardshop" method="post">
+                    
                         <div class="table-content table-responsive">
                             <table>
                                 <thead>
@@ -22,20 +22,24 @@
                                     <?php $total = 0; $quantityId = 0 ?>
                                     <?php foreach ($orderItems as $v): ?>
                                     <tr>
-                                        @csrf
-                                        <td class="product-name"><a href="#"><?php echo $v['name'] ?></a></td>
+                                       
+                                        <td class="product-name"><?php echo $v['name'] ?></td>
                                         <td class="product-price"><span class="amount"><?php echo $v['price'] ?></span></td>
                                         <td class="product-quantity">
                                             <form action="/Cardshop" method="post">
-                                                <input type="hidden" name="quantityId" value="<?php echo $quantityId ?>">
+                                            @csrf
+                                                <input type="hidden" name="upid" value="<?php echo $v['id'] ?>">
                                                 <input type="number" name="quantity" value="<?php echo $v['count'] ?>" />
                                                 <input type="submit" value="Up" />
                                             </form>
                                         </td>
                                         <td class="product-subtotal"><?php echo $v['price']*$v['count'] ?></td>
                                         <td class="product-remove">
-                                        <input type="hidden" name="id" value="<?php echo $v['id'] ?>">
-                                        <input type="submit" name="remove" value="X">
+                                        <form action="/Cardshop" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id" value="<?php echo $v['id'] ?>">
+                                            <input type="submit" name="remove" value="X">
+                                        </form>
                                         </td>
                                         <?php $total = $total + $v['price']*$v['count']; $quantityId++ ?>
                                     </tr>
@@ -47,7 +51,6 @@
                         <div class="row">
                             <div class="col-md-8 col-sm-7 col-xs-12">
                                 <div class="buttons-cart">
-                                    <input type="submit" value="Update Cart" />
                                     <a href="/">Continue Shopping</a>
                                 </div>
                             </div>
@@ -67,7 +70,7 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    
                 </div>
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -93,7 +96,7 @@
                             <div>
                                 <h2>Phone Number</h2>
                                 <h3> please, enter your phone number like "<strong>375</strong>123456789" </h3>
-                                <input type="text" placeholder="Enter Your Phone Number" class="form-control" id="phonenumber" name="phonenumber" value="{{ old('phonenumber') }}" pattern = "^\d+$">
+                                <input type="text" placeholder="Enter Your Phone Number" class="form-control" id="phonenumber" name="phonenumber" value="{{ old('phonenumber') }}">
                                 <br>
                             </div>
                             <div>
@@ -121,12 +124,12 @@
                            
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
         </div>
-    </div>
-    <!-- cart-main-area end -->
+</div>
+<!-- cart-main-area end -->
 
-    </div>
+</div>
 
 @endsection

@@ -18,7 +18,6 @@ class PostsController extends Controller
         $product = Product::getByIds(
             $request->post('prodid', 0)
         );
-        dump($_POST);
         if ($product instanceof Product) {
 
             $count = $request->session()->get('cart.' . $product->getKey(), 0);
@@ -31,6 +30,7 @@ class PostsController extends Controller
         $catTitle = Categories::orderBy('position')
             ->get();
         $product  = DB::table('products')->get();
+
         return view('posts.index', ['catTitle' => $catTitle, 'product' => $product]);
     }
 }
