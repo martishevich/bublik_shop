@@ -114,8 +114,7 @@ ON o1.id = ss1.order_id')
 				ON os.payment_id = sp.id')
             ->whereRaw('os.order_id = ?', [$id])
             ->orderBy('os.id', 'DESC')
-            ->get()
-            ->first();
+            ->get();
     }
 
     /**
@@ -185,7 +184,8 @@ ON o1.id = ss1.order_id')
             case StatusOrder::STATUS_BOXING:
             case StatusOrder::STATUS_COLLECTED:
             case StatusOrder::STATUS_WAIT_FOR_DELIV:
-            case StatusOrder::STATUS_RET_IN_STORE:
+            case StatusOrder::STATUS_DELIVERING:
+            case StatusOrder::STATUS_DELIVERED:
                 return true;
         }
         return false;
@@ -325,27 +325,6 @@ ON o1.id = ss1.order_id')
 		    );
     }
 
-    public function canInStore()
-    {
-        switch ($this->getStatusId()) {
-            case StatusOrder::STATUS_DELIVERING:
-            case StatusOrder::STATUS_DELIVERED:
-                return true;
-        }
-        return false;
-    }
-
-    public function setInStore()
-    {
-	    DB::table('order_statuses')
-		    ->insert(
-			    ['order_id' => $this->getStatus()->order_id,
-			     'status_id' => StatusOrder::STATUS_RET_IN_STORE,
-			     'payment_id' => $this->getPayment()->payment_id
-			    ]
-		    );
-    }
-
     public function canPaid()
     {
         switch ($this->getStatusId()) {
@@ -390,6 +369,7 @@ ON o1.id = ss1.order_id')
             case StatusOrder::STATUS_WAIT_FOR_DELIV:
             case StatusOrder::STATUS_DELIVERING:
             case StatusOrder::STATUS_DELIVERED:
+            case StatusOrder::STATUS_CANCEL:
                 return true;
         }
         return false;
