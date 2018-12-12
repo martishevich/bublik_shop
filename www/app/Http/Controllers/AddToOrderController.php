@@ -74,5 +74,12 @@ class AddToOrderController extends Controller
         });
         return view('Cardshop');
     }
+
+    public function test()
+    {
+        $order = Order::getById('1');
+        $data  = Order::getProds('1');
+        return view('orderList', compact('data', 'order'));
+    }
 }
 

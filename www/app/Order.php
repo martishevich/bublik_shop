@@ -63,13 +63,15 @@ ON o1.id = ss1.order_id')
         return static::query()
             ->select([
                 'o1.*',
-                'p1.total'
+                'p1.total',
+                'ss1.title_stat',
+                'ss1.title_pay',
             ])
             ->fromRaw('orders AS o1
 				LEFT JOIN(SELECT order_id, SUM(price * quantity) AS total
 				FROM order_prods GROUP BY order_id) AS p1
 				ON  p1.order_id = o1.id
-				LEFT JOIN(SELECT s1.order_id, s1.status_id, s3.title
+				LEFT JOIN(SELECT s1.order_id, s1.status_id, s1.payment_id, s3.title as title_stat, p2.title as title_pay
 				    FROM order_statuses AS s1
 				    LEFT JOIN (SELECT MAX(order_statuses.id) AS lastid, order_id
 				    FROM order_statuses
@@ -77,6 +79,8 @@ ON o1.id = ss1.order_id')
 				    ON s1.id = s2.lastid
 				    LEFT JOIN status_orders s3
 				    ON s1.status_id = s3.id
+				    LEFT JOIN status_payments p2
+				    ON s1.payment_id = p2.id				    
 				    WHERE NOT s2.lastid IS null) ss1
 				ON o1.id = ss1.order_id')
             ->where('ss1.status_id', '<>', null)
