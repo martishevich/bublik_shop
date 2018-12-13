@@ -2,6 +2,8 @@
 
 namespace App;
 
+use PDF;
+use Mail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -362,7 +364,6 @@ ON o1.id = ss1.order_id')
     }
 
 
-
     public function canSendMail()
     {
         switch ($this->getStatusId()) {
@@ -377,6 +378,17 @@ ON o1.id = ss1.order_id')
                 return true;
         }
         return false;
+    }
+    
+    public function sendMail(){
+	    $data  = Order::getProds($this->id); // Все продукты заказа
+	    $pdf = PDF::loadView('orderList', ['data' => $data, 'order' => $this])->setPaper('a4');
+	    Mail::send('backEmail', ['order' => $this], function ($message) use ($pdf){
+		    $message->from(Config::get('mail.username'), 'Bublic Shop');
+		    /*todo Не забудь заменить адрес КОМУ письмо на $this->email*/
+		    $message->to(Config::get('mail.username'))->subject('Invoice');
+		    $message->attachData($pdf->output(), "orderList.pdf");
+	    });
     }
 
 

@@ -1,9 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <?php
-    /**
-     * @var $order \App\Order
-     */
+
 
     ?>
     <script>
@@ -133,10 +131,9 @@
                     @endif
                     <br><br>
                     <p>Send mail again: </p>
-                    <input type = "button"
-                           data-status = "paid"
-                           class = "btn btn-primary status_btn"
-                           value = "Send">
+                    <a class = "btn btn-warning"
+                       href = "/home/orders/<?=$order->getKey()?>/sendmail"
+                       role = "button">Resend</a>
                     <br><br>
                     <div class = "card-header">
                         <h1>Order products</h1>

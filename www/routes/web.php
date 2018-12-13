@@ -36,6 +36,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::match(['get', 'post'], '/home/orders/{id}', 'AdminOrderController@show');
 
     Route::get('home/orders/{id}/change', 'AdminOrderController@change');
+    
+    Route::get('home/orders/{id}/sendmail', 'AdminOrderController@sendOrderList');
 
 });
 
