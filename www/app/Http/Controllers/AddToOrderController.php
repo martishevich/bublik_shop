@@ -12,6 +12,7 @@ use Carbon\Carbon;
 
 class AddToOrderController extends Controller
 {
+
     public function add(Request $request)
     {
 
@@ -29,7 +30,6 @@ class AddToOrderController extends Controller
         $data['telephone'] = $request['PNumber'];
         $data['email']     = $request['Email'];
         $data['address']   = $request['Adress'];
-
 
         $s['order_id']   = DB::table('orders')->insertGetId($data);
         $s['payment_id'] = 1;
@@ -63,16 +63,16 @@ class AddToOrderController extends Controller
 
     public function viewOrder()
     {
-        $id = $_POST['id'];
+        $id    = $_POST['id'];
         $order = Order::getById($id);
         $data  = Order::getProds($id)->toArray();
-        $pdf = PDF::loadView('orderList', compact('data', 'order'));
-        Mail::send('backEmail', $data, function ($message) use ($pdf) {
+        $pdf   = PDF::loadView('orderList', compact('data', 'order'))->setPaper('a4');
+        Mail::send('backEmail', ['pdf' => $pdf], function ($message) use ($pdf) {
             $message->from('loliabombita@mail.ru', 'Bublic Shop');
             $message->to('loliabombita@mail.ru')->subject('Invoice');
             $message->attachData($pdf->output(), "orderList.pdf");
         });
-        return view('Cardshop');
+        return redirect('/');
     }
 
     public function test()
