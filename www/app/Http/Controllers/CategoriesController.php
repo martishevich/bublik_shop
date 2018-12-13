@@ -9,7 +9,9 @@ class CategoriesController extends Controller
 {
     public function ShowCategories($id)
     {
+        $catTitle = Categories::orderBy('position')
+            ->get();
         $categories = Categories::GetCategories($id);
-        return view('categories',compact('categories'));
+        return view('categories',['catTitle' => $catTitle, 'categories' => $categories,'id' => $id]);
     }
 }

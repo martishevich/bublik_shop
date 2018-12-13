@@ -1,6 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
+    <base href="/">
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Bublik store</title>
@@ -22,7 +23,7 @@
     <!-- Theme shortcodes/elements style -->
     <link rel="stylesheet" href="css/shortcode/shortcodes.css">
     <!-- Theme main style -->
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="css/style.css"/>
     <!-- Responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
     <!-- User style -->

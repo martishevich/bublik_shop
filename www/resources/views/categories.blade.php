@@ -101,8 +101,12 @@
                                 <h3>Categories</h3>
                             </div>
                             <div class="category-menu-list">
-                                <ul>
-
+                                <ul class="nav nav-pills nav-stacked">
+                                    <?php foreach ($catTitle as $title): ?>
+                                        <li class="<?if ($id == $title['id']){echo "active";}?>">
+                                            <a href="/categories/<?php echo $title['id']?>"> <?php echo $title['title']?></a>
+                                        </li>
+                                    <?php endforeach;?>
                                 </ul>
                             </div>
                         </div>

@@ -79,7 +79,7 @@ class OrderCreateController extends Controller
                     }
                     $dataOrder['order_id'] = $s['order_id'];
                     $dataOrder['key']      = 'comment';
-                    $dataOrder['value']    = '';
+                    $dataOrder['value']    = $post['comment'];
                     $dataOrder['group']    = 'time';
                     DB::table('order_datas')->insert($dataOrder);
                     return view('add_success', compact('s'));

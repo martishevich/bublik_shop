@@ -72,7 +72,7 @@ class AddToOrderController extends Controller
             $message->to('loliabombita@mail.ru')->subject('Invoice');
             $message->attachData($pdf->output(), "orderList.pdf");
         });
-        return view('Cardshop');
+        return view('/');
     }
 }
 

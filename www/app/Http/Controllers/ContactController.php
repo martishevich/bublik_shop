@@ -21,11 +21,11 @@ class ContactController extends Controller
     public function add_contact(CreateContactRequest $request)
     {
         $validatedata = $request->validate([
-            'name'    => 'required',
-            'email'   => 'required',
-            'phone'   => 'required',
-            'subject' => 'required',
-            'message' => 'required'
+            'name'    => 'required|between:3,64',
+            'email'   => 'required|email',
+            'phone'   => 'required|regex:/^\s*(?=.*[1-9])\d*(?:\.\d{1,2})?\s*$/',
+            'subject' => 'required|max:255',
+            'message' => 'required|max:4000'
         ]);
         DB::table('contacts')->insert($validatedata);
 
