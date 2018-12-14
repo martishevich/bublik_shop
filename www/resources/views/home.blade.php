@@ -14,8 +14,12 @@
                         @endif
                         Вы удачно зашли!
                             <h2>Products</h2>
+                            <div class="btn-toolbar">
+                                <div class="btn-group">
                             <a class="btn btn-info" href="/home/products" role="button">view</a>
                             <a class="btn btn-success" href="/home/products/create" role="button">add new</a>
+                                </div>
+                            </div>
                             <h2>Orders</h2>
                             <a class="btn btn-info" href="/home/orders" role="button">view</a>
                     </div>

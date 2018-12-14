@@ -12,6 +12,7 @@ use Carbon\Carbon;
 
 class AddToOrderController extends Controller
 {
+
     public function add(Request $request)
     {
         $sessionCart = $request->session()->get('cart');
@@ -28,14 +29,11 @@ class AddToOrderController extends Controller
         $data['telephone'] = $request['PNumber'];
         $data['email']     = $request['Email'];
         $data['address']   = $request['Adress'];
-
-
-        $s['order_id']   = DB::table('orders')->insertGetId($data);
-        $s['payment_id'] = 1;
-        $s['status_id']  = 1;
-        $s['comment']    = '';
+        $s['order_id']     = DB::table('orders')->insertGetId($data);
+        $s['payment_id']   = 1;
+        $s['status_id']    = 1;
+        $s['comment']      = '';
         DB::table('order_statuses')->insert($s);
-
         foreach ($orderItems as $key => $v) {
 
             $orderItems[$key]['order_id'] = $s['order_id'];
@@ -43,7 +41,6 @@ class AddToOrderController extends Controller
             $order_prod['product_id']     = $v['id'];
             $order_prod['quantity']       = $v['count'];
             $order_prod['price']          = $v['price'];
-
             DB::table('order_prods')->insert($order_prod);
         }
         $dataOrder['order_id'] = $s['order_id'];
@@ -68,10 +65,10 @@ class AddToOrderController extends Controller
         $id = $_POST['id'];
         $order = Order::getById($id);
         $data  = Order::getProds($id)->toArray();
-        $pdf = PDF::loadView('orderList', compact('data', 'order'));
-        Mail::send('backEmail', $data, function ($message) use ($pdf) {
-            $message->from('loliabombita@mail.ru', 'Bublic Shop');
-            $message->to('loliabombita@mail.ru')->subject('Invoice');
+        $pdf   = PDF::loadView('orderList', compact('data', 'order'))->setPaper('a4');
+        Mail::send('backEmail', ['order' => $order], function ($message) use ($pdf) {
+            $message->from('testolaravel@yandex.ru', 'Bublic Shop');
+            $message->to('testolaravel@yandex.ru')->subject('Invoice');
             $message->attachData($pdf->output(), "orderList.pdf");
         });
         return view('Cardshop');

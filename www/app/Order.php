@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Config;
+use Mail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -63,13 +65,15 @@ ON o1.id = ss1.order_id')
         return static::query()
             ->select([
                 'o1.*',
-                'p1.total'
+                'p1.total',
+                'ss1.title_stat',
+                'ss1.title_pay',
             ])
             ->fromRaw('orders AS o1
 				LEFT JOIN(SELECT order_id, SUM(price * quantity) AS total
 				FROM order_prods GROUP BY order_id) AS p1
 				ON  p1.order_id = o1.id
-				LEFT JOIN(SELECT s1.order_id, s1.status_id, s3.title
+				LEFT JOIN(SELECT s1.order_id, s1.status_id, s1.payment_id, s3.title as title_stat, p2.title as title_pay
 				    FROM order_statuses AS s1
 				    LEFT JOIN (SELECT MAX(order_statuses.id) AS lastid, order_id
 				    FROM order_statuses
@@ -77,6 +81,8 @@ ON o1.id = ss1.order_id')
 				    ON s1.id = s2.lastid
 				    LEFT JOIN status_orders s3
 				    ON s1.status_id = s3.id
+				    LEFT JOIN status_payments p2
+				    ON s1.payment_id = p2.id				    
 				    WHERE NOT s2.lastid IS null) ss1
 				ON o1.id = ss1.order_id')
             ->where('ss1.status_id', '<>', null)
@@ -114,8 +120,7 @@ ON o1.id = ss1.order_id')
 				ON os.payment_id = sp.id')
             ->whereRaw('os.order_id = ?', [$id])
             ->orderBy('os.id', 'DESC')
-            ->get()
-            ->first();
+            ->get();
     }
 
     /**
@@ -185,7 +190,8 @@ ON o1.id = ss1.order_id')
             case StatusOrder::STATUS_BOXING:
             case StatusOrder::STATUS_COLLECTED:
             case StatusOrder::STATUS_WAIT_FOR_DELIV:
-            case StatusOrder::STATUS_RET_IN_STORE:
+            case StatusOrder::STATUS_DELIVERING:
+            case StatusOrder::STATUS_DELIVERED:
                 return true;
         }
         return false;
@@ -325,27 +331,6 @@ ON o1.id = ss1.order_id')
 		    );
     }
 
-    public function canInStore()
-    {
-        switch ($this->getStatusId()) {
-            case StatusOrder::STATUS_DELIVERING:
-            case StatusOrder::STATUS_DELIVERED:
-                return true;
-        }
-        return false;
-    }
-
-    public function setInStore()
-    {
-	    DB::table('order_statuses')
-		    ->insert(
-			    ['order_id' => $this->getStatus()->order_id,
-			     'status_id' => StatusOrder::STATUS_RET_IN_STORE,
-			     'payment_id' => $this->getPayment()->payment_id
-			    ]
-		    );
-    }
-
     public function canPaid()
     {
         switch ($this->getStatusId()) {
@@ -379,7 +364,6 @@ ON o1.id = ss1.order_id')
     }
 
 
-
     public function canSendMail()
     {
         switch ($this->getStatusId()) {
@@ -390,9 +374,21 @@ ON o1.id = ss1.order_id')
             case StatusOrder::STATUS_WAIT_FOR_DELIV:
             case StatusOrder::STATUS_DELIVERING:
             case StatusOrder::STATUS_DELIVERED:
+            case StatusOrder::STATUS_CANCEL:
                 return true;
         }
         return false;
+    }
+    
+    public function sendMail(){
+	    $data  = Order::getProds($this->id); // Все продукты заказа
+	    $pdf = \PDF::loadView('orderList', ['data' => $data, 'order' => $this])->setPaper('a4');
+	    Mail::send('backEmail', ['order' => $this], function ($message) use ($pdf){
+		    $message->from(Config::get('mail.username'), 'Bublic Shop');
+		    /*todo Не забудь заменить адрес КОМУ письмо на $this->email*/
+		    $message->to(Config::get('mail.username'))->subject('Invoice');
+		    $message->attachData($pdf->output(), "orderList.pdf");
+	    });
     }
 
 

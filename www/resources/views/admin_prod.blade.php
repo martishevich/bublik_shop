@@ -49,11 +49,11 @@
                         <tr>
                             <th scope="row"><?php echo $v['id'] ?></th>
                             <td><?=htmlentities($v['category_id']); ?></td>
-                            <td><?php echo $v['name'] ?></td>
-                            <td><?php echo $v['description'] ?></td>
-                            <td><?php echo $v['short_disc'] ?></td>
-                            <td><?php echo $v['price'] ?></td>
-                            <td><?php echo $v['is_active'] ?></td>
+                            <td><?php echo htmlentities($v['name']) ?></td>
+                            <td><?php echo htmlentities($v['description']) ?></td>
+                            <td><?php echo htmlentities($v['short_disc']) ?></td>
+                            <td><?php echo htmlentities($v['price']) ?></td>
+                            <td><?php echo htmlentities($v['is_active']) ?></td>
                             <td><a class="btn btn-warning" href="/home/products/edit/<?php echo $v['id'] ?>" role="button">edit</a></td>
                             <td><a class="btn btn-danger" onclick="return confirm('Are you sure？')" href="/home/products/delete/<?php echo $v['id'] ?>" role="button">delete</a></td>
                         </tr>

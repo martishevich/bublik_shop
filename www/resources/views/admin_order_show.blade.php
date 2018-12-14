@@ -1,9 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <?php
-    /**
-     * @var $order \App\Order
-     */
+
 
     ?>
     <script>
@@ -20,26 +18,26 @@
 
         });
     </script>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
+    <div class = "container">
+        <div class = "row justify-content-center">
+            <div class = "col-md-12">
                 <div>
-                    <div class="card-header">
+                    <div class = "card-header">
                         <h1>Order <?= $order->getKey() ?></h1>
-                        <a class="btn btn-primary"
-                           href="/home"
-                           role="button">cabinet</a>
-                        <a class="btn btn-info"
-                           href="/home/orders"
-                           role="button">view</a>
+                        <a class = "btn btn-primary"
+                           href = "/home"
+                           role = "button">cabinet</a>
+                        <a class = "btn btn-info"
+                           href = "/home/orders"
+                           role = "button">view</a>
                     </div>
                     @if (session('status'))
-                        <div class="alert alert-success"
-                             role="alert">
+                        <div class = "alert alert-success"
+                             role = "alert">
                             {{ session('status') }}
                         </div>
                     @endif
-                    <table class="table">
+                    <table class = "table">
                         <tr>
                             <th>Order id</th>
                             <td><?=$order->getKey()?></td>
@@ -76,85 +74,72 @@
                         </tr>
                     </table>
                     <hr>
-                    <form method="get"
-                          class="hidden"
-                          id="form_change_status"
-                          action="/home/orders/<?=$order->getKey()?>/change">
-                        <input type="text"
-                               name="status"
-                               value="">
+                    <form method = "get"
+                          class = "hidden"
+                          id = "form_change_status"
+                          action = "/home/orders/<?=$order->getKey()?>/change">
+                        <input type = "text"
+                               name = "status"
+                               value = "">
                     </form>
                     @if($order->getStatusId() != \App\StatusOrder::STATUS_CANCEL ?? $order->getStatusId() != \App\StatusOrder::STATUS_RET_IN_STORE)
                         <p>Change status: </p>
                     @else
-                        <p>Order complete!</p>
+                        <p>Order is over!</p>
                     @endif
                     @if($order->canCancel())
-                        <input type="button"
-                               data-status="cancel"
-                               class="btn btn-danger status_btn"
-                               value="Cancel">
-                    @endif
-                    @if($order->canInStore())
-                        <input type="button"
-                               data-status="store"
-                               class="btn btn-danger status_btn"
-                               value="Return in store">
-                    @endif
-                    @if($order->canRebuild())
-                        <input type="button"
-                               data-status="rebuild"
-                               class="btn btn-info status_btn"
-                               value="Rebuild">
+                        <input type = "button"
+                               data-status = "cancel"
+                               class = "btn btn-danger status_btn"
+                               value = "Cancel">
                     @endif
                     @if($order->canBoxing())
-                        <input type="button"
-                               data-status="boxing"
-                               class="btn btn-info status_btn"
-                               value="In process boxing">
+                        <input type = "button"
+                               data-status = "boxing"
+                               class = "btn btn-info status_btn"
+                               value = "In process boxing">
                     @endif
                     @if($order->canCollected())
-                        <input type="button"
-                               data-status="collected"
-                               class="btn btn-info status_btn"
-                               value="Collected">
+                        <input type = "button"
+                               data-status = "collected"
+                               class = "btn btn-info status_btn"
+                               value = "Collected">
                     @endif
                     @if($order->canWaiting())
-                        <input type="button"
-                               data-status="waiting"
-                               class="btn btn-info status_btn"
-                               value="Waiting for delivering">
+                        <input type = "button"
+                               data-status = "waiting"
+                               class = "btn btn-info status_btn"
+                               value = "Waiting for delivering">
                     @endif
                     @if($order->canDelivering())
-                        <input type="button"
-                               data-status="delivering"
-                               class="btn btn-info status_btn"
-                               value="Delivering">
+                        <input type = "button"
+                               data-status = "delivering"
+                               class = "btn btn-info status_btn"
+                               value = "Delivering">
                     @endif
                     @if($order->canDelivered())
-                        <input type="button"
-                               data-status="delivered"
-                               class="btn btn-info status_btn"
-                               value="Delivered">
+                        <input type = "button"
+                               data-status = "delivered"
+                               class = "btn btn-info status_btn"
+                               value = "Delivered">
                     @endif
                     @if($order->canPaid())
-                        <input type="button"
-                               data-status="paid"
-                               class="btn btn-success status_btn"
-                               value="Paid">
+                        <input type = "button"
+                               data-status = "paid"
+                               class = "btn btn-success status_btn"
+                               value = "Paid">
                     @endif
                     <br><br>
-                        <p>Send mail again: </p>
-                        <input type="button"
-                               data-status="paid"
-                               class="btn btn-primary status_btn"
-                               value="Send">
-                        <br><br>
-                    <div class="card-header">
+                    <p>Send mail again: </p>
+                    <a class = "btn btn-warning"
+                       href = "/home/orders/<?=$order->getKey()?>/sendmail"
+                       role = "button">Resend</a>
+                    <br><br>
+                    <div class = "card-header">
                         <h1>Order products</h1>
                     </div>
-                    <table class="table">
-                        <thead class="thead-dark">
+                    <table class = "table">
+                        <thead class = "thead-dark">
                         <tr>
                             <th>id</th>
                             <th>product</th>
@@ -166,7 +151,7 @@
                         <tbody>
                         <?php foreach ($allProds as $k => $v):?>
                         <tr>
-                            <th scope="row"><?php echo $v->id ?></th>
+                            <th scope = "row"><?php echo $v->id ?></th>
                             <td><?php echo $v->name ?></td>
                             <td><?php echo $v->quantity ?></td>
                             <td><?php echo number_format($v->price, 2, ',', ' ') ?></td>
@@ -176,11 +161,11 @@
                         </tbody>
                     </table>
                     <hr>
-                    <div class="card-header">
+                    <div class = "card-header">
                         <h1>Order history</h1>
                     </div>
-                    <table class="table">
-                        <thead class="thead-dark">
+                    <table class = "table">
+                        <thead class = "thead-dark">
                         <tr>
                             <th>status</th>
                             <th>payment</th>
@@ -190,11 +175,14 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td><?php echo $ordHistory->status ?></td>
-                            <td><?php echo $ordHistory->payment ?></td>
-                            <td><?php echo $ordHistory->comment ?></td>
-                            <td><?php echo $ordHistory->created_at ?></td>
-                        </tr>
+                        @foreach($ordHistory as $id => $column)
+                            <tr>
+                                <td><?php echo $column['status'] ?></td>
+                                <td><?php echo $column['payment'] ?></td>
+                                <td><?php echo $column['comment'] ?></td>
+                                <td><?php echo $column['created_at'] ?></td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

@@ -21,6 +21,8 @@
 							<th>telephone</th>
 							<th>email</th>
 							<th>address</th>
+							<th>status</th>
+							<th>payment</th>
 							<th>total</th>
 							<th>details</th>
 						</tr>
@@ -33,6 +35,8 @@
 							<td><?php echo $v->telephone ?></td>
 							<td><?php echo $v->email ?></td>
 							<td><?php echo $v->address ?></td>
+							<td><?php echo $v->title_stat ?></td>
+							<td><?php echo $v->title_pay ?></td>
 							<td><?php echo number_format($v->total, 2, ',', ' ') ?></td>
 							<td><a class = "btn btn-info" href = "/home/orders/<?php echo $v->id ?>" role = "button">details</a>
 							</td>
