@@ -64,8 +64,8 @@ class AddToOrderController extends Controller
 		$data  = Order::getProds($id)->toArray();
 		$pdf   = PDF::loadView('orderList', compact('data', 'order'))->setPaper('a4');
 		Mail::send('backEmail', ['order' => $order], function ($message) use ($pdf){
-			$message->from('testolaravel@yandex.ru', 'Bublic Shop');
-			$message->to('testolaravel@yandex.ru')->subject('Invoice');
+			$message->from('kozlov.eugene.88@gmail.com', 'Bublic Shop');
+			$message->to('kozlov.eugene.88@gmail.com')->subject('Invoice');
 			$message->attachData($pdf->output(), "orderList.pdf");
 		});
 		return redirect('/');

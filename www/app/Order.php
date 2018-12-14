@@ -2,7 +2,7 @@
 
 namespace App;
 
-use PDF;
+use Illuminate\Support\Facades\Config;
 use Mail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -382,7 +382,7 @@ ON o1.id = ss1.order_id')
     
     public function sendMail(){
 	    $data  = Order::getProds($this->id); // Все продукты заказа
-	    $pdf = PDF::loadView('orderList', ['data' => $data, 'order' => $this])->setPaper('a4');
+	    $pdf = \PDF::loadView('orderList', ['data' => $data, 'order' => $this])->setPaper('a4');
 	    Mail::send('backEmail', ['order' => $this], function ($message) use ($pdf){
 		    $message->from(Config::get('mail.username'), 'Bublic Shop');
 		    /*todo Не забудь заменить адрес КОМУ письмо на $this->email*/

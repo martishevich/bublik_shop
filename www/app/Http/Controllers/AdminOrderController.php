@@ -20,7 +20,6 @@ class AdminOrderController extends Controller
 	
 	public function show($id)
 	{
-		dd(Config::get('mail.username'));
 		$order      = Order::getById($id);
 		$allProds   = Order::getProds($id);
 		$ordHistory = Order::getOrdHistory($id);
