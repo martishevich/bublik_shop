@@ -45,7 +45,7 @@ class OrderCreateController extends Controller
             if (isset($_POST['Send'])) {
                 $validatedData = $request->validate([
                     'fullname'    => 'required|max:60|alpha_dash',
-                    'phonenumber' => 'required|digits:12',
+                    'phonenumber' => 'required|digits:9',
                     'email'       => 'required|email',
                     'adress'      => 'required|alpha_dash',
                     'comment'     => 'required|alpha_dash'

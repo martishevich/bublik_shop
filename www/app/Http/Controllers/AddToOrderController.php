@@ -57,7 +57,6 @@ class AddToOrderController extends Controller
 
     public function clearSession(Request $request)
     {
-
         $request->session()->forget('cart');
     }
 
