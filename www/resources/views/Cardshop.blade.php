@@ -5,9 +5,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                    
+                <form action="/Cardshop" method="post">
+                    @csrf
                         <div class="table-content table-responsive">
                             <table>
+                            <?php $total = 0; $quantityId = 0 ?>
+                            <?php if (isset($orderItems)){ ?>
                                 <thead>
                                     <tr>
                                         <th class="product-name">Product</th>
@@ -18,40 +21,47 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
-                                    <?php $total = 0; $quantityId = 0 ?>
+            
                                     <?php foreach ($orderItems as $v): ?>
                                     <tr>
                                        
                                         <td class="product-name"><?php echo $v['name'] ?></td>
                                         <td class="product-price"><span class="amount"><?php echo $v['price'] ?></span></td>
                                         <td class="product-quantity">
-                                            <form action="/Cardshop" method="post">
-                                            @csrf
-                                                <input type="hidden" name="upid" value="<?php echo $v['id'] ?>">
-                                                <input type="number" name="quantity" value="<?php echo $v['count'] ?>" />
-                                                <input type="submit" value="Up" />
-                                            </form>
+                                                <input type="hidden" name="upid<?php echo $v['id'] ?>" value="<?php echo $v['id'] ?>">
+                                                <input type="number" name="quantity<?php echo $v['id'] ?>" value="<?php echo $v['count'] ?>" />   
                                         </td>
                                         <td class="product-subtotal"><?php echo $v['price']*$v['count'] ?></td>
                                         <td class="product-remove">
-                                        <form action="/Cardshop" method="post">
-                                            @csrf
                                             <input type="hidden" name="id" value="<?php echo $v['id'] ?>">
-                                            <input type="submit" name="remove" value="X">
-                                        </form>
+                                            <input type="submit" name="remove" value="X" style="background-color: red; color: white;">
                                         </td>
                                         <?php $total = $total + $v['price']*$v['count']; $quantityId++ ?>
                                     </tr>
                                     <?php endforeach; ?>
                                     
                                 </tbody>
+                            <?php } else { ?>
+                                <thead>
+                                    <tr>
+                                        <th class="product-name">Product</th>
+                                        <th class="product-price">Price</th>
+                                        <th class="product-quantity">Quantity</th>
+                                        <th class="product-subtotal">Total</th>
+                                        <th class="product-remove">Remove</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            <?php }  ?>
                             </table>
                         </div>
                         <div class="row">
                             <div class="col-md-8 col-sm-7 col-xs-12">
                                 <div class="buttons-cart">
                                     <a href="/">Continue Shopping</a>
+                                    <input type="hidden" name="Update">
+                                    <input type="submit" value="Update" style="background-color: green;" />
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-5 col-xs-12">
@@ -70,57 +80,103 @@
                                 </div>
                             </div>
                         </div>
-                    
+                </form>   
                 </div>
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="container"> 
+                        <div class="container">
+                        <?php if (isset($post)){ ?> 
+
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                     @endforeach
+                                </ul>
+                            </div>
+                        @endif
                             <form action="/Cardshop" method="post">
                             @csrf
                             <div>
                                 <h1 style="text-align: center;">Delivery</h1>
                                 <br>
                             </div>
-                            @if ($errors->any())
-                                <ul class="alert alert-danger">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            @endif
+                            
                             <div>
                                 <h2>Full Name</h2>
-                                <input type="text" class="form-control" placeholder="Enter Your Full Name" name="fullname" id="fullname" value="{{ old('fullname') }}">
+                                <input type="text" class="form-control" placeholder="Enter Your Full Name" name="fullname" id="fullname" value="{{ $post['fullname'] }}">
                                 <br>
                             </div>
                             <div>
                                 <h2>Phone Number</h2>
                                 <h3> please, enter your phone number like "<strong>375</strong>123456789" </h3>
-                                <input type="text" placeholder="Enter Your Phone Number" class="form-control" id="phonenumber" name="phonenumber" value="{{ old('phonenumber') }}">
+                                <input type="text" placeholder="Enter Your Phone Number" class="form-control" id="phonenumber" name="phonenumber" value="{{ $post['phonenumber'] }}" >
                                 <br>
                             </div>
                             <div>
                                 <h2>Email</h2>
-                                <input type="email" id="email" placeholder="Enter Your Email" class="form-control" name="email" value="{{ old('email') }}">
+                                <input type="email" id="email" placeholder="Enter Your Email" class="form-control" name="email" value="{{ $post['email'] }}">
                                 <br>
                             </div>
                             <div>
                                 <h2>Adress:</h2>
                                 <h3> please, enter your adress like "street_home_apatment_floor" </h3>
-                                <input type="text" placeholder="Enter Your Adress" class="form-control" name="adress" id="adress" value="{{ old('adress') }}">
+                                <input type="text" placeholder="Enter Your Adress" class="form-control" name="adress" id="adress" value="{{ $post['adress'] }}">
                                 <br>
                             </div>
                             <div>
                                 <h2>Comment</h2>
-                                <input type="text" name="comment" class="form-control" value="{{ old('comment') }}">
+                                <input type="text" name="comment" class="form-control" value="{{ $post['comment'] }}">
                                 <br>
                             </div>
-                            
                             <div>
                                 <br>
                                 <input type="submit" class="btn btn-info" value="Send" name="Send"> 
                             </div>
                             </form>
+                            <?php } else { ?>
+                                <form action="/Cardshop" method="post"> 
+                            @csrf
+                            <div>
+                                <h1 style="text-align: center;">Delivery</h1>
+                                <br>
+                            </div>
+                            
+                            <div>
+                                <h2>Full Name</h2>
+                                <input type="text" class="form-control" placeholder="Enter Your Full Name" name="fullname" id="fullname" value="">
+                                <br>
+                            </div>
+                            <div>
+                                <h2>Phone Number</h2>
+                                <h3> please, enter your phone number like "<strong>375</strong>123456789" </h3>
+                                <input type="text" placeholder="Enter Your Phone Number" class="form-control" id="phonenumber" name="phonenumber" value="" >
+                                <br>
+                            </div>
+                            <div>
+                                <h2>Email</h2>
+                                <input type="email" id="email" placeholder="Enter Your Email" class="form-control" name="email" value="">
+                                <br>
+                            </div>
+                            <div>
+                                <h2>Adress:</h2>
+                                <h3> please, enter your adress like "street_home_apatment_floor" </h3>
+                                <input type="text" placeholder="Enter Your Adress" class="form-control" name="adress" id="adress" value="">
+                                <br>
+                            </div>
+                            <div>
+                                <h2>Comment</h2>
+                                <input type="text" name="comment" class="form-control" value="">
+                                <br>
+                            </div>
+                            <div>
+                                <br>
+                                <input type="submit" class="btn btn-info" value="Send" name="Send"> 
+                            </div>
+                            </form>
+                            <?php }  ?>
+                            
                            
                         </div>
                     </div>

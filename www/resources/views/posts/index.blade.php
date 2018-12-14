@@ -130,10 +130,8 @@
                                             <li><a data-toggle="modal" data-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
                                             <li>
                                                 <form action="/" method="post" >
-                                                       
                                                             <input type="hidden" name="prodid" value="<?php echo $n ?>">
-                                                            <input type="submit" class="btn btn-dark btn-sm" value="Basket">
-                                                        
+                                                            <button class="ti-shopping-cart btn btn-light"></button>
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 </form>
                                             </li>
