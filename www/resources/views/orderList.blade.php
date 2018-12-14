@@ -1,15 +1,18 @@
 <!doctype html>
 <head>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=PT+Sans+Narrow&subset=cyrillic');
+    </style>
     <link rel = "stylesheet"
           href = "bootstrap-4.1.3/bootstrap.min.css">
     <style>
         body {
-            font-family: Arial;
+            font-family: 'PT Sans Narrow', sans-serif;;
             font-size: 14px;
         }
 
         h2 {
-            font-family: Arial;
+            font-family: 'PT Sans Narrow', sans-serif;;
             text-align: center
         }
 
@@ -93,7 +96,7 @@
     </div>
 </div>
 <br>
-<h2>ORDER N <?= $order['id'] ?></h2>
+<h2>ORDER N фыва<?= $order['id'] ?></h2>
 <br>
 <div class = "container">
     <p>Order Info: </p>
