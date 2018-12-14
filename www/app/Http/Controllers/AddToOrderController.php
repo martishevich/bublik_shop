@@ -15,7 +15,6 @@ class AddToOrderController extends Controller
 
     public function add(Request $request)
     {
-
         $sessionCart = $request->session()->get('cart');
         if (isset($sessionCart)) {
             $orderItems = Product::prod_sess(array_keys($sessionCart));
@@ -60,7 +59,10 @@ class AddToOrderController extends Controller
 
     public function viewOrder()
     {
-        $id    = $_POST['id'];
+        if (isset($_POST['goback'])){
+            return redirect('/');
+        }
+        $id = $_POST['id'];
         $order = Order::getById($id);
         $data  = Order::getProds($id)->toArray();
         $pdf   = PDF::loadView('orderList', compact('data', 'order'))->setPaper('a4');
