@@ -15,7 +15,15 @@ class Basketmiddleware
      */
     public function handle($request, Closure $next)
     {
-
+        if ($request->session()->has('cart')){
+            $counter = count($request->session()->get('cart', '0'));
+            $request->session()->put('counter', $counter);
+        }
+        else {
+            $counter = '';
+            $request->session()->put('counter', $counter);
+        }
+        
         return $next($request);
     }
 }

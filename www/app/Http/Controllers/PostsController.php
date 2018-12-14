@@ -23,8 +23,9 @@ class PostsController extends Controller
             $request->session()->put(
                 'cart.' . $product->getKey(),
                 $count + 1
+                
             );
-            $counter = count($request->session()->get('cart'));
+            $counter = count($request->session()->get('cart', '0'));
             $request->session()->put('counter', $counter);
         }
         $request->session()->save();
