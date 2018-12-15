@@ -143,10 +143,17 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="product__details">
-                                        <h2><a href="product-details.html"><?php echo $v->name ?></a></h2>
-                                        <h2><?php echo $v->short_disc ?></h2>
-                                        <h2><?php echo $v->price ?></h2>
+                                    <div class="product__hover__info">
+                                        <ul class="product__action">
+                                            <li><a data-toggle="modal" data-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
+                                            <li>
+                                                <form action="/" method="post" >
+                                                            <input type="hidden" name="prodid" value="<?php echo $n ?>">
+                                                            <button class="ti-shopping-cart btn btn-light"></button>
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                </form>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>

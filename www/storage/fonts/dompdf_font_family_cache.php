@@ -86,4 +86,10 @@
   'slick' => array(
     'normal' => $fontDir . '/b510b70a3f46282dc812e4c5fe164708',
   ),
+  'mynairi' => array(
+    'normal' => $fontDir . '/58d9a0ccc09c31b2b93b7b7fef55ef27',
+  ),
+  'pt sans narrow' => array(
+    'normal' => $fontDir . '/2de41085877e76a64c857b698b39d3ec',
+  ),
 ) ?>

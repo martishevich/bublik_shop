@@ -39,9 +39,6 @@
 				'title' => 'delivered'
 			]);
 			DB::table('status_orders')->insert([
-				'title' => 'return in store'
-			]);
-			DB::table('status_orders')->insert([
 				'title' => 'cancel'
 			]);
 			

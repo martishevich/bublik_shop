@@ -48,7 +48,8 @@
                                     @endauth
                                 </div>
                             @endif</li>
-                            <li><a title="Add TO Cart" href="/Cardshop"><span class="ti-shopping-cart"></span></a></li>
+                            <li><a title="Add TO Cart" href="/Cardshop"><span style="color: red;" class="ti-shopping-cart">{{ session('counter') }}</span></a></li>
+                            
                         {{--<li class="toggle__menu hidden-xs hidden-sm"><span class="ti-menu"></span></li>--}}
                     </ul>
                 </div>
