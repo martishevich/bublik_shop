@@ -10,6 +10,6 @@ class Categories extends Model
     protected $table = 'categories';
 
     public static function GetCategories($id){
-        return DB::table('products')->where('category_id',$id)->get();
+        return DB::table('products')->where('category_id',$id)->paginate(1);
     }
 }

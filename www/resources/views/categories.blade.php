@@ -143,6 +143,7 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    {{$categories->links()}}
                                     <div class="product__details">
                                         <h2><a href="product-details.html"><?php echo $v->name ?></a></h2>
                                         <h2><?php echo $v->short_disc ?></h2>
