@@ -156,11 +156,17 @@
                                         </ul>
                                     </div>
                                 </div>
+                                <div class="product__details">
+                                    <h2><a href="product-details.html"><?php echo $v->name ?></a></h2>
+                                    <h2><?php echo $v->short_disc ?></h2>
+                                    <h2><?php echo $v->price ?></h2>
+                                </div>
                             </div>
                         <?php endforeach; ?>
                         <!-- End Single Product -->
                         </div>
                     </div>
+                    <div align="center">{{$product->links()}}</div>
                 </div>
             </div>
         </div>

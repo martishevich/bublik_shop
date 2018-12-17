@@ -103,9 +103,11 @@
                             <div class="category-menu-list">
                                 <ul class="nav nav-pills nav-stacked">
                                     <?php foreach ($catTitle as $title): ?>
-                                        <li class="<?if ($id == $title['id']){echo "active";}?>">
-                                            <a href="/categories/<?php echo $title['id']?>"> <?php echo $title['title']?></a>
-                                        </li>
+                                    <li class="<?if ($id == $title['id']) {
+                                        echo "active";
+                                    }?>">
+                                        <a href="/categories/<?php echo $title['id']?>"> <?php echo $title['title']?></a>
+                                    </li>
                                     <?php endforeach;?>
                                 </ul>
                             </div>
@@ -143,7 +145,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    {{$categories->links()}}
+
                                     <div class="product__details">
                                         <h2><a href="product-details.html"><?php echo $v->name ?></a></h2>
                                         <h2><?php echo $v->short_disc ?></h2>
@@ -156,6 +158,7 @@
                         </div>
                     </div>
                 </div>
+                <div align="center">{{$categories->links()}}</div>
             </div>
         </div>
     </section>
