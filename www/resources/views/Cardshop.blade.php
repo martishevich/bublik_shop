@@ -10,7 +10,7 @@
                         <div class="table-content table-responsive">
                             <table>
                             <?php $total = 0; $quantityId = 0 ?>
-                            <?php if (isset($orderItems)){ ?>
+                            <?php if (session('counter') > 0) { ?>
                                 <thead>
                                     <tr>
                                         <th class="product-name">Product</th>
@@ -41,19 +41,7 @@
                                     <?php endforeach; ?>
                                     
                                 </tbody>
-                            <?php } else { ?>
-                                <thead>
-                                    <tr>
-                                        <th class="product-name">Product</th>
-                                        <th class="product-price">Price</th>
-                                        <th class="product-quantity">Quantity</th>
-                                        <th class="product-subtotal">Total</th>
-                                        <th class="product-remove">Remove</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            <?php }  ?>
+                            
                             </table>
                         </div>
                         <div class="row">
@@ -176,7 +164,9 @@
                             </div>
                             </form>
                             <?php }  ?>
-                            
+                            <?php } else { ?>
+                                <h1>BASKET ARE EMPTY!<br><br><br><br>PLEASE, GO TO SHOP, CHOOSE SOME PRODCUT AND COME BACK</h1>
+                            <?php }  ?>  
                            
                         </div>
                     </div>

@@ -60,39 +60,38 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-12 col-xs-12">
-                        <div class="table-content ">
-                            <table>
-                            <thead>
-                                    <tr>
-                                        <th class="product-name">FullName</th>
-                                        <th class="product-price">PhoneNumber</th>
-                                        <th class="product-quantity">Email</th>
-                                        <th class="product-subtotal">Adress</th>
-                                    </tr>
-                            </thead>
-                            <tbody>
-                                    <tr>
-                                        <td class="product-name"><?php echo $post['fullname'] ?></td>
-                                        <td class="product-price"><span class="amount"><?php echo $post['phonenumber'] ?></span></td>
-                                        <td class="product-quantity"><?php echo $post['email'] ?></td>
-                                        <td class="product-subtotal"><?php echo $post['adress'] ?></td>
-                                    </tr>
-                                    
-                            </tbody>
-                            </table>
-                            <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-6 col-sm-12 col-xs-12" >
+                        <div class="col-md-6 col-sm-6 col-xs-6"  >
+                        <ul style="text-align: left; color: green;">
+                            <li>FullName</li>
+                            <li>PhoneNumber</li>
+                            <li>Email</li>
+                            <li>Adress</li>
+                            
+                        </ul>
+                        <br><br> <br><br>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6"  >
+                        <ul style="text-align: right; color: green;">
+                            <li><?php echo $post['fullname'] ?></li>
+                            <li><?php echo $post['phonenumber'] ?></li>
+                            <li><?php echo $post['email'] ?></li>
+                            <li><?php echo $post['adress'] ?></li>
+                            
+                        </ul>
+                        <br><br> <br><br>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="text-align: right;" >
                             <form action="orderList" method="post">
                             @csrf
                             <span><input type="hidden" name="id" value="{{ $s['order_id'] }}">
                                 
-                                <button type="submit" class="btn btn-outline-primary btn-lg btn-block">Are You Shure?</button>
+                                <button type="submit" class="btn btn-primary-dark btn-lg" >Are You Shure?</button>
                                 </span>
                             </form>   
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 

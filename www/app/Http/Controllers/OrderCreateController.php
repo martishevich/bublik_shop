@@ -27,14 +27,28 @@ class OrderCreateController extends Controller
 
         if (isset($_POST['Update'])){
             foreach(session('cart') as $k => $v ){
-                if ($_POST['quantity'.$k] > 0){
-                    $request->session()->put('cart.'.$k, $_POST['quantity'.$k]);
+                $inputNumber = $_POST['quantity'.$k];
+                $pattern = '#[0-9]#';
+                $match = preg_match($pattern, $inputNumber);
+
+                if ($match == 0){
+                    $inputNumber = $request->session()->get('cart.'.$k);
                 }
                 else {
-                    $request->session()->forget('cart.' . $k);
+                    $inputNumber = $_POST['quantity'.$k];
                 }
+                if ($inputNumber > 0){
+
+                    $request->session()->put('cart.'.$k, $inputNumber);
+                }
+                
+                /*else {
+                    $request->session()->forget('cart.' . $k);
+                    $counter = count($request->session()->get('cart', '0'));
+                    $request->session()->put('counter', $counter);
+                }*/
+             
             }
-            
         }
         
         //Add Product Count to Order Items
