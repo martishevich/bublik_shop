@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Components\Filters\OrdersFilter;
+use App\Components\Filters\QueryFilter;
 use App\Order;
+use Illuminate\Http\Request;
 
 class AdminOrderController extends Controller
 {
-	public function index()
+	public function index(Request $request)
 	{
 		$allOrd = Order::getList();
-		return view('admin_order', compact('allOrd'));
+		$orders = Order::with('orderProd', 'orderStatus');
+		$orders = (new OrdersFilter($orders, $request))->apply()->get();
+		return view('admin_order', compact('allOrd', 'orders'));
 	}
 	
 	public function show($id)

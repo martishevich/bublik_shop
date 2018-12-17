@@ -1,5 +1,9 @@
 @extends('layouts.app')
 @section('content')
+	<?php
+	dd( $orders['0']->orderStatus['0']->statuses->title);
+	die;
+	?>
 	<div class = "container">
 		<div class = "row justify-content-center">
 			<div class = "col-md-12">
