@@ -15,13 +15,14 @@ class OrderCreateController extends Controller
     public function cardshop(Request $request)
     {
         //REMOVE CART
-
         if (isset($_POST['remove'])) {
             $removeId = $_POST['id'];
             $request->session()->forget('cart.' . $removeId);
+            //unset($_POST['Update']);
             $counter = count($request->session()->get('cart', '0'));
             $request->session()->put('counter', $counter);
         }
+        
         
         //Update Cart
 
@@ -37,11 +38,9 @@ class OrderCreateController extends Controller
                 else {
                     $inputNumber = $_POST['quantity'.$k];
                 }
-                if ($inputNumber > 0){
-
+                if ($inputNumber > 0){ 
                     $request->session()->put('cart.'.$k, $inputNumber);
                 }
-                
                 /*else {
                     $request->session()->forget('cart.' . $k);
                     $counter = count($request->session()->get('cart', '0'));
@@ -57,7 +56,6 @@ class OrderCreateController extends Controller
         
         if (isset($sessionCart)) 
         {
-            
             $orderItems = Product::prod_sess(array_keys($sessionCart));
 
             foreach ($orderItems as $key => $v) 
