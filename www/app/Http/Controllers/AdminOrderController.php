@@ -11,10 +11,12 @@ class AdminOrderController extends Controller
 {
 	public function index(Request $request)
 	{
-		$allOrd = Order::getList();
-		$orders = Order::with('orderProd', 'orderStatus');
+	    if (isset($_GET)){
+
+        }
+        $orders = Order::getList();
 		$orders = (new OrdersFilter($orders, $request))->apply()->get();
-		return view('admin_order', compact('allOrd', 'orders'));
+		return view('admin_order', compact('orders'));
 	}
 	
 	public function show($id)

@@ -34,6 +34,7 @@ class Order extends Model
 		return StatusPayment::getNamePayment($this);
 	}
 
+
 	public static function getList()
 	{
 		return static::query()
@@ -60,8 +61,7 @@ class Order extends Model
 				    WHERE NOT s2.lastid IS null) ss1
 				ON o1.id = ss1.order_id')
 			->where('ss1.status_id', '<>', null)
-			->orderBy('o1.id', 'DESC')
-			->get();
+			->orderBy('o1.id', 'DESC');
 	}
 	
 	public static function getOrdHistory($id)

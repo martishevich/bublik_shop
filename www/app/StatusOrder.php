@@ -22,6 +22,7 @@ class StatusOrder extends Model
 			->get()
 			->first();
 	}
+
 	
 	public function orderStatus()
 	{
