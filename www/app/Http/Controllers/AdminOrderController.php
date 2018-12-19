@@ -11,17 +11,14 @@ class AdminOrderController extends Controller
 {
 	public function index(Request $request)
 	{
-	    if (isset($_GET)){
-
-        }
-        $orders = Order::getList();
-		$orders = (new OrdersFilter($orders, $request))->apply()->get();
+		$request->flash();
+		$orders = Order::filterAndPagination($request);
 		return view('admin_order', compact('orders'));
 	}
 	
 	public function show($id)
 	{
-		$order      = Order::getById($id);
+		$order = Order::getById($id);
 		return view('admin_order_show', compact('order'));
 	}
 	
@@ -31,7 +28,8 @@ class AdminOrderController extends Controller
 		return redirect("home/orders/$id");
 	}
 	
-	public function sendOrderList($id){
+	public function sendOrderList($id)
+	{
 		$order = Order::getById($id)->sendMail();
 		return redirect("/home/orders/$id");
 	}

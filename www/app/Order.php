@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Config;
 use Mail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Components\Filters\OrdersFilter;
 
 class Order extends Model
 {
@@ -416,5 +417,20 @@ ON o1.id = ss1.order_id')
 				ON op.product_id = p.id')
 			->whereRaw('op.order_id = ?', [$id])
 			->get();
+	}
+	
+	public static function filterAndPagination($request)
+	{
+		$pagination = (isset($_GET['filter']['pagination']) && (int) $_GET['filter']['pagination'] <= 50 && (int) $_GET['filter']['pagination'] > 0) ? (int) $_GET['filter']['pagination'] : 5;
+		$orders = Order::getList();
+		$orders =  (new OrdersFilter($orders, $request))
+			->apply()
+			->paginate($pagination)
+			->appends('filter[status]', request('filter.status'))
+			->appends('filter[payment]', request('filter.payment'))
+			->appends('filter[total_min]', request('filter.total_min'))
+			->appends('filter[total_max]', request('filter.total_max'))
+			->appends('filter[pagination]', request('filter.pagination'));
+		return $orders;
 	}
 }
