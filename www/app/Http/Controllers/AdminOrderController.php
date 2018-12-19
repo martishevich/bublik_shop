@@ -2,60 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Components\Filters\OrdersFilter;
+use App\Components\Filters\QueryFilter;
 use App\Order;
-use App\OrderProd;
-use App\OrderStatus;
-use App\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
 
 class AdminOrderController extends Controller
 {
-	public function index()
+	public function index(Request $request)
 	{
-		$allOrd = Order::getList();
-		return view('admin_order', compact('allOrd'));
+		$request->flash();
+		$orders = Order::filterAndPagination($request);
+		return view('admin_order', compact('orders'));
 	}
 	
 	public function show($id)
 	{
-		$order      = Order::getById($id);
-		$allProds   = Order::getProds($id);
-		$ordHistory = Order::getOrdHistory($id);
-		return view('admin_order_show', compact('order', 'allProds', 'ordHistory'));
+		$order = Order::getById($id);
+		return view('admin_order_show', compact('order'));
 	}
 	
 	public function change($id)
 	{
-		$order = Order::getById($id);
-		if ($_GET['status'] == 'boxing' && $order->canBoxing()){
-			$order->setBoxing();
-		}
-		if ($_GET['status'] == 'collected' && $order->canCollected()){
-			$order->setCollected();
-		}
-		if ($_GET['status'] == 'waiting' && $order->canWaiting()){
-			$order->setWaiting();
-		}
-		if ($_GET['status'] == 'delivering' && $order->canDelivering()){
-			$order->setDelivering();
-		}
-		if ($_GET['status'] == 'delivered' && $order->canDelivered()){
-			$order->setDelivered();
-		}
-		if ($_GET['status'] == 'cancel' && $order->canCancel()){
-			$order->setCancel();
-		}
-		if ($_GET['status'] == 'paid' && $order->canPaid()){
-			$order->setPaid();
-		}
+		$order = Order::getById($id)->checkAndSetStatus($_GET);
 		return redirect("home/orders/$id");
 	}
 	
-	public function sendOrderList($id){
-		$order = Order::getById($id);
-		$order->sendMail();
+	public function sendOrderList($id)
+	{
+		$order = Order::getById($id)->sendMail();
 		return redirect("/home/orders/$id");
 	}
 	/*$start = microtime(true);
