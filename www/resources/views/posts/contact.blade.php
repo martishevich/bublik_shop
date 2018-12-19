@@ -27,7 +27,7 @@
                                         <span class="ti-mobile"></span>
                                     </div>
                                     <div class="contact__details">
-                                        <p> Phone : <br><a href="#">+012 345 678 102 </a></p>
+                                        <p> Phone : <br><a href="tel:+375292044640">+375 (29) 2044640 (MTC)</a></p>
                                     </div>
                                 </div>
                                 <!-- End Single Adress -->
@@ -37,7 +37,7 @@
                                         <span class="ti-email"></span>
                                     </div>
                                     <div class="contact__details">
-                                        <p> Mail :<br><a href="#">info@example.com</a></p>
+                                        <p> Mail :<br><a href="mailto:loliabombita@mail.ru">loliabombita@mail.ru</a></p>
                                     </div>
                                 </div>
                                 <!-- End Single Adress -->

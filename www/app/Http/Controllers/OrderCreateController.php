@@ -87,7 +87,6 @@ class OrderCreateController extends Controller
                 
                 if ($validator->passes()) 
                 {
-
                     foreach ($post as $k => $v) 
                     {
                         $post[$k] = e(trim($v));
@@ -105,7 +104,6 @@ class OrderCreateController extends Controller
 
                     foreach ($orderItems as $key => $m) 
                     {
-
                         $orderItems[$key]['order_id'] = $s['order_id'];
                         $order_prod['order_id']       = $s['order_id'];
                         $order_prod['product_id']     = $m['id'];
@@ -116,7 +114,7 @@ class OrderCreateController extends Controller
                     }
                     $dataOrder['order_id'] = $s['order_id'];
                     $dataOrder['key']      = 'comment';
-                    $dataOrder['value']    = '';
+                    $dataOrder['value']    = $post['comment'];
                     $dataOrder['group']    = 'time';
                     DB::table('order_datas')->insert($dataOrder);
                     return view('/add_success', ['s' => $s, 'post' => $post, 'orderItems' => $orderItems]);

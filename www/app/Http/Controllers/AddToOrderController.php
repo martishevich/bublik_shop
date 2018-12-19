@@ -12,8 +12,7 @@ use Carbon\Carbon;
 
 class AddToOrderController extends Controller
 {
-
-    public function add(Request $request)
+   /* public function add(Request $request)
     {
         $sessionCart = $request->session()->get('cart');
         if (isset($sessionCart)) {
@@ -49,11 +48,10 @@ class AddToOrderController extends Controller
         $dataOrder['group']    = 'time';
         DB::table('order_datas')->insert($dataOrder);
         return view('add_success', compact('s'));
-    }
+    }*/
 
     public function clearSession(Request $request)
     {
-
         $request->session()->forget('cart');
     }
 
@@ -71,7 +69,7 @@ class AddToOrderController extends Controller
             $message->to('testolaravel@yandex.ru')->subject('Invoice');
             $message->attachData($pdf->output(), "orderList.pdf");
         });
-        return view('Cardshop');
+        return view('/');
     }
 }
 
