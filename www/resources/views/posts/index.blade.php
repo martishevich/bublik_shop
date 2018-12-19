@@ -5,22 +5,21 @@
     <!-- Start Offset Wrapper -->
     <div class="offset__wrapper">
         <!-- Start Search Popap -->
-        <div class="search__area">
-            <div class="container">
+        <div class="search__inner">
+            <form action="{{route('searchSimple')}}" method="GET" class="search-simple">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="search__inner">
-                            <form action="#" method="get">
-                                <input placeholder="Search here... " type="text">
-                                <button type="submit"></button>
-                            </form>
-                            <div class="search__close__btn">
-                                <span class="search__close__btn_icon"><i class="zmdi zmdi-close"></i></span>
-                            </div>
+                    <div class="col-xs-10">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="q" value="{{ old('q') }}" required>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="form-group">
+                            <input class="btn btn-info" type="submit" value="Искать">
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
         <!-- End Search Popap -->
         <!-- Start Offset MEnu -->
@@ -85,7 +84,9 @@
                     <li><a href="cart.html">View Cart</a></li>
                     <li class="shp__checkout"><a href="checkout.html">Checkout</a></li>
                 </ul>
+
             </div>
+
         </div>
         <!-- End Cart Panel -->
     </div>

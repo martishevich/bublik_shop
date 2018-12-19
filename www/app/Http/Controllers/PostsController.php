@@ -31,7 +31,7 @@ class PostsController extends Controller
         $request->session()->save();
         $catTitle = Categories::orderBy('position')
             ->get();
-        $product  = DB::table('products')->paginate(10);
+        $product  = DB::table('products')->paginate(12);
         return view('posts.index', ['catTitle' => $catTitle, 'product' => $product]);
     }
 }
