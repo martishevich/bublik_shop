@@ -58,7 +58,7 @@ class AddToOrderController extends Controller
     public function viewOrder()
     {
         if (isset($_POST['goback'])){
-            return redirect('/');
+            return redirect('Cardshop');
         }
         $id = $_POST['id'];
         $order = Order::getById($id);

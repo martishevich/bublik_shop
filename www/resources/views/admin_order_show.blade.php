@@ -149,13 +149,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($allProds as $k => $v):?>
+                        <?php foreach ($order->orderProd as $k => $v):?>
                         <tr>
                             <th scope = "row"><?php echo $v->id ?></th>
-                            <td><?php echo $v->name ?></td>
-                            <td><?php echo $v->quantity ?></td>
-                            <td><?php echo number_format($v->price, 2, ',', ' ') ?></td>
-                            <td><?php echo number_format($v->price * $v->quantity, 2, ',', ' ') ?></td>
+                            <td><?= $v->product->name ?></td>
+                            <td><?= $v->quantity ?></td>
+                            <td><?= number_format($v->price, 2, ',', ' ') ?></td>
+                            <td><?= number_format($v->price * $v->quantity, 2, ',', ' ') ?></td>
                         </tr>
                         <?php endforeach; ?>
                         </tbody>
@@ -175,12 +175,12 @@
                         </thead>
                         <tbody>
                         <tr>
-                        @foreach($ordHistory as $id => $column)
+                        @foreach($order->orderStatus as $k => $v)
                             <tr>
-                                <td><?php echo $column['status'] ?></td>
-                                <td><?php echo $column['payment'] ?></td>
-                                <td><?php echo $column['comment'] ?></td>
-                                <td><?php echo $column['created_at'] ?></td>
+                                <td><?= $v->statuses->title ?></td>
+                                <td><?= $v->payments->title ?></td>
+                                <td><?= $v->comment ?></td>
+                                <td><?= $v->created_at ?></td>
                             </tr>
                         @endforeach
                         </tbody>

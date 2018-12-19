@@ -15,26 +15,39 @@ class OrderCreateController extends Controller
     public function cardshop(Request $request)
     {
         //REMOVE CART
-
         if (isset($_POST['remove'])) {
             $removeId = $_POST['id'];
             $request->session()->forget('cart.' . $removeId);
+            //unset($_POST['Update']);
             $counter = count($request->session()->get('cart', '0'));
             $request->session()->put('counter', $counter);
         }
+        
         
         //Update Cart
 
         if (isset($_POST['Update'])){
             foreach(session('cart') as $k => $v ){
-                if ($_POST['quantity'.$k] > 0){
-                    $request->session()->put('cart.'.$k, $_POST['quantity'.$k]);
+                $inputNumber = $_POST['quantity'.$k];
+                $pattern = '#[0-9]#';
+                $match = preg_match($pattern, $inputNumber);
+
+                if ($match == 0){
+                    $inputNumber = $request->session()->get('cart.'.$k);
                 }
                 else {
-                    $request->session()->forget('cart.' . $k);
+                    $inputNumber = $_POST['quantity'.$k];
                 }
+                if ($inputNumber > 0){ 
+                    $request->session()->put('cart.'.$k, $inputNumber);
+                }
+                /*else {
+                    $request->session()->forget('cart.' . $k);
+                    $counter = count($request->session()->get('cart', '0'));
+                    $request->session()->put('counter', $counter);
+                }*/
+             
             }
-            
         }
         
         //Add Product Count to Order Items
@@ -43,7 +56,6 @@ class OrderCreateController extends Controller
         
         if (isset($sessionCart)) 
         {
-            
             $orderItems = Product::prod_sess(array_keys($sessionCart));
 
             foreach ($orderItems as $key => $v) 

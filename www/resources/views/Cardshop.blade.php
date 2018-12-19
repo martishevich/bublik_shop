@@ -7,10 +7,11 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                 <form action="/Cardshop" method="post">
                     @csrf
+                    <?php $total = 0; $quantityId = 0 ?>
+                            <?php if (session('counter') > 0) { ?>
                         <div class="table-content table-responsive">
                             <table>
-                            <?php $total = 0; $quantityId = 0 ?>
-                            <?php if (isset($orderItems)){ ?>
+                            
                                 <thead>
                                     <tr>
                                         <th class="product-name">Product</th>
@@ -33,27 +34,18 @@
                                         </td>
                                         <td class="product-subtotal"><?php echo $v['price']*$v['count'] ?></td>
                                         <td class="product-remove">
+                                        <form action="/Cardshop" method="post">
+                                            @csrf
                                             <input type="hidden" name="id" value="<?php echo $v['id'] ?>">
                                             <input type="submit" name="remove" value="X" style="background-color: red; color: white;">
+                                        </form>
                                         </td>
                                         <?php $total = $total + $v['price']*$v['count']; $quantityId++ ?>
                                     </tr>
                                     <?php endforeach; ?>
                                     
                                 </tbody>
-                            <?php } else { ?>
-                                <thead>
-                                    <tr>
-                                        <th class="product-name">Product</th>
-                                        <th class="product-price">Price</th>
-                                        <th class="product-quantity">Quantity</th>
-                                        <th class="product-subtotal">Total</th>
-                                        <th class="product-remove">Remove</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            <?php }  ?>
+                            
                             </table>
                         </div>
                         <div class="row">
@@ -176,7 +168,18 @@
                             </div>
                             </form>
                             <?php }  ?>
-                            
+                            <?php } else { ?>
+                                <div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
+                                    <h1>BASKET ARE EMPTY!<br><br><br><br>
+                                    <div class="img">
+                                        <img src="images/CardShop.jpg" class="img-fluid" alt="Responsive image">
+                                        <br><br><br>
+                                    </div>
+                                    PLEASE, GO TO SHOP, CHOOSE SOME PRODCUT AND COME BACK</h1>
+                                    <br><br><br><br>
+
+                                </div>
+                            <?php }  ?>  
                            
                         </div>
                     </div>
