@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+
     <div class="body__overlay"></div>
     <!-- Start Offset Wrapper -->
     <div class="offset__wrapper">
@@ -135,9 +136,9 @@
                                     </a>
                                 </div>
                             </div>
-                        <?php endforeach; ?>
                         <!-- End Single Product -->
                         </div>
+                        <?php endforeach; ?>
                     </div>
                     <div align="center">{{$product->links()}}</div>
                 </div>
