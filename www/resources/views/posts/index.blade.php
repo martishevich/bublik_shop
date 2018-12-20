@@ -121,7 +121,7 @@
                             <div class="product foo">
                                 <div class="product__inner">
                                     <div class="pro__thumb">
-                                        <a href="#">
+                                        <a href="/product_details/<?php echo $v->id ?>" role="button">
                                             <img src="images/Products/prod1.jpg" alt="product images">
                                         </a>
                                     </div>
@@ -138,9 +138,11 @@
                                     </div>
                                 </div>
                                 <div class="product__details">
-                                    <h2><a href="product-details.html"><?php echo $v->name ?></a></h2>
+                                    <a href="/product_details/<?php echo $v->id ?>" role="button">
+                                    <h2><?php echo $v->name ?></h2>
                                     <h2><?php echo $v->short_disc ?></h2>
                                     <h2><?php echo $v->price ?></h2>
+                                    </a>
                                 </div>
                             </div>
                         </div>
