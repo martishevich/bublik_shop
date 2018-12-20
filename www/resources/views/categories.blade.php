@@ -5,9 +5,22 @@
     <!-- Start Offset Wrapper -->
     <div class="offset__wrapper">
         <!-- Start Search Popap -->
-        <div class="search__inner">
-
-            
+        <div class="search__area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="search__inner">
+                            <form action="#" method="get">
+                                <input placeholder="Search here... " type="text">
+                                <button type="submit"></button>
+                            </form>
+                            <div class="search__close__btn">
+                                <span class="search__close__btn_icon"><i class="zmdi zmdi-close"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- End Search Popap -->
         <!-- Start Offset MEnu -->
@@ -72,9 +85,7 @@
                     <li><a href="cart.html">View Cart</a></li>
                     <li class="shp__checkout"><a href="checkout.html">Checkout</a></li>
                 </ul>
-
             </div>
-
         </div>
         <!-- End Cart Panel -->
     </div>
@@ -90,9 +101,11 @@
                                 <h3>Categories</h3>
                             </div>
                             <div class="category-menu-list">
-                                <ul>
+                                <ul class="nav nav-pills nav-stacked">
                                     <?php foreach ($catTitle as $title): ?>
-                                    <li>
+                                    <li class="<?if ($id == $title['id']) {
+                                        echo "active";
+                                    }?>">
                                         <a href="/categories/<?php echo $title['id']?>"> <?php echo $title['title']?></a>
                                     </li>
                                     <?php endforeach;?>
@@ -105,42 +118,47 @@
                     <div class="col-md-9 col-lg-9 col-sm-8 col-xs-12 row justify-content">
                         <div class="product__list another-product-style">
 
-                       <?php foreach ($product as $k => $v): ?>
-                       <?php $n = $v->id; ?>
-                        <div class="col-md-3 col-lg-3 col-sm-8 col-xs-12 no-gutters row justify-content">
-                            <div class="product foo">
-                                <div class="product__inner">
-                                    <div class="pro__thumb">
-                                        <a href="/product_details/<?php echo $v->id ?>" role="button">
-                                            <img src="images/Products/prod1.jpg" alt="product images">
-                                        </a>
+                            <?php foreach ($categories as $k => $v): ?>
+                            <?php $n = $v->id; ?>
+                            <div class="col-md-3 col-lg-3 col-sm-8 col-xs-12 no-gutters row justify-content">
+                                <div class="product foo">
+                                    <div class="product__inner">
+                                        <div class="pro__thumb">
+                                            <a href="#">
+                                                <img src="images/Products/prod1.jpg" alt="product images">
+                                            </a>
+                                        </div>
+                                        <div class="product__hover__info">
+                                            <ul class="product__action">
+                                                <li><a data-toggle="modal" data-target="#productModal"
+                                                       title="Quick View" class="quick-view modal-view detail-link"
+                                                       href="#"><span class="ti-plus"></span></a></li>
+                                                <li>
+                                                    <form action="/" method="post">
+
+                                                        <input type="hidden" name="prodid" value="<?php echo $n ?>">
+                                                        <input type="submit" class="btn btn-dark btn-sm" value="Basket">
+
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="product__hover__info">
-                                        <ul class="product__action">
-                                            <li>
-                                                <form action="/" method="post" >
-                                                            <input type="hidden" name="prodid" value="<?php echo $n ?>">
-                                                            <button class="ti-shopping-cart btn btn-light"></button>
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                </form>
-                                            </li>
-                                        </ul>
+
+                                    <div class="product__details">
+                                        <h2><a href="product-details.html"><?php echo $v->name ?></a></h2>
+                                        <h2><?php echo $v->short_disc ?></h2>
+                                        <h2><?php echo $v->price ?></h2>
                                     </div>
-                                </div>
-                                <div class="product__details">
-                                    <a href="/product_details/<?php echo $v->id ?>" role="button">
-                                    <h2><?php echo $v->name ?></h2>
-                                    <h2><?php echo $v->short_disc ?></h2>
-                                    <h2><?php echo $v->price ?></h2>
-                                    </a>
                                 </div>
                             </div>
                         <?php endforeach; ?>
                         <!-- End Single Product -->
                         </div>
                     </div>
-                    <div align="center">{{$product->links()}}</div>
                 </div>
+                <div align="center">{{$categories->links()}}</div>
             </div>
         </div>
     </section>
