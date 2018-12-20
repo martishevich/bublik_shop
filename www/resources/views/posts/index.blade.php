@@ -105,32 +105,15 @@
                     <div class="col-md-9 col-lg-9 col-sm-8 col-xs-12 row justify-content">
                         <div class="product__list another-product-style">
 
-                            <?php foreach ($product as $k => $v): ?>
-                            <?php $n = $v->id; ?>
-                            <div class="col-md-3 col-lg-3 col-sm-8 col-xs-12 no-gutters row justify-content">
-                                <div class="product foo">
-                                    <div class="product__inner">
-                                        <div class="pro__thumb">
-                                            <a href="#">
-                                                <img src="images/Products/prod1.jpg" alt="product images">
-                                            </a>
-                                        </div>
-                                        <div class="product__hover__info">
-                                            <ul class="product__action">
-                                                <li><a data-toggle="modal" data-target="#productModal"
-                                                       title="Quick View" class="quick-view modal-view detail-link"
-                                                       href="#"><span class="ti-plus"></span></a></li>
-                                                <li>
-                                                    <form action="/" method="get">
-
-                                                        <input type="hidden" name="prodid" value="<?php echo $n ?>">
-                                                        <input type="submit" class="btn btn-dark btn-sm" value="Basket">
-
-                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    </form>
-                                                </li>
-                                            </ul>
-                                        </div>
+                       <?php foreach ($product as $k => $v): ?>
+                       <?php $n = $v->id; ?>
+                        <div class="col-md-3 col-lg-3 col-sm-8 col-xs-12 no-gutters row justify-content">
+                            <div class="product foo">
+                                <div class="product__inner">
+                                    <div class="pro__thumb">
+                                        <a href="/product_details/<?php echo $v->id ?>" role="button">
+                                            <img src="images/Products/prod1.jpg" alt="product images">
+                                        </a>
                                     </div>
                                     <div class="product__hover__info">
                                         <ul class="product__action">
@@ -145,9 +128,11 @@
                                     </div>
                                 </div>
                                 <div class="product__details">
-                                    <h2><a href="product-details.html"><?php echo $v->name ?></a></h2>
+                                    <a href="/product_details/<?php echo $v->id ?>" role="button">
+                                    <h2><?php echo $v->name ?></h2>
                                     <h2><?php echo $v->short_disc ?></h2>
                                     <h2><?php echo $v->price ?></h2>
+                                    </a>
                                 </div>
                             </div>
                         <?php endforeach; ?>

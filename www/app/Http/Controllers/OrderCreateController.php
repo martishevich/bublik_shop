@@ -72,7 +72,7 @@ class OrderCreateController extends Controller
                 
                 $validator = Validator::make($request->all(), [
                     'fullname'    => 'required|max:60',
-                    'phonenumber' => 'required',
+                    'phonenumber' => 'required|regex:/[()"+"-"0-9]/',
                     'email'       => 'required|email',
                     'adress'      => 'required',
                     'comment'     => 'max:5000'
