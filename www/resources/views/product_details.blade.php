@@ -31,17 +31,36 @@
                             <ul class="pro__dtl__prize">
                                 <li>{{ $prodDet["price"] }}</li>
                             </ul>
-                            <ul class="pro__dtl__btn">
-                                <li class="buy__now__btn">
-                                    <div col-md-6 col-lg-6 col-sm-6 col-xs-12>
-                                        <form action="/product_details/{{ $id }}" method="post">
+                            
+                            <form id='myform' action="/product_details/{{ $id }}" method="post">
+                                <div class="product-action-wrap">
+                                    <div class="prodict-statas"><span>Quantity :</span></div>
+                                        <div class="product-quantity">
                                             @csrf
-                                                <input type="number" name="quantity" value="{{ $quantity }}" class="btn btn-primary-succes">
-                                                <input type="submit" class="btn btn-primary-succes" name="ADD" value="ADD TO CART">
-                                        </form>
+                                            <div class="product-quantity">
+                                                <div class="cart-plus-minus">
+                                                    <input class="cart-plus-minus-box" type="text" name="quantity" value="{{ $quantity }}">
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </li>
-                            </ul>    
+                                    <ul class="pro__dtl__btn">
+                                        <li class="buy__now__btn">
+                                            <div class="product-quantity">
+                                                <input type="submit" class="btn btn-success" name="ADD" value="ADD TO CART">
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <br><br><br>
+                                    <ul class="pro__dtl__btn">
+                                        <li class="buy__now__btn">
+                                            <div class="product-quantity">
+                                                <a href="/">Shop</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>  
+                            </form>   
                         </div>
                     </div>
                 </div>
