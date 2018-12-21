@@ -11,7 +11,7 @@ use Session;
 use App\Categories;
 use App\Http\Controllers;
 use App\Providers;
-
+use Validator;
 
 class ProductDetailsController extends Controller
 {
@@ -25,13 +25,18 @@ class ProductDetailsController extends Controller
         $product = Product::getByIds($id);
         $quantity = 1;
         if (isset($_POST['ADD'])){
+        $validator = Validator::make($_POST, ['quantity' => 'digits_between:1,100']);
+        if ($validator->fails()){
+            $quantity = 1;
+        }
+        if ($validator->passes()){
             $quantity = $_POST['quantity'];
             $count = session()->get('cart.' . $product->getKey(), 0);
             session()->put(
                 'cart.' . $product->getKey(),
-                $count + $quantity
-                
+                $count + $quantity     
             );
+        };
             $counter = count(session()->get('cart', '0'));
             session()->put('counter', $counter);
         };
