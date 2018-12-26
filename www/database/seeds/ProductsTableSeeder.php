@@ -11,7 +11,8 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('products')->delete();
+	    factory(App\Product::class, 100000)->create();
+        /*DB::table('products')->delete();
         DB::table('products')->insert([
             'category_id' => '1',
             'name'        => 'Notebook Asus',
@@ -28,6 +29,6 @@ class ProductsTableSeeder extends Seeder
             'short_disc'  => 'Not bad...',
             'price'       => '1500.50',
             'is_active'   => '0'
-        ]);
+        ]);*/
     }
 }

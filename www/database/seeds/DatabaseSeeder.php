@@ -6,6 +6,7 @@
 	{
 		public function run()
 		{
+			$this->call('UsersTableSeeder');
 			$this->call('StatusesTableSeeder');
 			$this->call('CategoriesTableSeeder');
 			$this->call('ProductsTableSeeder');
