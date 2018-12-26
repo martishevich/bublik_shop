@@ -10,7 +10,7 @@
 
     <!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="images/logo/apple-touch-icon.png">
 
     <!-- All css files are included here. -->
     <!-- Bootstrap frem-->
@@ -23,7 +23,7 @@
     <!-- Theme shortcodes/elements style -->
     <link rel="stylesheet" href="css/shortcode/shortcodes.css">
     <!-- Theme main style -->
-    <link rel="stylesheet" href="/css/style.css?{<?php gettimeofday() ?>}" />
+    <link rel="stylesheet" href="css/style.css?{<?php gettimeofday() ?>}" />
     <!-- Responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
     <!-- User style -->
