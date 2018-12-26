@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Categories;
 use App\Product;
-use Dotenv\Validator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProductValidation;
 
 class AdminProductController extends Controller
@@ -20,6 +18,7 @@ class AdminProductController extends Controller
 
     public function create()
     {
+    	
         $is_add = session('is_add');
         $allCat = Categories::orderBy('position')
             ->get();
@@ -28,12 +27,12 @@ class AdminProductController extends Controller
 
     public function save(ProductValidation $request, $id = false)
     {
-        $referer = $request->headers->get('referer');
+        $referer = $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
         switch ($referer) {
-            case 'http://localhost/home/products/create':
+            case $_SERVER['SERVER_NAME'].'/home/products/create':
                 Product::insertDB($request);
                 return redirect('home/products/create')->with('is_add', 'true');
-            case "http://localhost/home/products/edit/$id":
+            case $_SERVER['SERVER_NAME'].'/home/products/edit/$id':
                 Product::updateDB($request, $id);
                 return redirect('home/products')->with('is_edit', 'true');
             default:

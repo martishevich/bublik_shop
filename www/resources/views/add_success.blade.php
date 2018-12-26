@@ -61,21 +61,20 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12 col-xs-12" >
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="col-md-5 col-sm-5 col-xs-5">
+                        <div class="col-md-6 col-sm-6 col-xs-6" style="border-right: 2px solid;">
+                            <div class="col-md-5 col-sm-5 col-xs-5" >
                             </div>
-                            <div class="col-md-5 col-sm-5 col-xs-5">
+                            <div class="col-md-5 col-sm-5 col-xs-5" >
                             <ul style="text-align: left; color: green;">
                                 <li>FullName</li>
                                 <li>PhoneNumber</li>
                                 <li>Email</li>
                                 <li>Adress</li>
                             </ul>
-                            </div>  
+                            </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6"  >
+                        <div class="col-md-6 col-sm-6 col-xs-6" >
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                        
                         <ul style="text-align: right; color: green;">
                             <li><?php echo $post['fullname'] ?></li>
                             <li><?php echo $post['phonenumber'] ?></li>
