@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Categories;
 use App\Product;
 use Illuminate\Http\Request;
@@ -12,8 +13,8 @@ class AdminProductController extends Controller
 
     public function index()
     {
-        $allProd = Product::all();
-        return view('admin_prod', compact('allProd'));
+        $allProd = Product::paginate(50);
+        return view('admin.admin_prod', compact('allProd'));
     }
 
     public function create()
@@ -22,7 +23,7 @@ class AdminProductController extends Controller
         $is_add = session('is_add');
         $allCat = Categories::orderBy('position')
             ->get();
-        return view('admin_prod_create', compact('allCat', 'is_add'));
+        return view('admin.admin_prod_create', compact('allCat', 'is_add'));
     }
 
     public function save(ProductValidation $request, $id = false)
@@ -45,7 +46,7 @@ class AdminProductController extends Controller
         $allCat = Categories::orderBy('position')
             ->get();
         $prod   = Product::find($id);
-        return view('admin_prod_edit', compact('allCat', 'prod'));
+        return view('admin.admin_prod_edit', compact('allCat', 'prod'));
     }
 
     public function destroy($id)
