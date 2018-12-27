@@ -7,7 +7,7 @@
                 <div class = "col-md-3 col-lg-3 col-sm-6">
                     <div class = "ft__widget">
                         <div class = "ft__logo">
-                            <a href = "index.html">
+                            <a href = "/">
                                 <img src = "images/logo/logo.png" alt = "footer logo">
                             </a>
                         </div>
@@ -15,18 +15,10 @@
                             <ul>
                                 <li>
                                     <div class = "address-icon">
-                                        <i class = "zmdi zmdi-pin"></i>
-                                    </div>
-                                    <div class = "address-text">
-                                        <p>Kulman 11, <br> Minsk, Belarus</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class = "address-icon">
                                         <i class = "zmdi zmdi-email"></i>
                                     </div>
                                     <div class = "address-text">
-                                        <a href = "#"> info@bublik.com</a>
+                                        <a href = "mailto:loliabombita@mail.ru"> loliabombita@mail.ru</a>
                                     </div>
                                 </li>
                                 <li>
@@ -34,7 +26,7 @@
                                         <i class = "zmdi zmdi-phone-in-talk"></i>
                                     </div>
                                     <div class = "address-text">
-                                        <p>+375(29)-204-46-40</p>
+                                        <a href="tel:+375292044640">+375(29)-204-46-40</a>
                                     </div>
                                 </li>
                             </ul>
@@ -47,8 +39,8 @@
                     <div class = "ft__widget">
                         <h2 class = "ft__title">Infomation</h2>
                         <ul class = "footer-categories">
-                            <li><a href = "about.html">About Us</a></li>
-                            <li><a href = "contact.html">Contact Us</a></li>
+                            <li><a href = "/about">About Us</a></li>
+                            <li><a href = "/contact">Contact Us</a></li>
 
                         </ul>
                     </div>
@@ -61,7 +53,7 @@
                             <p>Subscribe to our newsletter and get 10% off your first purchase .</p>
                             <div class = "input__box">
                                 <div id = "mc_embed_signup">
-                                    <form action = "#" method = "post" id = "mc-embedded-subscribe-form"
+                                    <form action = "/" method = "post" id = "mc-embedded-subscribe-form"
                                           name = "mc-embedded-subscribe-form" class = "validate" target = "_blank"
                                           novalidate>
                                         <div id = "mc_embed_signup_scroll" class = "htc__news__inner">

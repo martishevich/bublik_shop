@@ -33,8 +33,8 @@ class ContactController extends Controller
         $validatedata['phone'] = PhoneValidate::FilterPhone($phone);
         DB::table('contacts')->insert($validatedata);
 
-        Mail::send('mail', $validatedata, function ($message) {
-            $message->to('loliabombita@mail.ru', 'To web dev blog')->subject('Test mail');
+        Mail::send('mail', $validatedata, function ($message) use($validatedata) {
+            $message->to($validatedata['email'], 'To web dev blog')->subject('Test mail');
             $message->from('loliabombita@mail.ru', 'Web deb blog');
         });
         if (count(Mail::failures()) > 0) {
