@@ -96,7 +96,7 @@
     </div>
 </div>
 <br>
-<h2>ORDER N фыва<?= $order['id'] ?></h2>
+<h2>ORDER №<?= $order['id'] ?></h2>
 <br>
 <div class = "container">
     <p>Order Info: </p>

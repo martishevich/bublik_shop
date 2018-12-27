@@ -22,73 +22,67 @@ class OrderCreateController extends Controller
             $counter = count($request->session()->get('cart', '0'));
             $request->session()->put('counter', $counter);
         }
-        
-        
+
+
         //Update Cart
 
-        if (isset($_POST['Update'])){
-            foreach(session('cart') as $k => $v ){
-                $inputNumber = $_POST['quantity'.$k];
-                $pattern = '#[0-9]#';
-                $match = preg_match($pattern, $inputNumber);
+        if (isset($_POST['Update'])) {
+            foreach (session('cart') as $k => $v) {
+                $inputNumber = $_POST['quantity' . $k];
+                $pattern     = '#[0-9]#';
+                $match       = preg_match($pattern, $inputNumber);
 
-                if ($match == 0){
-                    $inputNumber = $request->session()->get('cart.'.$k);
+                if ($match == 0) {
+                    $inputNumber = $request->session()->get('cart.' . $k);
+                } else {
+                    $inputNumber = $_POST['quantity' . $k];
                 }
-                else {
-                    $inputNumber = $_POST['quantity'.$k];
-                }
-                if ($inputNumber > 0){ 
-                    $request->session()->put('cart.'.$k, $inputNumber);
+                if ($inputNumber > 0) {
+                    $request->session()->put('cart.' . $k, $inputNumber);
                 }
                 /*else {
                     $request->session()->forget('cart.' . $k);
                     $counter = count($request->session()->get('cart', '0'));
                     $request->session()->put('counter', $counter);
                 }*/
-             
+
             }
         }
-        
+
         //Add Product Count to Order Items
-        
+
         $sessionCart = $request->session()->get('cart');
-        
-        if (isset($sessionCart)) 
-        {
+
+        if (isset($sessionCart)) {
             $orderItems = Product::prod_sess(array_keys($sessionCart));
 
-            foreach ($orderItems as $key => $v) 
-            {
+            foreach ($orderItems as $key => $v) {
                 $orderItems[$key]['count'] = $sessionCart[$v['id']];
-            } 
-            
+            }
+
             //Validation 
-            
-            if (isset($_POST['Send']))
-            {
-                
-                $post=$_POST;
-                
+
+            if (isset($_POST['Send'])) {
+
+                $post = $_POST;
+
                 $validator = Validator::make($request->all(), [
                     'fullname'    => 'required|max:60',
                     'phonenumber' => 'required',
                     'email'       => 'required|email',
                     'adress'      => 'required',
                     'comment'     => 'max:5000'
-                  ]);
-              
-                  if ($validator->fails()) {
-                    return view('Cardshop', ['post' => $post, 'orderItems' => $orderItems]) 
-                               ->withErrors($validator); 
-                  }
-                
-                $post          = array_except($post, ['_token']);
-                
-                if ($validator->passes()) 
-                {
-                    foreach ($post as $k => $v) 
-                    {
+                ]);
+
+                if ($validator->fails()) {
+                    return view('Cardshop', ['post' => $post, 'orderItems' => $orderItems])
+                        ->withErrors($validator);
+                }
+
+                $post = array_except($post, ['_token']);
+
+                if ($validator->passes()) {
+                    foreach ($post as $k => $v) {
                         $post[$k] = e(trim($v));
                     }
                     $dataor['fullname']  = $post['fullname'];
@@ -102,8 +96,7 @@ class OrderCreateController extends Controller
                     $s['comment']    = '';
                     DB::table('order_statuses')->insert($s);
 
-                    foreach ($orderItems as $key => $m) 
-                    {
+                    foreach ($orderItems as $key => $m) {
                         $orderItems[$key]['order_id'] = $s['order_id'];
                         $order_prod['order_id']       = $s['order_id'];
                         $order_prod['product_id']     = $m['id'];
@@ -117,15 +110,18 @@ class OrderCreateController extends Controller
                     $dataOrder['value']    = $post['comment'];
                     $dataOrder['group']    = 'time';
                     DB::table('order_datas')->insert($dataOrder);
-                    return view('/add_success', ['s' => $s, 'post' => $post, 'orderItems' => $orderItems]);
+                    return view('/preOrder', ['s' => $s, 'post' => $post, 'orderItems' => $orderItems]);
                 }
-                return view('Cardshop', ['post' => $post, 'orderItems' => $orderItems]); 
+                return view('Cardshop', ['post' => $post, 'orderItems' => $orderItems]);
             }
-            
+
             return view('Cardshop', ['orderItems' => $orderItems]);
         }
         return view('Cardshop');
     }
 
+    public function SendView (){
+
+    }
 
 }

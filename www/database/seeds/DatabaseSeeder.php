@@ -89,6 +89,8 @@
 			]);
 			
 			DB::table('products')->delete();
+			$i = 0;
+			while ($i<10000000){
 			DB::table('products')->insert([
 				'category_id' => '1',
 				'name'        => 'Notebook Asus',
@@ -106,6 +108,8 @@
 				'price'       => '1500.50',
 				'is_active'   => '0'
 			]);
+			$i++;
+			}
 			
 			DB::table('orders')->delete();
 			DB::table('orders')->insert([

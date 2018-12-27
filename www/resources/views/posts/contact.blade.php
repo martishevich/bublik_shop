@@ -12,18 +12,6 @@
                                 <!-- Start Single Adress -->
                                 <div class="single__contact__address">
                                     <div class="contact__icon">
-                                        <span class="ti-location-pin"></span>
-                                    </div>
-                                    <div class="contact__details">
-                                        <p>Location : <br> 77, seventh avenue, Brat road USA.</p>
-                                    </div>
-                                </div>
-                                <!-- End Single Adress -->
-                            </div>
-                            <div class="contact__address__inner">
-                                <!-- Start Single Adress -->
-                                <div class="single__contact__address">
-                                    <div class="contact__icon">
                                         <span class="ti-mobile"></span>
                                     </div>
                                     <div class="contact__details">
@@ -43,6 +31,13 @@
                                 <!-- End Single Adress -->
                             </div>
                         </div>
+                        @if ($errors->any())
+                            <ul class="alert alert-danger">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
                         <div class="contact-form-wrap">
                             <div class="contact-title">
                                 <h2 class="contact__title">Get In Touch</h2>
@@ -60,13 +55,6 @@
                             {!!Form::textarea('message','',['id'=>'','class'=>''])!!}
                             {!!Form::submit('Send') !!}
                             {{ Form::close() }}
-                            @if ($errors->any())
-                                <ul class="alert alert-danger">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            @endif
                         </div>
                         <div class="form-output">
                             <p class="form-messege"></p>

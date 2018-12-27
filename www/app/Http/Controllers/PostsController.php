@@ -9,6 +9,7 @@ use App\Http\Controllers;
 use App\Providers;
 use mysql_xdevapi\Session;
 use DB;
+use App\Newsletter;
 
 class PostsController extends Controller
 {
@@ -33,5 +34,19 @@ class PostsController extends Controller
             ->get();
         $product  = DB::table('products')->paginate(12);
         return view('posts.index', ['catTitle' => $catTitle, 'product' => $product]);
+    }
+    public function SendNewsletter(){
+        $email = $_POST['email'];
+        Newsletter::AddEmail($email);
+        Mail::send('mail', function ($message) {
+            $message->to('loliabombita@mail.ru', 'To web dev blog')->subject('Test mail');
+            $message->from('loliabombita@mail.ru', 'Web deb blog');
+        });
+        if (count(Mail::failures()) > 0) {
+            return view('posts.i');
+        } else {
+            return view('posts.infomes')->with('name', $validatedata['name']);
+        }
+        return redirect('show');
     }
 }

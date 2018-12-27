@@ -115,22 +115,6 @@
                                                 <img src="images/Products/prod1.jpg" alt="product images">
                                             </a>
                                         </div>
-                                        <div class="product__hover__info">
-                                            <ul class="product__action">
-                                                <li><a data-toggle="modal" data-target="#productModal"
-                                                       title="Quick View" class="quick-view modal-view detail-link"
-                                                       href="#"><span class="ti-plus"></span></a></li>
-                                                <li>
-                                                    <form action="/" method="get">
-
-                                                        <input type="hidden" name="prodid" value="<?php echo $n ?>">
-                                                        <input type="submit" class="btn btn-dark btn-sm" value="Basket">
-
-                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    </form>
-                                                </li>
-                                            </ul>
-                                        </div>
                                     </div>
                                     <div class="product__hover__info">
                                         <ul class="product__action">
