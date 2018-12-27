@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Components\Filters\OrdersFilter;
-use App\Components\Filters\QueryFilter;
+use App\Jobs;
 use App\Order;
 use Illuminate\Http\Request;
 
@@ -31,7 +30,8 @@ class AdminOrderController extends Controller
 	
 	public function sendOrderList($id)
 	{
-		$order = Order::getById($id)->sendMail();
+		$order = Order::getById($id);
+		Jobs\SendMessage::dispatch($order);
 		return redirect("/home/orders/$id");
 	}
 	/*$start = microtime(true);
