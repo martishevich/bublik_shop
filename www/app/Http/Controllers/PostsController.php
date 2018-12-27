@@ -10,6 +10,7 @@ use App\Providers;
 use mysql_xdevapi\Session;
 use DB;
 use App\Newsletter;
+use function GuzzleHttp\Promise\all;
 
 class PostsController extends Controller
 {
@@ -29,6 +30,7 @@ class PostsController extends Controller
             $counter = count($request->session()->get('cart', '0'));
             $request->session()->put('counter', $counter);
         }
+       
         $request->session()->save();
         $catTitle = Categories::orderBy('position')
             ->get();

@@ -15,7 +15,7 @@ Route::get('/about', 'AboutController@about');
 
 Auth::routes();
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['namespace' => 'Admin', 'middleware' => ['auth']], function (){
 
 	Route::get('/home', 'HomeController@index')->name('home');
 
@@ -54,5 +54,8 @@ Route::match(['get','post'],'/show','AddToOrderController@add');
 Route::post('orderList','AddToOrderController@viewOrder');
 
 Route::match(['get','post'],'categories/{id}','CategoriesController@ShowCategories');
+
+Route::match(['get', 'post'], '/product_details/{id}', 'ProductDetailsController@productdetails');
+
 
 Route::post('mailing','PostController@SendNewsletter');

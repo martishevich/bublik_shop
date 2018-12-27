@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Components\Filters\OrdersFilter;
 use App\Components\Filters\QueryFilter;
 use App\Order;
@@ -13,13 +14,13 @@ class AdminOrderController extends Controller
 	{
 		$request->flash();
 		$orders = Order::filterAndPagination($request);
-		return view('admin_order', compact('orders'));
+		return view('admin.admin_order', compact('orders'));
 	}
 	
 	public function show($id)
 	{
 		$order = Order::getById($id);
-		return view('admin_order_show', compact('order'));
+		return view('admin.admin_order_show', compact('order'));
 	}
 	
 	public function change($id)

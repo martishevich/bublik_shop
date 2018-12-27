@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->unsignedDecimal('price',8,2);
             $table->boolean('is_active')->default('1');
             $table->timestamp('created_at')->useCurrent();
+	        $table->softDeletes();
 
         });
     }
