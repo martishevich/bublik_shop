@@ -106,44 +106,46 @@
                     <div class="col-md-9 col-lg-9 col-sm-8 col-xs-12 row justify-content">
                         <div class="product__list another-product-style">
 
-                       <?php foreach ($product as $k => $v): ?>
-                       <?php $n = $v->id; ?>
-                        <div class="col-md-3 col-lg-3 col-sm-8 col-xs-12 no-gutters row justify-content">
-                            <div class="product foo">
-                                <div class="product__inner">
-                                    <div class="pro__thumb">
-                                        <a href="/product_details/<?php echo $v->id ?>" role="button">
-                                            <img src="images/Products/prod1.jpg" alt="product images">
-                                        </a>
-                                    </div>
-                                    <div class="product__hover__info">
-                                        <ul class="product__action">
-                                            <li>
-                                                <form action="/" method="post" >
+                            <?php foreach ($product as $k => $v): ?>
+                            <?php $n = $v->id; ?>
+                            <div class="col-md-3 col-lg-3 col-sm-8 col-xs-12 no-gutters row justify-content">
+                                <div class="product foo">
+                                    <div class="product__inner">
+                                        <div class="pro__thumb">
+                                            <a href="/product_details/<?php echo $v->id ?>" role="button">
+                                                <img src="images/Products/prod1.jpg" alt="product images">
+                                            </a>
+                                        </div>
+                                        <div class="product__hover__info">
+                                            <ul class="product__action">
+                                                <li>
+                                                    <form action="/" method="post" >
                                                             <input type="hidden" name="prodid" value="<?php echo $n ?>">
                                                             <button class="ti-shopping-cart btn btn-light"></button>
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                </form>
-                                            </li>
-                                        </ul>
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product__details">
+                                        <a href="/product_details/<?php echo $v->id ?>" role="button">
+                                        <h2><?php echo $v->name ?></h2>
+                                        <h2><?php echo $v->short_disc ?></h2>
+                                        <h2><?php echo $v->price ?></h2>
+                                        </a>
                                     </div>
                                 </div>
-                                <div class="product__details">
-                                    <a href="/product_details/<?php echo $v->id ?>" role="button">
-                                    <h2><?php echo $v->name ?></h2>
-                                    <h2><?php echo $v->short_disc ?></h2>
-                                    <h2><?php echo $v->price ?></h2>
-                                    </a>
-                                </div>
+                            
                             </div>
-                        <!-- End Single Product -->
+                            <?php endforeach; ?>
+                            <!-- End Single Product -->
                         </div>
-                        <?php endforeach; ?>
+                        <div align="center">{{$product->links()}}</div>
                     </div>
-                    <div align="center">{{$product->links()}}</div>
                 </div>
             </div>
-        </div>
+        </div>  
     </section>
     <!-- End Feature Product -->
 
