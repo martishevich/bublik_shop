@@ -25,16 +25,15 @@ class ContactController extends Controller
         $validatedata = $request->validate([
             'name'    => 'required|between:3,64',
             'email'   => 'required|email',
-            'phone'   => 'required|min:9|max:13',
+            'phone'   => 'required|integer',
             'subject' => 'required|max:255',
             'message' => 'required|max:4000'
         ]);
         $phone = $validatedata['phone'];
         $validatedata['phone'] = PhoneValidate::FilterPhone($phone);
         DB::table('contacts')->insert($validatedata);
-
-        Mail::send('mail', $validatedata, function ($message) use($validatedata) {
-            $message->to($validatedata['email'], 'To web dev blog')->subject('Test mail');
+        Mail::send('mail', $validatedata, function ($message) use ($validatedata) {
+            $message->to($validatedata['email'])->subject('Test mail');
             $message->from('loliabombita@mail.ru', 'Web deb blog');
         });
         if (count(Mail::failures()) > 0) {
