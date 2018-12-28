@@ -13,7 +13,7 @@ class AdminProductController extends Controller
 
     public function index()
     {
-        $allProd = Product::paginate(50);
+        $allProd = Product::orderBy('id', 'DESK')->paginate(50);
         return view('admin.admin_prod', compact('allProd'));
     }
 
