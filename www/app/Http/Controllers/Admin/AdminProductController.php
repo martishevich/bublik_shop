@@ -33,7 +33,7 @@ class AdminProductController extends Controller
             case $_SERVER['SERVER_NAME'].'/home/products/create':
                 Product::insertDB($request);
                 return redirect('home/products/create')->with('is_add', 'true');
-            case $_SERVER['SERVER_NAME'].'/home/products/edit/$id':
+            case $_SERVER['SERVER_NAME']."/home/products/edit/$id":
                 Product::updateDB($request, $id);
                 return redirect('home/products')->with('is_edit', 'true');
             default:
