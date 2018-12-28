@@ -13,7 +13,7 @@
 
 Route::get('/about', 'AboutController@about');
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::group(['namespace' => 'Admin', 'middleware' => ['auth']], function (){
 
