@@ -82,7 +82,6 @@
     <!-- Start Feature Product -->
     <div class="container">
         <div class="row">
-            
             <div class="col-md-3 col-lg-3 col-sm-4 col-xs-12">
                         <div class="categories-menu mrg-xs">
                             <div class="category-heading">
@@ -127,7 +126,6 @@
                                     </div>
                                     <div class="product__details">
                                         <a href="/product_details/<?php echo $v->id ?>" role="button">
-                                                
                                                     <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: green; font-size: 16px; text-transform: capitalize;">
                                                     <?php echo $v->name ?>
                                                     </p>
