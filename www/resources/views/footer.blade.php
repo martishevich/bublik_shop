@@ -11,6 +11,11 @@
                                 <img src = "images/logo/logo.png" alt = "footer logo">
                             </a>
                         </div>
+                    </div>
+                </div>
+                <br>
+                <div class = "col-md-3 col-lg-3 col-sm-6">
+                    <div class = "ft__widget">
                         <div class = "footer-address">
                             <ul>
                                 <li>
@@ -46,7 +51,7 @@
                     </div>
                 </div>
                 <!-- Start Single Footer Widget -->
-                <div class = "col-md-3 col-lg-3 col-lg-offset-1 col-sm-6 smt-30 xmt-30">
+                {{--<div class = "col-md-3 col-lg-3 col-lg-offset-1 col-sm-6 smt-30 xmt-30">
                     <div class = "ft__widget">
                         <h2 class = "ft__title">Newsletter</h2>
                         <div class = "newsletter__form">
@@ -77,7 +82,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--}}
                 <!-- End Single Footer Widget -->
             </div>
         </div>
@@ -87,7 +92,7 @@
                 <div class = "col-md-12 col-lg-12 col-sm-12 col-xs-12">
                     <div class = "copyright__inner">
                         <div class = "copyright">
-                            <p>© 2018 <a href = "#">Bublik.com</a>
+                            <p>© 2018 Bublik.com</a>
                                All Right Reserved.</p>
                         </div>
                     </div>
