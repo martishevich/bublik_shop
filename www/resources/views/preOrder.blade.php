@@ -66,10 +66,11 @@
                             </div>
                             <div class="col-md-5 col-sm-5 col-xs-5">
                             <ul style="text-align: left; color: green;">
-                                <li>FullName</li>
-                                <li>PhoneNumber</li>
-                                <li>Email</li>
-                                <li>Adress</li>
+                                <li>FullName:</li>
+                                <li>PhoneNumber:</li>
+                                <li>Email:</li>
+                                <li>Adress:</li>
+                                <li>Comment:</li>
                             </ul>
                             </div>
                         </div>
@@ -81,6 +82,7 @@
                             <li><?php echo $post['phonenumber'] ?></li>
                             <li><?php echo $post['email'] ?></li>
                             <li><?php echo $post['adress'] ?></li>
+                            <li><?php echo $post['comment']?></li>
 
                         </ul>
                         <br><br> <br><br>

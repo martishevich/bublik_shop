@@ -17,8 +17,10 @@ class AddToOrderController extends Controller
         $request->session()->forget('cart');
     }
 
-    public function viewOrder()
+    public function viewOrder(Request $request)
     {
+        $request->session()->forget(['counter','cart']);
+
         if (isset($_POST['goback'])) {
             return redirect('Cardshop');
         }
