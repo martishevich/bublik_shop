@@ -57,5 +57,10 @@ Route::match(['get','post'],'categories/{id}','CategoriesController@ShowCategori
 
 Route::match(['get', 'post'], '/product_details/{id}', 'ProductDetailsController@productdetails');
 
-
 Route::post('mailing','PostController@SendNewsletter');
+
+Route::get('status','Admin\StatusOrderController@index');
+
+Route::post('payment','Admin\StatusPaymentController@index');
+
+

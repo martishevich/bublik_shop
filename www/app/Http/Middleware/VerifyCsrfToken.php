@@ -12,6 +12,8 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        //
+        'http://localhost/api/',
+        'http://localhost/payment',
+        'http://localhost/status'
     ];
 }
