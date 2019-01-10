@@ -13,4 +13,4 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('payment', 'API\PaymentController@callBank');
+Route::post('answer_from_bank', 'API\PaymentController@callBank');

@@ -59,8 +59,8 @@ Route::match(['get', 'post'], '/product_details/{id}', 'ProductDetailsController
 
 Route::post('mailing','PostController@SendNewsletter');
 
-Route::get('status','Admin\StatusOrderController@index');
-
-Route::post('payment','Admin\StatusPaymentController@index');
+Route::get('answer', function () {
+    return view('posts.answer');
+});
 
 

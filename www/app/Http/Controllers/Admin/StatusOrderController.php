@@ -11,16 +11,6 @@ class StatusOrderController extends Controller
 
     public function index()
     {
-        $client   = new Client(['base_url' => 'http://localhost']);
-        $data     = [
-            'form_params' => [
-                'name' => 'Slavik',
-                'tag'  => 'tapok'
-            ]
-        ];
-        $responce = $client->request('POST',
-            'http://localhost/payment',
-            $data);
-        echo $responce->getBody();
+        //
     }
 }

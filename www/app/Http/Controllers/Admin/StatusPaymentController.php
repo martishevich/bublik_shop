@@ -9,6 +9,6 @@ class StatusPaymentController extends Controller
 {
     public function index()
     {
-        dd($_POST);
+        //
     }
 }
