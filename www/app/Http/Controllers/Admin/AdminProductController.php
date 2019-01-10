@@ -7,6 +7,7 @@ use App\Categories;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductValidation;
+use Intervention\Image\Facades\Image;
 
 class AdminProductController extends Controller
 {
@@ -14,6 +15,9 @@ class AdminProductController extends Controller
     public function index()
     {
         $allProd = Product::orderBy('id', 'DESK')->paginate(50);
+        Image::make('images/Products/prod1.jpg')
+            ->resize(100, 100)
+            ->save('images/Products/bar.jpg', 60);
         return view('admin.admin_prod', compact('allProd'));
     }
 
@@ -33,7 +37,7 @@ class AdminProductController extends Controller
             case $_SERVER['SERVER_NAME'].'/home/products/create':
                 Product::insertDB($request);
                 return redirect('home/products/create')->with('is_add', 'true');
-            case $_SERVER['SERVER_NAME'].'/home/products/edit/$id':
+            case $_SERVER['SERVER_NAME']."/home/products/edit/$id":
                 Product::updateDB($request, $id);
                 return redirect('home/products')->with('is_edit', 'true');
             default:
