@@ -23,7 +23,7 @@ class AdminProductController extends Controller
 
     public function create()
     {
-    	
+        print_r($_FILES);
         $is_add = session('is_add');
         $allCat = Categories::orderBy('position')
             ->get();
@@ -32,6 +32,7 @@ class AdminProductController extends Controller
 
     public function save(ProductValidation $request, $id = false)
     {
+        print_r($_FILES);
         $referer = $_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
         switch ($referer) {
             case $_SERVER['SERVER_NAME'].'/home/products/create':
