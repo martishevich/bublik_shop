@@ -31,7 +31,7 @@ class ProductValidation extends FormRequest
             'is_active'   => 'required|boolean',
             'description' => 'required|max:4000',
             'short_disc'  => 'required|max:255',
-            'image'       => ''
+            'image'       => 'mimes:jpeg,png,jpg'
         ];
     }
 
@@ -41,6 +41,7 @@ class ProductValidation extends FormRequest
             'required'           => 'Just do it! The :attribute field is required!',
             'category_id.exists' => 'Hmmm... This category was not found!',
             'price.regex'        => 'I want digit between 0.01 and 99999999999999.99',
+            'image.mimes'        => 'I can use only jpeg/jpg or png formats less than 8Mb!'
         ];
     }
 }

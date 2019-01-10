@@ -92,6 +92,9 @@
                                   name = "short_disc"
                                   class = "message">{{ old('short_disc') }}</textarea>
                         <br>
+	                    <?php foreach ($errors->get('image') as $message):?>
+                        <p class = "text-danger"><?= $message ?></p>
+	                    <?php endforeach; ?>
                         <label class = "btn btn-default">
                             <i class = "fas fa-download"></i>
                             open image...<input type = "file"
