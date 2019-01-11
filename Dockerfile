@@ -4,7 +4,7 @@ RUN apt-get update
 RUN docker-php-ext-install pdo_mysql
 RUN apt-get install zlib1g-dev
 RUN docker-php-ext-install zip
-RUN apt-get install unzip
+RUN apt-get install unzip nano
 
 RUN apt-get install -y sendmail
 
@@ -31,3 +31,5 @@ COPY php-entrypoint.sh /var/php-entrypoint.sh
 RUN chmod 0777 -R /var/php-entrypoint.sh
 
 #ENTRYPOINT ["sh", "/var/php-entrypoint.sh"]
+
+#CMD ['php-apache']

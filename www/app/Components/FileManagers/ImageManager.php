@@ -9,14 +9,15 @@ class ImageManager
 {
 	public static function createImageProduct($request, $id)
 	{
-		$directory = "images/products/$id/";
-		$image = $request->file('image');
+		$directory = "images/products/$id";
+		$image = file_get_contents($request->file('image'));
+		dd(readfile($image));
 		
 		if (file_exists($directory)){
 			rmdir($directory);
 		}
 		//проверить изначальный размер
-		if (!mkdir($directory, 0777, true)) {
+		if (!mkdir($directory, 0777)) {
 			die('Не удалось создать директории...');
 		}
 		self::makeImageSize($request, 150, 150, $id);
@@ -41,5 +42,6 @@ class ImageManager
 		Image::make($request->file('image'))
 			->resize($width, $height)
 			->save('images/products/'.$id.'/'.$id.$prefix.'.jpg', 60);
+		chmod('images/products/'.$id.'/'.$id.$prefix.'.jpg', 0777);
 	}
 }
