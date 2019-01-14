@@ -6,8 +6,21 @@ RUN apt-get install zlib1g-dev
 RUN docker-php-ext-install zip
 RUN apt-get install unzip
 
-RUN apt-get update -y && apt-get install -y sendmail libpng-dev
+RUN apt-get install -y sendmail
+
+RUN apt-get install -y libpng-dev libjpeg-dev
+
+RUN docker-php-ext-configure gd \
+    --with-png-dir=/usr/lib/ \
+    --with-jpeg-dir=/usr/lib/ \
+    --with-gd
+
 RUN docker-php-ext-install gd
+
+RUN apt-get install -y \
+    libmagickwand-dev --no-install-recommends \
+    && pecl install imagick \
+	&& docker-php-ext-enable imagick
 
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug

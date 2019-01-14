@@ -125,33 +125,36 @@
                                         <div class="product__inner">
                                             <div class="pro__thumb">
                                                 <a href="#">
-                                                    <img src="images/Products/prod1.jpg" alt="product images">
+                                                    <img src="images/products/<?php echo $v->id?>/<?php echo $v->id?>_s.jpg" alt="product images">
                                                 </a>
                                             </div>
                                             <div class="product__hover__info">
                                                 <ul class="product__action">
-                                                    <li><a data-toggle="modal" data-target="#productModal"
-                                                           title="Quick View" class="quick-view modal-view detail-link"
-                                                           href="#"><span class="ti-plus"></span></a></li>
                                                     <li>
-                                                        <form action="/" method="post">
-
+                                                        <form action="/" method="post" >
                                                             <input type="hidden" name="prodid" value="<?php echo $n ?>">
-                                                            <input type="submit" class="btn btn-dark btn-sm"
-                                                                   value="Basket">
-
-                                                            <input type="hidden" name="_token"
-                                                                   value="{{ csrf_token() }}">
+                                                            <button class="ti-shopping-cart btn btn-light"></button>
+                                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                         </form>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
-
                                         <div class="product__details">
-                                            <h2><a href="product-details.html"><?php echo $v->name ?></a></h2>
-                                            <h2><?php echo $v->short_disc ?></h2>
-                                            <span><?php echo $v->price ?></span>
+                                            <a href="/product_details/<?php echo $v->id ?>" role="button">
+                                                <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: green; font-size: 16px; text-transform: capitalize;">
+                                                    <?php echo $v->name ?>
+                                                </p>
+
+                                                <p style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis; font-size: 12px">
+                                                    <?php echo $v->short_disc ?>
+                                                </p>
+
+                                                <p style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis; color: red;">
+                                                    <?php echo $v->price ?>
+                                                </p>
+                                            </a>
+
                                         </div>
                                     </div>
                                 </div>

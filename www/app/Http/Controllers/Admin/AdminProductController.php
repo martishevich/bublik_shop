@@ -7,6 +7,7 @@ use App\Categories;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductValidation;
+use Intervention\Image\Facades\Image;
 
 class AdminProductController extends Controller
 {
@@ -14,6 +15,9 @@ class AdminProductController extends Controller
     public function index()
     {
         $allProd = Product::orderBy('id', 'DESK')->paginate(50);
+        Image::make('images/pproducts/1_m.jpg')
+            ->resize(100, 100)
+            ->save('images/pproducts/bar.jpg', 60);
         return view('admin.admin_prod', compact('allProd'));
     }
 
