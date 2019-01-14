@@ -7,7 +7,7 @@
     <div class="offset__wrapper">
         <!-- Start Search Popap -->
         <div class="search__inner">
-     
+
         </div>
         <!-- End Search Popap -->
         <!-- Start Offset MEnu -->
@@ -109,7 +109,7 @@
                                     <div class="product__inner">
                                         <div class="pro__thumb">
                                             <a href="/product_details/<?php echo $v->id ?>" role="button">
-                                                <img src="images/Products/prod1.jpg" alt="product images">
+                                                <img src="images/products/<?php echo $v->id?>/<?php echo $v->id?>_s.jpg" alt="product images">
                                             </a>
                                         </div>
                                         <div class="product__hover__info">
@@ -129,31 +129,31 @@
                                                     <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: green; font-size: 16px; text-transform: capitalize;">
                                                     <?php echo $v->name ?>
                                                     </p>
-                                                
+
                                                     <p style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis; font-size: 12px">
                                                     <?php echo $v->short_disc ?>
                                                     </p>
-                                                
+
                                                     <p style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis; color: red;">
                                                     <?php echo $v->price ?>
                                                     </p>
-                                                  
+
                                         </a>
                                     </div>
                                 </div>
-                            
+
                             </div>
                             <?php endforeach; ?>
                             <!-- End Single Product -->
                         </div>
                         <div align="center">{{$product->links()}}</div>
-                    </div> 
+                    </div>
             </div>
         </div>
     </div>
 
 
-    
+
     <!-- End Feature Product -->
 
 @endsection

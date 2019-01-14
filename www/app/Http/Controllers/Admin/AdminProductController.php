@@ -15,9 +15,9 @@ class AdminProductController extends Controller
     public function index()
     {
         $allProd = Product::orderBy('id', 'DESK')->paginate(50);
-        Image::make('images/Products/prod1.jpg')
+        Image::make('images/pproducts/1_m.jpg')
             ->resize(100, 100)
-            ->save('images/Products/bar.jpg', 60);
+            ->save('images/pproducts/bar.jpg', 60);
         return view('admin.admin_prod', compact('allProd'));
     }
 

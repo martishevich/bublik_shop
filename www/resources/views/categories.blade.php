@@ -125,7 +125,7 @@
                                         <div class="product__inner">
                                             <div class="pro__thumb">
                                                 <a href="#">
-                                                    <img src="images/Products/prod1.jpg" alt="product images">
+                                                    <img src="images/products/<?php echo $v->id?>/<?php echo $v->id?>_s.jpg" alt="product images">
                                                 </a>
                                             </div>
                                             <div class="product__hover__info">
