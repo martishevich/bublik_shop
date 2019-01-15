@@ -28,7 +28,7 @@ RUN pecl install xdebug \
 RUN a2enmod rewrite
 
 COPY php-entrypoint.sh /var/php-entrypoint.sh
-RUN chmod 0777 -R /var/php-entrypoint.sh
+RUN chmod 0777 -R /var/php-entrypoint.sh && usermod -u 1000 www-data
 
 #ENTRYPOINT ["sh", "/var/php-entrypoint.sh"]
 
