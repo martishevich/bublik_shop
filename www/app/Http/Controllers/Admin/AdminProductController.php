@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Components\FileManagers\ImageProducts;
 use App\Http\Controllers\Controller;
 use App\Categories;
 use App\Product;
@@ -38,10 +39,12 @@ class AdminProductController extends Controller
 		$referer = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 		switch ($referer){
 			case $_SERVER['SERVER_NAME'] . '/home/products/create':
-				Product::insertDB($request);
+				$id = Product::insertDB($request);
+				(new ImageProducts($request, $id))->createImages();
 				return redirect('home/products/create')->with('is_add', 'true');
 			case $_SERVER['SERVER_NAME'] . "/home/products/edit/$id":
 				Product::updateDB($request, $id);
+				(new ImageProducts($request, $id))->createImages();
 				return redirect('home/products')->with('is_edit', 'true');
 			default:
 				return redirect('home/products/create')->with('is_add', 'false');

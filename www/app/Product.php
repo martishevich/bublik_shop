@@ -24,9 +24,7 @@ class Product extends Model
 			'price'       => trim(preg_replace("~  +~", " ", $request->input('price'))),
 			'is_active'   => trim(preg_replace("~  +~", " ", $request->input('is_active'))),
 		]);
-		if ($request->hasFile('image')){
-			ImageManager::createImageProduct($request, $id);
-		}
+		return $id;
 	}
 	
 	public static function updateDB($request, $id)
@@ -40,9 +38,7 @@ class Product extends Model
 				'price'       => trim(preg_replace("~  +~", " ", $request->input('price'))),
 				'is_active'   => trim(preg_replace("~  +~", " ", $request->input('is_active')))
 			]);
-		if ($request->hasFile('image')){
-			ImageManager::createImageProduct($request, $id);
-		}
+		return $id;
 	}
 	
 	public static function delDB($id)
