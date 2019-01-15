@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
+use App\Components\FileManagers\ImageManager;
 
 class Product extends Model
 {
@@ -15,7 +16,7 @@ class Product extends Model
 	
 	public static function insertDB($request)
 	{
-		DB::table('products')->insert([
+		$id = DB::table('products')->insertGetId([
 			'category_id' => trim(preg_replace("~  +~", " ", $request->input('category_id'))),
 			'name'        => trim(preg_replace("~  +~", " ", $request->input('name'))),
 			'description' => trim(preg_replace("~  +~", " ", $request->input('description'))),
@@ -23,6 +24,7 @@ class Product extends Model
 			'price'       => trim(preg_replace("~  +~", " ", $request->input('price'))),
 			'is_active'   => trim(preg_replace("~  +~", " ", $request->input('is_active'))),
 		]);
+		return $id;
 	}
 	
 	public static function updateDB($request, $id)
@@ -36,6 +38,7 @@ class Product extends Model
 				'price'       => trim(preg_replace("~  +~", " ", $request->input('price'))),
 				'is_active'   => trim(preg_replace("~  +~", " ", $request->input('is_active')))
 			]);
+		return $id;
 	}
 	
 	public static function delDB($id)

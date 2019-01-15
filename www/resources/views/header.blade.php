@@ -4,7 +4,7 @@
     <div id="sticky-header-with-topbar" class="mainmenu__area sticky__header">
         <div class="container">
             <div class="row">
-                <div class="col-md-2 col-lg-2 col-sm-3 col-xs-3">
+                <div class="col-md-2 col-lg-2 col-sm-3 col-xs-3 col-12">
                     <div class="logo">
                         <a href="/">
                             <img src="images/logo/logo.png" alt="logo">
@@ -24,6 +24,11 @@
                     <div class="mobile-menu clearfix visible-xs visible-sm">
                         <nav id="mobile_dropdown">
                             <ul>
+                                <li>@if (Route::has('login'))
+                                            @auth
+                                                <a href="{{ url('/home') }}">Cabinet</a>
+                                            @endauth
+                                    @endif</li>
                                 <li><a href="/">Shop</a></li>
                                 <li><a href="/about">About us</a></li>
                                 <li><a href="/contact">Contact</a></li>
@@ -32,25 +37,14 @@
                     </div>
                 </div>
                 <!-- End MAinmenu Ares -->
-                <div class="col-md-2 col-sm-4 col-xs-3">
+                <div class="col-md-2 col-sm-4 col-xs-3 col-12">
                     <ul class="menu-extra">
-                        {{--<li class="search search__open hidden-xs"><span class="ti-search"></span></li>--}}
-                        <li>@if (Route::has('login'))
-                                <div class="top-right links">
+                        <li class="hidden-xs hidden-sm">@if (Route::has('login'))
                                     @auth
                                         <a href="{{ url('/home') }}">Cabinet</a>
-                                    @else
-                                        <a href="{{ route('login') }}">Login</a>
-
-                                        @if (Route::has('register'))
-                                            <a href="{{ route('register') }}">Register</a>
-                                        @endif
                                     @endauth
-                                </div>
                             @endif</li>
                             <li><a title="Add TO Cart" href="/Cardshop"><span style="color: red;" class="ti-shopping-cart">{{ session('counter') }}</span></a></li>
-                            
-                        {{--<li class="toggle__menu hidden-xs hidden-sm"><span class="ti-menu"></span></li>--}}
                     </ul>
                 </div>
             </div>

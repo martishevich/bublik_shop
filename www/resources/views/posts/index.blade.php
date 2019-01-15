@@ -8,7 +8,6 @@
         <!-- Start Search Popap -->
         <div class="search__inner">
 
-            
         </div>
         <!-- End Search Popap -->
         <!-- Start Offset MEnu -->
@@ -81,11 +80,9 @@
     </div>
     <!-- End Offset Wrapper -->
     <!-- Start Feature Product -->
-    <section class="categories-slider-area bg__white">
-        <div class="container">
-            <div class="row">
-                <div class="container">
-                    <div class="col-md-3 col-lg-3 col-sm-4 col-xs-12">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-lg-3 col-sm-4 col-xs-12">
                         <div class="categories-menu mrg-xs">
                             <div class="category-heading">
                                 <h3>Categories</h3>
@@ -100,20 +97,19 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
-                    <!-- End Left Feature -->
-                    <!-- Start Single Product -->
-                    <div class="col-md-9 col-lg-9 col-sm-8 col-xs-12 row justify-content">
+            </div>
+            <div class="col-md-9 col-lg-9 col-sm-8 col-xs-12 ">
+                <div class="htc__product__container">
                         <div class="product__list another-product-style">
 
                             <?php foreach ($product as $k => $v): ?>
                             <?php $n = $v->id; ?>
-                            <div class="col-md-3 col-lg-3 col-sm-8 col-xs-12 no-gutters row justify-content">
+                            <div class="col-md-3 single__pro col-lg-3 cat--1 col-sm-4 col-xs-12">
                                 <div class="product foo">
                                     <div class="product__inner">
                                         <div class="pro__thumb">
                                             <a href="/product_details/<?php echo $v->id ?>" role="button">
-                                                <img src="images/Products/prod1.jpg" alt="product images">
+                                                <img src="images/products/<?php echo $v->id?>/<?php echo $v->id?>_s.jpg" alt="product images">
                                             </a>
                                         </div>
                                         <div class="product__hover__info">
@@ -130,23 +126,34 @@
                                     </div>
                                     <div class="product__details">
                                         <a href="/product_details/<?php echo $v->id ?>" role="button">
-                                        <h2><?php echo $v->name ?></h2>
-                                        <h2><?php echo $v->short_disc ?></h2>
-                                        <h2><?php echo $v->price ?></h2>
+                                                    <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: green; font-size: 16px; text-transform: capitalize;">
+                                                    <?php echo $v->name ?>
+                                                    </p>
+
+                                                    <p style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis; font-size: 12px">
+                                                    <?php echo $v->short_disc ?>
+                                                    </p>
+
+                                                    <p style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis; color: red;">
+                                                    <?php echo $v->price ?>
+                                                    </p>
+
                                         </a>
                                     </div>
                                 </div>
-                            
+
                             </div>
                             <?php endforeach; ?>
                             <!-- End Single Product -->
                         </div>
                         <div align="center">{{$product->links()}}</div>
                     </div>
-                </div>
             </div>
-        </div>  
-    </section>
+        </div>
+    </div>
+
+
+
     <!-- End Feature Product -->
 
 @endsection

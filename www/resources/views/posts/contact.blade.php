@@ -15,7 +15,7 @@
                                         <span class="ti-mobile"></span>
                                     </div>
                                     <div class="contact__details">
-                                        <p> Phone : <br><a href="tel:+375292044640">+375 (29) 2044640 (MTC)</a></p>
+                                        <p> Phone : <br><a href="tel:+375292044640">+375 (29) 204-46-40 (MTC)</a></p>
                                     </div>
                                 </div>
                                 <!-- End Single Adress -->

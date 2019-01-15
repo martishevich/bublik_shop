@@ -4,7 +4,6 @@ namespace App\Components\Filters;
 
 abstract class QueryFilter
 {
-
     protected $builder;
     protected $request;
 
