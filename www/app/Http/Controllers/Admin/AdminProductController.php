@@ -36,6 +36,7 @@ class AdminProductController extends Controller
 	
 	public function save(ProductValidation $request, $id = false)
 	{
+		/*todo переделать на проверку (есть ли товар с таким id в базе +софтделете) если есть то обновить, если нет до добавить. Переделать, что создание картинки будет только если в запросе есть картинка*/
 		$referer = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 		switch ($referer){
 			case $_SERVER['SERVER_NAME'] . '/home/products/create':
