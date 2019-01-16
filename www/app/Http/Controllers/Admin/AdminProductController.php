@@ -8,7 +8,6 @@ use App\Categories;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductValidation;
-use App\Components\FileManagers\ImageManager;
 
 class AdminProductController extends Controller
 {

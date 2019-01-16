@@ -5,6 +5,7 @@ namespace App\Components\FileManagers;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Illuminate\Http\Request;
 
 abstract class ImageManager
 {
@@ -15,7 +16,7 @@ abstract class ImageManager
     protected $sizeW;
     protected $type = 'jpg';
 
-    public function __construct($request, $id)
+    public function __construct(Request $request, $id)
     {
         $this->id    = $id;
         $this->image = Image::make($request->file('image'));
@@ -28,7 +29,7 @@ abstract class ImageManager
         $this->createDeleteDirectory();
         $image_raw = $this->image;
         $image_raw->save($this->saveDirectory . $this->id . '_raw.' . $this->type);
-        $sizes = array_reverse($this->getPossibleSizes($this::SIZES));
+        $sizes = array_reverse($this::SIZES);
         array_walk($sizes, function ($v, $k) {
             if ($this->sizeH > $this->sizeW) {
                 $this->image
