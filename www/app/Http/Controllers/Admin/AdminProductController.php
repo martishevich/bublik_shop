@@ -7,9 +7,7 @@ use App\Categories;
 use App\Product;
 use App\Http\Requests\ProductValidation;
 use Illuminate\Support\Facades\Request;
-use Intervention\Image\Facades\Image;
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Request as Req;
 
 
 
@@ -18,17 +16,7 @@ class AdminProductController extends Controller
 
     public function index(Request $request)
     {
-        $client = new Client();
-        $responce = $client->request(
-            'POST',
-            'http://localhost/home/products', ['jsjs' => 'try']);
-        dd($request);
-        $data = json_decode($responce->getBody(), true);
-        print_r($data);
         $allProd = Product::orderBy('id', 'DESK')->paginate(50);
-//        Image::make('images/Products/prod1.jpg')
-//            ->resize(100, 100)
-//            ->save('images/Products/bar.jpg', 60);
         return view('admin.admin_prod', compact('allProd'));
     }
 
