@@ -23,7 +23,8 @@
                         </div>
                     @endif
                     <br>
-                    <form id = "form-ins"
+                    <form enctype = "multipart/form-data"
+                          id = "form-ins"
                           method = "post"
                           action = "/home/products/edit/<?php echo $prod->id ?>">
                         @csrf
@@ -92,6 +93,15 @@
                                   class = "message"
                                   required><?= $prod->short_disc ?></textarea>
                         <br>
+                        <?php foreach ($errors->get('image') as $message):?>
+                        <p class = "text-danger"><?= $message ?></p>
+                        <?php endforeach; ?>
+                        <label class = "btn btn-default">
+                            <i class = "fas fa-download"></i>
+                            open image...<input type = "file"
+                                                name = "image"
+                                                hidden>
+                        </label>
                         <input type = "submit"
                                name = "submit"
                                class = "btn btn-warning"

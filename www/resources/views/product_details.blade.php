@@ -1,5 +1,4 @@
 @extends('layout')
-
 @section('content')
 
 <!-- Start Product Details -->
@@ -10,7 +9,7 @@
                     <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
                         <div class="product__details__container product-details-5">
                             <div class="scroll-single-product mb--30">
-                                <img src="images/Products/prod1.jpg" alt="full-image">
+                                <img src="images/products/<?php echo $prodDet["id"]?>/<?php echo $prodDet["id"]?>_m.jpg" alt="full-image">
                             </div>
                             <div class="scroll-single-product mb--30">
                                 <img src="images/Products/prod1.jpg" alt="full-image">

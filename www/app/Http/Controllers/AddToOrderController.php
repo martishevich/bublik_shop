@@ -6,9 +6,7 @@ use App\Order;
 use PDF;
 use Mail;
 use Illuminate\Http\Request;
-use App\Product;
 use DB;
-use Carbon\Carbon;
 
 class AddToOrderController extends Controller
 {

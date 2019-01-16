@@ -399,7 +399,6 @@ ON o1.id = ss1.order_id')
 		$pdf  = \PDF::loadView('orderList', ['data' => $data, 'order' => $this])->setPaper('a4');
 		Mail::send('backEmail', ['order' => $this], function ($message) use ($pdf){
 			$message->from(Config::get('mail.username'), 'Bublic Shop');
-			/*todo Не забудь заменить адрес КОМУ письмо на $this->email*/
 			$message->to($this->email)->subject('Invoice');
 			$message->attachData($pdf->output(), "orderList.pdf");
 		});
