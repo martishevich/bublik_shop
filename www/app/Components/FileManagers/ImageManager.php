@@ -13,7 +13,7 @@ abstract class ImageManager
     protected $image;
     protected $sizeH;
     protected $sizeW;
-    protected $type;
+    protected $type = 'jpg';
 
     public function __construct($request, $id)
     {
@@ -21,7 +21,6 @@ abstract class ImageManager
         $this->image = Image::make($request->file('image'));
         $this->sizeH = $this->image->height();
         $this->sizeW = $this->image->width();
-        $this->type  = $request->image->extension();
     }
 
     public function createImages()
