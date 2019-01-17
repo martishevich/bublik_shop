@@ -12,7 +12,6 @@
                 </h2>
             </div>
         </div>
-
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-sm-12 col-xs-12">
