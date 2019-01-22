@@ -23,7 +23,7 @@ RUN apt-get install -y \
 	&& docker-php-ext-enable imagick
 
 RUN pecl install xdebug \
-    && docker-php-ext-enable xdebug
+    && docker-php-phpext-enable xdebug
 
 RUN a2enmod rewrite
 
