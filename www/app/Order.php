@@ -14,22 +14,22 @@ class Order extends Model
 	{
 		return $this->hasMany('App\OrderProd');
 	}
-	
+
 	public function orderData()
 	{
 		return $this->hasMany('App\OrderData');
 	}
-	
+
 	public function orderStatus()
 	{
 		return $this->hasMany('App\OrderStatus');
 	}
-	
+
 	public function getStatusName()
 	{
 		return StatusOrder::getNameStatus($this);
 	}
-	
+
 	public function getPaymentName()
 	{
 		return StatusPayment::getNamePayment($this);
@@ -64,7 +64,7 @@ class Order extends Model
 			->where('ss1.status_id', '<>', null)
 			->orderBy('o1.id', 'DESC');
 	}
-	
+
 	public static function getOrdHistory($id)
 	{
 		return static::query()
@@ -83,7 +83,22 @@ class Order extends Model
 			->orderBy('os.id', 'DESC')
 			->get();
 	}
-	
+
+    public static function getTotal($id)
+    {
+        return static::query()
+            ->select([
+                'o1.*',
+                'p1.total'
+            ])
+            ->fromRaw('orders AS o1
+				LEFT JOIN(SELECT order_id, SUM(price * quantity) total
+				FROM order_prods GROUP BY order_id) AS p1
+				ON  o1.id = p1.order_id')
+            ->whereRaw("p1.order_id = $id")
+            ->get();
+    }
+
 	/**
 	 * @param int $id
 	 * @return Order|null
@@ -130,7 +145,7 @@ ON o1.id = ss1.order_id')
 
 	}*/
 
-	
+
 	/**
 	 * @return \Illuminate\Database\Eloquent\Collection
 	 */
@@ -138,7 +153,7 @@ ON o1.id = ss1.order_id')
 	{
 		return OrderData::getListByOrder($this);
 	}
-	
+
 	public function checkAndSetStatus($massGet)
 	{
 		if ($massGet['status'] === 'boxing' && $this->canBoxing()){
@@ -163,7 +178,7 @@ ON o1.id = ss1.order_id')
 			$this->setPaid();
 		}
 	}
-	
+
 	public function canBoxing()
 	{
 		switch ($this->getStatusId()){
@@ -173,12 +188,12 @@ ON o1.id = ss1.order_id')
 		}
 		return false;
 	}
-	
+
 	public function getStatusId()
 	{
 		return $this->getStatus()->status_id;
 	}
-	
+
 	/**
 	 * @return OrderStatus|null
 	 */
@@ -186,7 +201,7 @@ ON o1.id = ss1.order_id')
 	{
 		return OrderStatus::getLastByOrder($this);
 	}
-	
+
 	public function setBoxing()
 	{
 		DB::table('order_statuses')
@@ -198,7 +213,7 @@ ON o1.id = ss1.order_id')
 				]
 			);
 	}
-	
+
 	public function canCollected()
 	{
 		switch ($this->getStatusId()){
@@ -207,7 +222,7 @@ ON o1.id = ss1.order_id')
 		}
 		return false;
 	}
-	
+
 	//Проверить на возможность установки статуса CANCEL
 
 	public function setCollected()
@@ -221,7 +236,7 @@ ON o1.id = ss1.order_id')
 				]
 			);
 	}
-	
+
 	public function canWaiting()
 	{
 		switch ($this->getStatusId()){
@@ -230,7 +245,7 @@ ON o1.id = ss1.order_id')
 		}
 		return false;
 	}
-	
+
 	public function setWaiting()
 	{
 		DB::table('order_statuses')
@@ -242,7 +257,7 @@ ON o1.id = ss1.order_id')
 				]
 			);
 	}
-	
+
 	public function canDelivering()
 	{
 		switch ($this->getStatusId()){
@@ -251,7 +266,7 @@ ON o1.id = ss1.order_id')
 		}
 		return false;
 	}
-	
+
 	public function setDelivering()
 	{
 		DB::table('order_statuses')
@@ -263,7 +278,7 @@ ON o1.id = ss1.order_id')
 				]
 			);
 	}
-	
+
 	public function canDelivered()
 	{
 		switch ($this->getStatusId()){
@@ -272,7 +287,7 @@ ON o1.id = ss1.order_id')
 		}
 		return false;
 	}
-	
+
 	public function setDelivered()
 	{
 		DB::table('order_statuses')
@@ -284,7 +299,7 @@ ON o1.id = ss1.order_id')
 				]
 			);
 	}
-	
+
 	public function canCancel()
 	{
 		switch ($this->getStatusId()){
@@ -299,7 +314,7 @@ ON o1.id = ss1.order_id')
 		}
 		return false;
 	}
-	
+
 	public function setCancel()
 	{
 		DB::table('order_statuses')
@@ -311,7 +326,7 @@ ON o1.id = ss1.order_id')
 				]
 			);
 	}
-	
+
 	public function canPaid()
 	{
 		switch ($this->getStatusId()){
@@ -330,12 +345,12 @@ ON o1.id = ss1.order_id')
 		}
 		return false;
 	}
-	
+
 	public function getPaymentId()
 	{
 		return $this->getPayment()->payment_id;
 	}
-	
+
 	/**
 	 * @return OrderStatus|null
 	 */
@@ -343,7 +358,7 @@ ON o1.id = ss1.order_id')
 	{
 		return OrderStatus::getLastByOrder($this);
 	}
-	
+
 	public function setPaid()
 	{
 		DB::table('order_statuses')
@@ -355,7 +370,7 @@ ON o1.id = ss1.order_id')
 				]
 			);
 	}
-	
+
 	public function canRebuild()
 	{
 		switch ($this->getStatusId()){
@@ -364,7 +379,7 @@ ON o1.id = ss1.order_id')
 		}
 		return false;
 	}
-	
+
 	public function setRebuild()
 	{
 		DB::table('order_statuses')
@@ -376,7 +391,7 @@ ON o1.id = ss1.order_id')
 				]
 			);
 	}
-	
+
 	public function canSendMail()
 	{
 		switch ($this->getStatusId()){
@@ -392,7 +407,7 @@ ON o1.id = ss1.order_id')
 		}
 		return false;
 	}
-	
+
 	public function sendMail()
 	{
 		$data = Order::getProds($this->id); // Все продукты заказа
@@ -403,7 +418,7 @@ ON o1.id = ss1.order_id')
 			$message->attachData($pdf->output(), "orderList.pdf");
 		});
 	}
-	
+
 	public static function getProds($id)
 	{
 		return static::query()
@@ -417,7 +432,7 @@ ON o1.id = ss1.order_id')
 			->whereRaw('op.order_id = ?', [$id])
 			->get();
 	}
-	
+
 	public static function filterAndPagination($request)
 	{
 		$pagination = (isset($_GET['filter']['pagination']) && (int) $_GET['filter']['pagination'] <= 50 && (int) $_GET['filter']['pagination'] > 0) ? (int) $_GET['filter']['pagination'] : 5;

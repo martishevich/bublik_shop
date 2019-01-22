@@ -6,8 +6,9 @@ use App\Components\FileManagers\ImageProducts;
 use App\Http\Controllers\Controller;
 use App\Categories;
 use App\Product;
-use Illuminate\Http\Request;
 use App\Http\Requests\ProductValidation;
+
+
 
 class AdminProductController extends Controller
 {
