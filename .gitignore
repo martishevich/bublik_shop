@@ -3,3 +3,5 @@ mariadb/
 .idea/
 
 www/\.env
+
+www/\.phpunit\.result\.cache
