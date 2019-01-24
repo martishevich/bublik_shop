@@ -21,13 +21,13 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth']], function (){
 
 	Route::match(['get', 'post'], '/home/products', 'AdminProductController@index');
 
-	Route::post('/home/products/create', 'AdminProductController@save');
+	Route::post('/home/products/create', 'AdminProductController@create_save');
 
 	Route::get('/home/products/create', 'AdminProductController@create');
 
     Route::get('/home/products/edit/{id}', 'AdminProductController@edit');
 
-    Route::post('/home/products/edit/{id}', 'AdminProductController@save');
+    Route::post('/home/products/edit/{id}', 'AdminProductController@edit_save');
 
 	Route::get('/home/products/delete/{id}', 'AdminProductController@destroy');
 

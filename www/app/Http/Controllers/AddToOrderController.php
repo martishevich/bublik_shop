@@ -26,11 +26,13 @@ class AddToOrderController extends Controller
         $order = Order::getById($id);
         $data  = Order::getProds($id)->toArray();
         $pdf   = PDF::loadView('orderList', compact('data', 'order'))->setPaper('a4');
-        Mail::send('backEmail', ['order' => $order], function ($message) use ($pdf, $order) {
-            $message->from('loliabombita@mail.ru', 'Bublic Shop');
-            $message->to($order->email)->subject('Invoice');
-            $message->attachData($pdf->output(), "orderList.pdf");
-        });
+        Mail::send(
+            'backEmail', ['order' => $order], function ($message) use ($pdf, $order) {
+                $message->from('loliabombita@mail.ru', 'Bublic Shop');
+                $message->to($order->email)->subject('Invoice');
+                $message->attachData($pdf->output(), "orderList.pdf");
+            }
+        );
         return view('add_success', ['order'=>$order]);
     }
 }

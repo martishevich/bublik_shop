@@ -6,26 +6,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class StatusOrder extends Model
 {
-	const STATUS_PROCESSING     = 1;
-	const STATUS_REBUILD        = 2;
-	const STATUS_BOXING         = 3;
-	const STATUS_COLLECTED      = 4;
-	const STATUS_WAIT_FOR_DELIV = 5;
-	const STATUS_DELIVERING     = 6;
-	const STATUS_DELIVERED      = 7;
-	const STATUS_CANCEL         = 8;
-	
-	public static function getNameStatus(Order $order): ?self
-	{
-		return static::query()
-			->where(['id' => $order->getStatusId()])
-			->get()
-			->first();
-	}
+    const STATUS_PROCESSING     = 1;
+    const STATUS_REBUILD        = 2;
+    const STATUS_BOXING         = 3;
+    const STATUS_COLLECTED      = 4;
+    const STATUS_WAIT_FOR_DELIV = 5;
+    const STATUS_DELIVERING     = 6;
+    const STATUS_DELIVERED      = 7;
+    const STATUS_CANCEL         = 8;
+    
+    public static function getNameStatus(Order $order): ?self
+    {
+        return static::query()
+            ->where(['id' => $order->getStatusId()])
+            ->get()
+            ->first();
+    }
 
-	
-	public function orderStatus()
-	{
-		return $this->hasMany('App\OrderStatus');
-	}
+    
+    public function orderStatus()
+    {
+        return $this->hasMany('App\OrderStatus');
+    }
 }

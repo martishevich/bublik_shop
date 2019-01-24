@@ -9,13 +9,13 @@ class Basketmiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure                 $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        if ($request->session()->has('cart')){
+        if ($request->session()->has('cart')) {
             $counter = count($request->session()->get('cart', '0'));
             $request->session()->put('counter', $counter);
         }

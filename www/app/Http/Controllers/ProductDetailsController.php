@@ -22,12 +22,12 @@ class ProductDetailsController extends Controller
         $prodDet = $productdetails[$id];
         $product = Product::getByIds($id);
         $quantity = 1;
-        if (isset($_POST['ADD'])){
+        if (isset($_POST['ADD'])) {
             $validator = Validator::make($_POST, ['quantity' => 'digits_between:1,100']);
-            if ($validator->fails()){
+            if ($validator->fails()) {
                 $quantity = 1;
             }
-            if ($validator->passes()){
+            if ($validator->passes()) {
                 $quantity = $_POST['quantity'];
                 $count = session()->get('cart.' . $product->getKey(), 0);
                 session()->put(

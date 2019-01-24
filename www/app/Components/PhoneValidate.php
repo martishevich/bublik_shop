@@ -17,18 +17,18 @@ class PhoneValidate
         $phone = str_split($phone);
         $new_phone = '';
         foreach ($phone as $val){
-            if (in_array($val, $numbers)){
+            if (in_array($val, $numbers)) {
                 $new_phone .=$val;
             }
         }
 
-        if(strlen($new_phone)==12){
+        if(strlen($new_phone)==12) {
             $new_phone = substr($new_phone, 3, 9);
         }
-        if(strlen($new_phone)==13){
+        if(strlen($new_phone)==13) {
             $new_phone = substr($new_phone, 4, 9);
         }
-        if(strlen($new_phone)==11){
+        if(strlen($new_phone)==11) {
             $new_phone = substr($new_phone, 2, 9);
         }
 
