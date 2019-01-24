@@ -12,6 +12,6 @@ class CategoriesController extends Controller
         $catTitle = Categories::orderBy('position')
             ->get();
         $categories = Categories::GetCategories($id);
-        return view('categories',['catTitle' => $catTitle, 'categories' => $categories,'id' => $id]);
+        return view('categories', ['catTitle' => $catTitle, 'categories' => $categories,'id' => $id]);
     }
 }

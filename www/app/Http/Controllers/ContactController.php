@@ -22,20 +22,24 @@ class ContactController extends Controller
 
     public function add_contact(CreateContactRequest $request)
     {
-        $validatedata = $request->validate([
+        $validatedata = $request->validate(
+            [
             'name'    => 'required|between:3,64',
             'email'   => 'required|email',
             'phone'   => 'required|integer',
             'subject' => 'required|max:255',
             'message' => 'required|max:4000'
-        ]);
+            ]
+        );
         $phone = $validatedata['phone'];
         $validatedata['phone'] = PhoneValidate::FilterPhone($phone);
         DB::table('contacts')->insert($validatedata);
-        Mail::send('mail', $validatedata, function ($message) use ($validatedata) {
-            $message->to($validatedata['email'])->subject('Test mail');
-            $message->from('loliabombita@mail.ru', 'Web deb blog');
-        });
+        Mail::send(
+            'mail', $validatedata, function ($message) use ($validatedata) {
+                $message->to($validatedata['email'])->subject('Test mail');
+                $message->from('loliabombita@mail.ru', 'Web deb blog');
+            }
+        );
         if (count(Mail::failures()) > 0) {
             return view('posts.contact');
         } else {

@@ -16,15 +16,17 @@ class PaymentController extends Controller
                 'tag'  => 'tapok'
             ]
         ];
-        $responce = $client->request('POST',
+        $responce = $client->request(
+            'POST',
             'http://localhost/payment',
-            $data);
+            $data
+        );
         echo $responce->getBody();
-//        return response()->json(
-//            ['error' => 'You can only edit your own books.' . $request->post('ggg')],
-//            200
-//
-//        );
+        //        return response()->json(
+        //            ['error' => 'You can only edit your own books.' . $request->post('ggg')],
+        //            200
+        //
+        //        );
 
     }
 }

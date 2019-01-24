@@ -16,5 +16,7 @@ docker-prune:
 composer-update:
 	php composer.phar update
 
-test:
-	./vendor/bin/phpunit
+tests:
+	vendor/bin/phpunit
+	vendor/bin/phpcs app
+	vendor/bin/phpcbf app

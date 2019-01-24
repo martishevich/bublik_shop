@@ -25,7 +25,6 @@ class PostsController extends Controller
             $request->session()->put(
                 'cart.' . $product->getKey(),
                 $count + 1
-                
             );
             $counter = count($request->session()->get('cart', '0'));
             $request->session()->put('counter', $counter);
@@ -37,13 +36,16 @@ class PostsController extends Controller
         $product  = DB::table('products')->paginate(12);
         return view('posts.index', ['catTitle' => $catTitle, 'product' => $product]);
     }
-    public function SendNewsletter(){
+    public function SendNewsletter()
+    {
         $email = $_POST['email'];
         Newsletter::AddEmail($email);
-        Mail::send('mail', function ($message) {
-            $message->to('loliabombita@mail.ru', 'To web dev blog')->subject('Test mail');
-            $message->from('loliabombita@mail.ru', 'Web deb blog');
-        });
+        Mail::send(
+            'mail', function ($message) {
+                $message->to('loliabombita@mail.ru', 'To web dev blog')->subject('Test mail');
+                $message->from('loliabombita@mail.ru', 'Web deb blog');
+            }
+        );
         if (count(Mail::failures()) > 0) {
             return view('posts.i');
         } else {

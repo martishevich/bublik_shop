@@ -26,13 +26,15 @@ class OrderCreateController extends Controller
 
         //Update Cart
 
-        if (isset($_POST['Update'])){
+        if (isset($_POST['Update'])) {
             foreach(session('cart') as $k => $v ){
                 $inputNumber = $_POST['quantity'.$k];
                 $validator = Validator::make($request->all(), ['quantity'.$k => 'digits_between:1,1000']);
-                if ($validator->fails()) {$inputNumber = $request->session()->get('cart.'.$k);};
-                if ($validator->passes()) {$inputNumber = $_POST['quantity'.$k];};
-                if ($inputNumber > 0){ 
+                if ($validator->fails()) {$inputNumber = $request->session()->get('cart.'.$k);
+                };
+                if ($validator->passes()) {$inputNumber = $_POST['quantity'.$k];
+                };
+                if ($inputNumber > 0) { 
                     $request->session()->put('cart.'.$k, $inputNumber);
                 }
                 /*else {
@@ -61,23 +63,24 @@ class OrderCreateController extends Controller
 
                 $post = $_POST;
 
-                $validator = Validator::make($request->all(), [
+                $validator = Validator::make(
+                    $request->all(), [
                     'fullname'    => 'required|max:80',
                     'phonenumber' => 'required|regex:/[()"+"-"0-9]/',
                     'email'       => 'required|email|max:150',
                     'adress'      => 'required|max:150',
                     'comment'     => 'max:250'
-                  ]);
+                    ]
+                );
               
-                  if ($validator->fails()) {
+                if ($validator->fails()) {
                     return view('Cardshop', ['post' => $post, 'orderItems' => $orderItems]) 
-                               ->withErrors($validator); 
-                  }
+                             ->withErrors($validator); 
+                }
                 
                 $post          = array_except($post, ['_token']);
                 
-                if ($validator->passes()) 
-                {
+                if ($validator->passes()) {
                     foreach ($post as $k => $v) 
                     {
                         $post[$k] = e(trim($v));
@@ -117,7 +120,8 @@ class OrderCreateController extends Controller
         return view('Cardshop');
     }
 
-    public function SendView (){
+    public function SendView()
+    {
 
     }
 
